@@ -1,0 +1,13 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+                    "type": "ext:info",
+                    "name": "Come back when you are in a UGS."
+                }
+			]
+		}
+	]
+}

@@ -1,0 +1,13 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+					"type": "ext:yn",
+					"name": "Do you want to add a new green space to the database?"
+				}				
+			]
+		}
+	]
+}

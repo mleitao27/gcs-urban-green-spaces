@@ -1,0 +1,14 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+                    "type": "expression",
+                    "name": "ERROR",
+                    "commentText": "Something went wrong!"
+                }
+			]
+		}
+	]
+}

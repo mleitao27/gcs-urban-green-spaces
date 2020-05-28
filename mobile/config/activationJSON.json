@@ -1,0 +1,47 @@
+{
+    "ActivationModes": [
+        {
+            "mode": "null"
+        },
+        {
+            "mode": "area",
+            "areas": [
+                {
+                    "name": "Alameda",
+                    "type": "Avenue",
+                    "lat": "38.737201",
+                    "long": "-9.132109",
+                    "radius": "200"
+                },
+                {
+                    "name": "Arco do Cego",
+                    "type": "Garden",
+                    "lat": "38.7357451",
+                    "long": "-9.1423017",
+                    "radius": "75"
+                },
+                {
+                    "name": "Jardim Cesário Verde",
+                    "type": "Garden",
+                    "lat": "38.732583",
+                    "long": "-9.140807",
+                    "radius": "35"
+                }
+            ]   
+        },
+        {
+            "mode": "deltat",
+            "delta": "60"
+        },
+        {
+            "mode": "activity",
+            "activity": "running",
+            "timing": "end"  
+        },
+        {
+            "mode": "time",
+            "start": "00:00:00",
+            "end": "24:00:00"   
+        }
+    ]
+}

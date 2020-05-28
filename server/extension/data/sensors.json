@@ -1,0 +1,22 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+					"type": "ext:sensor",
+					"subtype": "weather",
+					"name": "Weather Sensor"
+				},
+				{
+                    "type": "ext:sensor",
+                    "subtype": "googlefit",
+					"name": "Google Fit Sensor",
+					"config": {
+						"data": ["steps", "distance", "calories", "activeMinutes"]
+					}
+				}
+			]
+		}
+	]
+}

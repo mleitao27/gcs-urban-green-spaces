@@ -1,0 +1,27 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+					"type": "imagepicker",
+					"name": "What animal elements can be found in this UGS?",
+					"choices": [
+						{
+							"value": "bird",
+							"imageLink": "http://192.168.1.107:3000/images/bird.png"
+						},
+						{
+							"value": "insect",
+							"imageLink": "http://192.168.1.107:3000/images/butterfly.png"
+						},
+						{
+							"value": "squirrel",
+							"imageLink": "http://192.168.1.107:3000/images/squirrel.png"
+						}
+					]
+				}		
+			]
+		}
+	]
+}

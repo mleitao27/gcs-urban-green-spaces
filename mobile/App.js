@@ -1,0 +1,14 @@
+import React from 'react';
+
+import MainNavigator from './navigation/MainNavigator';
+import { enableScreens } from 'react-native-screens';
+import activationConfig from './config/activationConfig';
+
+// Under the hood react-navigation uses native optimized components
+enableScreens();
+
+activationConfig();
+
+export default function App() {
+  return <MainNavigator />;
+}

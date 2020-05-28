@@ -1,0 +1,90 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+					"type": "text",
+					"name": "Text Title"
+				},
+				{
+					"type": "datepicker",
+					"name": "Datepicker Title",
+					"mode": "manual"
+				},
+				{
+					"type": "timepicker",
+					"name": "Timepicker Title",
+					"mode": "manual"
+				},
+				{
+					"type": "imagepicker",
+					"name": "Imagepicker Title",
+					"choices": [
+						{
+							"value": "imagem_a",
+							"imageLink": "https://i.pinimg.com/originals/33/b8/69/33b869f90619e81763dbf1fccc896d8d.jpg"
+						},
+						{
+							"value": "imagem_b",
+							"imageLink": "https://i.pinimg.com/originals/67/ab/a1/67aba171f2f192fe07a351d784807749.jpg"
+						},
+						{
+							"value": "imagem_c",
+							"imageLink": "https://i.pinimg.com/originals/9e/87/dd/9e87dda09ee6d3d40024b61123abe64d.jpg"
+						},
+						{
+							"value": "imagem_d",
+							"imageLink": "https://i.pinimg.com/originals/9e/87/dd/9e87dda09ee6d3d40024b61123abe64d.jpg"
+						}
+					]
+				},
+				{
+					"type": "dropdown",
+					"name": "Dropdown Title",
+					"choices": [
+						"item1",
+						"item2",
+						"item3"
+					]
+				},
+				{
+					"type": "radiogroup",
+					"name": "Radio Title",
+					"choices": [
+						"item1",
+						"item2",
+						"item3"
+					]
+				},
+				{
+					"type": "boolean",
+					"name": "Boolean Title"
+				},
+				{
+					"type": "range",
+					"name": "Range Title",
+					"min": 0,
+					"max": 200
+				},
+				{
+					"type": "checkbox",
+					"name": "Checkbox Title",
+					"choices": [
+						"item1",
+						"item2",
+						"item3"
+					]
+				},
+				{
+					"type": "camera",
+					"name": "Camera Title"
+				},
+				{
+					"type": "geolocation",
+					"name": "Geolocation Title"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,27 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+					"type": "imagepicker",
+					"name": "What vegetation elements can be found in this UGS?",
+					"choices": [
+						{
+							"value": "tree",
+							"imageLink": "http://192.168.1.107:3000/images/tree.png"
+						},
+						{
+							"value": "bush",
+							"imageLink": "http://192.168.1.107:3000/images/bush.png"
+						},
+						{
+							"value": "flower",
+							"imageLink": "http://192.168.1.107:3000/images/flower.png"
+						}
+					]
+				}		
+			]
+		}
+	]
+}
