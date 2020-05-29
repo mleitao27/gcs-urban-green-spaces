@@ -22,6 +22,10 @@
 						{
 							"value": "kiosk",
 							"imageLink": "http://192.168.1.107:3000/images/kiosk.png"
+						},
+						{
+							"value": "other",
+							"imageLink": "http://192.168.1.107:3000/images/other.png"
 						}
 					]
 				}		

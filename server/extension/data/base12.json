@@ -1,0 +1,13 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+					"type": "ext:feel",
+					"name": "How are you feeling here?"
+				}					
+			]
+		}
+	]
+}

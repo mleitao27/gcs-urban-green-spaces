@@ -18,6 +18,10 @@
 						{
 							"value": "squirrel",
 							"imageLink": "http://192.168.1.107:3000/images/squirrel.png"
+						},
+						{
+							"value": "other",
+							"imageLink": "http://192.168.1.107:3000/images/other.png"
 						}
 					]
 				}		

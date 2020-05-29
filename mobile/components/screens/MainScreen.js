@@ -6,7 +6,10 @@ import {
     Alert,
     TouchableOpacity, 
     Dimensions,
-    StyleSheet
+    StyleSheet,
+    TouchableWithoutFeedback,
+    Keyboard
+
 } from 'react-native';
 
 import config from '../../extension/config';
@@ -104,9 +107,11 @@ const MainScreen = props => {
         content = <UserScreen navigation={props.navigation} onLogout={changeLoggedState} email={email} />;
 
     return (
-        <View style={globalStyles.screen} >
-            {content}        
-        </View>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <View style={globalStyles.screen} >
+                {content}        
+            </View>
+        </TouchableWithoutFeedback>
     );
 };
 

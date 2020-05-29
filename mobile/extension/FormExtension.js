@@ -1,6 +1,7 @@
 import SensorElement from './SensorElement';
 import YNElement from './YNElement';
 import InfoElement from './InfoElement';
+import FeelElement from './FeelElement';
 
 const ext = [
     {
@@ -14,6 +15,10 @@ const ext = [
     {
         type: 'ext:info',
         component: InfoElement
+    },
+    {
+        type: 'ext:feel',
+        component: FeelElement
     }
 ];
 

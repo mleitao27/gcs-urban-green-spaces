@@ -41,13 +41,13 @@ const GeolocationSensor = props => {
         let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest });
         const { latitude, longitude } = location.coords;
         await getGeocodeAsync({ latitude, longitude });
-        setLocation({ latitude, longitude });
+        if (location === null) setLocation({ latitude, longitude });
     };
 
     // Get geocode
     getGeocodeAsync = async (location) => {
         let geocode = await Location.reverseGeocodeAsync(location);
-        setGeocode(geocode);
+        if (geocode === null) setGeocode(geocode);
     };
 
     // Render dummy view

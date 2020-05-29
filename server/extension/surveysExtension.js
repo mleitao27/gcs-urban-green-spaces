@@ -29,7 +29,6 @@ const getForm = (req, res) => {
                 res.status(200).send(baseArray[0]);
             } else if (status.length === 1) {
                 if (req.body.status !== status[0].base) {
-                    console.log('RESET');
                     db.updateDocument('status', {user: req.body.email}, {base: 0, answer: await resetAnswer(req.body.email)});
                     db.deleteDocument('answers', {_id: status[0].answer});
                     res.status(200).send(baseArray[0]);
@@ -79,6 +78,7 @@ const processAnswer = (req, res) => {
             feedback.diffFeedback();
             // Database storage
             console.log(req.body);
+
             dbStorage.storeAnswer(req);
             
             const status = await db.getDocument('status', {user: req.body.email});
@@ -93,6 +93,8 @@ const processAnswer = (req, res) => {
 };
 
 const getNewStatus = (oldStatus, answer) => {
+
+    let other;
 
     if (oldStatus === 0) {
         if (answer[0].value === false) return 1;
@@ -116,12 +118,42 @@ const getNewStatus = (oldStatus, answer) => {
         return 4;
     }
     else if (oldStatus === 6) {
-        return 7;
+        other = false;
+        answer[0].value.map(a => {
+            if (a === 'other') other = true;
+        });
+
+        if (other == true) return 9;
+        else return 7;
     }
     else if (oldStatus === 7) {
-        return 8;
+        other = false;
+        answer[0].value.map(a => {
+            if (a === 'other') other = true;
+        });
+
+        if (other == true) return 10;
+        else return 8;
     }
     else if (oldStatus === 8) {
+        other = false;
+        answer[0].value.map(a => {
+            if (a === 'other') other = true;
+        });
+
+        if (other == true) return 11;
+        else return 12;
+    }
+    else if (oldStatus === 9) {
+        return 7;
+    }
+    else if (oldStatus === 10) {
+        return 8;
+    }
+    else if (oldStatus === 11) {
+        return 12;
+    }
+    else if (oldStatus === 12) {
         return 0;
     }
 

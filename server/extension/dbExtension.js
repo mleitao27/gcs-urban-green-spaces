@@ -11,7 +11,6 @@ const storeAnswer = async (req) => {
         const status = await db.getDocument('status', {user: req.body.email});
         if (status.length === 1) {
             const answer = await db.getDocument('answers', {_id: status[0].answer});
-            console.log(status);
             let answerData = [];
             if (answer.length === 1) answerData = answer[0].data;
 
