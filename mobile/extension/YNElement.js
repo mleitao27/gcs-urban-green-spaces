@@ -38,7 +38,7 @@ const YNElement = props => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingVertical: Dimensions.get('window').height * 0.05
+        paddingVertical: Dimensions.get('window').height * 0.045
     },
     title: {
         fontSize: 18,

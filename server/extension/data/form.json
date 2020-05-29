@@ -79,10 +79,6 @@
 				{
 					"type": "camera",
 					"name": "Camera Title"
-				},
-				{
-					"type": "geolocation",
-					"name": "Geolocation Title"
 				}
 			]
 		}

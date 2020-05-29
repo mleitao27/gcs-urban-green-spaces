@@ -18,7 +18,7 @@ const FeelElement = props => {
     }
 
     return (
-        <View>
+        <View style={styles.container}>
             <Text style={styles.title}>{props.props.name}</Text>
             <View style={styles.facesContainer}>
                 <View style={styles.iconContainer}>
@@ -52,6 +52,9 @@ const FeelElement = props => {
 };
 
 const styles = StyleSheet.create({
+    container: {
+        paddingVertical: Dimensions.get('window').height * 0.025
+    },
     title: {
         fontSize: 18,
         marginBottom: Dimensions.get('window').height * 0.02
