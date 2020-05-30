@@ -97,7 +97,7 @@ const MainScreen = props => {
                     <Text style={styles.text}>Not registered yet? </Text>
                     <TouchableOpacity onPress={() => props.navigation.navigate({routeName: 'Register'})}>
                         <Text style={[styles.text, styles.textUnderline]}>Click here!</Text>
-                        </TouchableOpacity>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>

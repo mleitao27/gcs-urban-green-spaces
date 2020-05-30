@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Alert, TextInput } from 'react-native';
+import { View, Alert, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 import config from '../../extension/config';
 import globalStyles from '../../constants/globalStyles';
@@ -51,39 +51,41 @@ const RegisterScreen = props => {
     };
 
     return (
-        <View style={globalStyles.screen}>
-            <View style={globalStyles.formContainer}>
-                <TextInput
-                    style={globalStyles.formElement}
-                    placeholder="Name"
-                    placeholderTextColor="#ccc"
-                    value={name}
-                    onChangeText={nameInputHandler}
-                />
-                <TextInput
-                    style={globalStyles.formElement}
-                    placeholder="E-mail"
-                    placeholderTextColor="#ccc"
-                    value={email}
-                    onChangeText={emailInputHandler}
-                />
-                <TextInput
-                    style={globalStyles.formElement}
-                    placeholder="Password"
-                    placeholderTextColor="#ccc"
-                    value={password}
-                    onChangeText={passwordInputHandler}
-                    secureTextEntry={true}
-                />
-                <CustomButton
-                    title='Register'
-                    onPress={register}
-                    backgroundColor={Colors.secondary}
-                    textColor={Colors.primary}    
-                />
-                <OAuthButtons method={'register'} navigation={props.navigation}/>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <View style={globalStyles.screen}>
+                <View style={globalStyles.formContainer}>
+                    <TextInput
+                        style={globalStyles.formElement}
+                        placeholder="Name"
+                        placeholderTextColor="#ccc"
+                        value={name}
+                        onChangeText={nameInputHandler}
+                    />
+                    <TextInput
+                        style={globalStyles.formElement}
+                        placeholder="E-mail"
+                        placeholderTextColor="#ccc"
+                        value={email}
+                        onChangeText={emailInputHandler}
+                    />
+                    <TextInput
+                        style={globalStyles.formElement}
+                        placeholder="Password"
+                        placeholderTextColor="#ccc"
+                        value={password}
+                        onChangeText={passwordInputHandler}
+                        secureTextEntry={true}
+                    />
+                    <CustomButton
+                        title='Register'
+                        onPress={register}
+                        backgroundColor={Colors.secondary}
+                        textColor={Colors.primary}    
+                    />
+                    <OAuthButtons method={'register'} navigation={props.navigation}/>
+                </View>
             </View>
-        </View>
+        </TouchableWithoutFeedback>
     );
 };
 

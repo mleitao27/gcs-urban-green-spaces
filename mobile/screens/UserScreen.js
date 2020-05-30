@@ -26,7 +26,13 @@ const UserScreen = props => {
     return (
         <View>
             <CustomButton
-                title='Form'
+                title='Profile'
+                onPress={() => props.navigation.navigate({routeName: 'Profile'})}
+                backgroundColor={Colors.primary}
+                textColor={Colors.secondary}
+                />
+            <CustomButton
+                title='Survey'
                 onPress={() => props.navigation.navigate({routeName: 'Form', params: {email: props.email}})}
                 backgroundColor={Colors.primary}
                 textColor={Colors.secondary}

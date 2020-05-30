@@ -5,6 +5,7 @@ import MainScreen from '../components/screens/MainScreen';
 import FormScreen from '../components/screens/FormScreen';
 import ResultsScreen from '../components/screens/ResultsScreen';
 import RegisterScreen from '../components/screens/RegisterScreen';
+import ProfileScreen from '../components/screens/ProfileScreen';
 
 import Colors from '../constants/colors';
 
@@ -29,6 +30,9 @@ const MainNavigator = createStackNavigator({
     },
     Register: {
         screen: RegisterScreen
+    },
+    Profile: {
+        screen: ProfileScreen
     }
 }, {
     defaultNavigationOptions: defaultStackNavOptions
