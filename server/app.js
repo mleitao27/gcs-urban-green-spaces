@@ -12,7 +12,7 @@ const app = express();
 var usersRouter = require('./routes/users');
 var surveysRouter = require('./routes/surveys');
 
-app.use('/images', express.static(__dirname + '/extension/assets'));
+app.use('/public', express.static(__dirname + '/extension/public'));
 
 // Middleware
 app.use(cors());

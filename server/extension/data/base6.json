@@ -9,19 +9,19 @@
 					"choices": [
 						{
 							"value": "bird",
-							"imageLink": "http://192.168.1.107:3000/images/bird.png"
+							"imageLink": "http://192.168.1.107:3000/public/bird.png"
 						},
 						{
 							"value": "insect",
-							"imageLink": "http://192.168.1.107:3000/images/butterfly.png"
+							"imageLink": "http://192.168.1.107:3000/public/butterfly.png"
 						},
 						{
 							"value": "squirrel",
-							"imageLink": "http://192.168.1.107:3000/images/squirrel.png"
+							"imageLink": "http://192.168.1.107:3000/public/squirrel.png"
 						},
 						{
 							"value": "other",
-							"imageLink": "http://192.168.1.107:3000/images/other.png"
+							"imageLink": "http://192.168.1.107:3000/public/other.png"
 						}
 					]
 				}		

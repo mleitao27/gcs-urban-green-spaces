@@ -9,19 +9,19 @@
 					"choices": [
 						{
 							"value": "tree",
-							"imageLink": "http://192.168.1.107:3000/images/tree.png"
+							"imageLink": "http://192.168.1.107:3000/public/tree.png"
 						},
 						{
 							"value": "bush",
-							"imageLink": "http://192.168.1.107:3000/images/bush.png"
+							"imageLink": "http://192.168.1.107:3000/public/bush.png"
 						},
 						{
 							"value": "flower",
-							"imageLink": "http://192.168.1.107:3000/images/flower.png"
+							"imageLink": "http://192.168.1.107:3000/public/flower.png"
 						},
 						{
 							"value": "other",
-							"imageLink": "http://192.168.1.107:3000/images/other.png"
+							"imageLink": "http://192.168.1.107:3000/public/other.png"
 						}
 					]
 				}		

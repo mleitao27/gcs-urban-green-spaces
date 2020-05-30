@@ -9,23 +9,23 @@
 					"choices": [
 						{
 							"value": "bench",
-							"imageLink": "http://192.168.1.107:3000/images/bench.png"
+							"imageLink": "http://192.168.1.107:3000/public/bench.png"
 						},
 						{
 							"value": "gazebo",
-							"imageLink": "http://192.168.1.107:3000/images/gazebo.png"
+							"imageLink": "http://192.168.1.107:3000/public/gazebo.png"
 						},
 						{
 							"value": "swing",
-							"imageLink": "http://192.168.1.107:3000/images/swing.png"
+							"imageLink": "http://192.168.1.107:3000/public/swing.png"
 						},
 						{
 							"value": "kiosk",
-							"imageLink": "http://192.168.1.107:3000/images/kiosk.png"
+							"imageLink": "http://192.168.1.107:3000/public/kiosk.png"
 						},
 						{
 							"value": "other",
-							"imageLink": "http://192.168.1.107:3000/images/other.png"
+							"imageLink": "http://192.168.1.107:3000/public/other.png"
 						}
 					]
 				}		
