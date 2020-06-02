@@ -12,13 +12,13 @@ import {
 
 } from 'react-native';
 
-import config from '../../extension/config';
-import globalStyles from '../../constants/globalStyles';
-import Colors from '../../constants/colors';
+import config from '../extension/config';
+import globalStyles from '../constants/globalStyles';
+import Colors from '../constants/colors';
 
-import CustomButton from '../CustomButton';
-import UserScreen from './UserScreen';
-import OAuthButtons from '../../extension/OAuthButtons';
+import CustomButton from '../components/CustomButton';
+import MenuScreen from './MenuScreen';
+import OAuthButtons from '../extension/OAuthButtons';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -104,7 +104,7 @@ const MainScreen = props => {
     );
 
     if (isLogged)
-        content = <UserScreen navigation={props.navigation} onLogout={changeLoggedState} email={email} />;
+        content = <MenuScreen navigation={props.navigation} onLogout={changeLoggedState} email={email} />;
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>

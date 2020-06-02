@@ -1,9 +1,9 @@
 import React from 'react';
-import { View } from 'react-native';
+import ProfileScreenExtension from '../extension/ProfileScreenExtension';
 
 const ProfileScreen = props => {
     return (
-        <View />
+        <ProfileScreenExtension navigation={props.navigation} />
     );
 };
 

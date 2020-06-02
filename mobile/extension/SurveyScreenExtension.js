@@ -20,7 +20,7 @@ import FeedbackHandler from './FeedbackHandler';
 
 import config from './config';
 
-const FormScreenExtension = props => {
+const SurveyScreenExtension = props => {
 
     const [fixHeight, setFixHeight] = useState('100%');
 
@@ -159,4 +159,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default FormScreenExtension;
+export default SurveyScreenExtension;

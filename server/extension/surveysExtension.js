@@ -59,6 +59,9 @@ const baseSurvey = async (req, res, status, answer) => {
     else if (status === 1) {
         db.deleteDocument('answers', {_id: answer});
     }
+    else if (status === 2) {
+        console.log(2);
+    }
     res.status(200).send(baseArray[status]);
 };
 
