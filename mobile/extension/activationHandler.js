@@ -29,7 +29,7 @@ const activationHandler = async (activationMode) => {
         fences.push({
           latitude: parseFloat(area.lat),
           longitude: parseFloat(area.long),
-          radius: parseFloat(area.radius),
+          radius: Math.round(Math.sqrt(parseFloat(area.area)/Math.PI)),
           notifyOnEnter: true,
           notifyOnExit: false
         });
