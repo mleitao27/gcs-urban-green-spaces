@@ -11,6 +11,9 @@ const app = express();
 // Routers
 var usersRouter = require('./routes/users');
 var surveysRouter = require('./routes/surveys');
+var profileRouter = require('./routes/profile');
+var resultsRouter = require('./routes/results');
+var oauthRouter = require('./routes/oauth');
 
 app.use('/public', express.static(__dirname + '/extension/public'));
 
@@ -21,6 +24,9 @@ app.use(bodyParser.json());
 // Endpoints
 app.use('/api/users', usersRouter);
 app.use('/api/surveys', surveysRouter);
+app.use('/api/profile', profileRouter);
+app.use('/api/results', resultsRouter);
+app.use('/api/oauth', oauthRouter);
 
 app.get('/:uid', (req, res) => {
     cache.get(req.params.uid)

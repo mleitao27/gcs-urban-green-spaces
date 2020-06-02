@@ -4,7 +4,6 @@ var router = express.Router();
 
 var db = require('../modules/db');
 var cache = require('../modules/cache');
-var oauth = require('../extension/oauth');
 var config = require('../extension/config');
 
 // Get Users
@@ -50,15 +49,6 @@ router.post('/register', async (req, res) => {
 
 });
 
-// Register user with oauth
-router.post('/oauth/register', async (req, res) => {
-  oauth.registerHandler(req.body)
-    .then(status => {
-      res.status(status).send();
-    });
-});
-
-
 // Login User
 router.post('/login', async (req, res) => {
 
@@ -92,17 +82,6 @@ router.post('/login', async (req, res) => {
   res.status(404).send();
 });
 
-
-// Login user with oauth
-router.post('/oauth/login', async (req, res) => {
-  oauth.loginHandler(req.body)
-    .then(ret => {
-      // Add user to cache
-      cache.set(String(req.body.email), config.userTimeout);
-      res.status(ret.status).send({ type: ret.type });
-    });
-});
-
 // Login user with oauth
 router.post('/logout', async (req, res) => {
   cache.del(String(req.body.email))
@@ -111,8 +90,6 @@ router.post('/logout', async (req, res) => {
       else res.status(404).send();
     });
 });
-
-
 
 // Change User Type
 router.post('/changeType', async (req, res) => {

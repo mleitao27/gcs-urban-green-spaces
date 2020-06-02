@@ -25,7 +25,7 @@ const OAuthButtons = props => {
   if (props.method === 'register') method = 'Register w/';
 
   const oauthServerConnection = async (params) => {
-    const res = await fetch(`${config.serverURL}/api/users/oauth/${props.method}`,{
+    const res = await fetch(`${config.serverURL}/api/oauth/${props.method}`,{
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
