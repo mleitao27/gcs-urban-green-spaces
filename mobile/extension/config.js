@@ -9,7 +9,7 @@ const config = {
             appId: "534270243959641"
         }
     },
-    serverURL: 'http://192.168.1.100:3000',
+    serverURL: 'http://192.168.1.78:3000',
     OWMAPIKey: '890df5db881a1a76b5f7ccc04b1a5e0c'
 };
 
