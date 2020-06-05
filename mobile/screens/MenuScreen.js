@@ -28,7 +28,7 @@ const MenuScreen
         <View>
             <CustomButton
                 title='Profile'
-                onPress={() => props.navigation.navigate({routeName: 'Profile'})}
+                onPress={() => props.navigation.navigate({routeName: 'Profile', params: {email: props.email}})}
                 backgroundColor={Colors.primary}
                 textColor={Colors.secondary}
                 />
