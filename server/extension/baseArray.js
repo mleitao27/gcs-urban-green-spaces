@@ -11,6 +11,7 @@ const base9JSON = require('./data/base9.json');
 const base10JSON = require('./data/base10.json');
 const base11JSON = require('./data/base11.json');
 const base12JSON = require('./data/base12.json');
+const base13JSON = require('./data/base13.json');
 
 const baseArray = [
     base0JSON,
@@ -25,7 +26,8 @@ const baseArray = [
     base9JSON,
     base10JSON,
     base11JSON,
-    base12JSON
+    base12JSON,
+    base13JSON
 ];
 
 exports.baseArray = baseArray;

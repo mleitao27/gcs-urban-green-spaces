@@ -5,9 +5,9 @@
 			"elements": [
 				{
                     "type": "expression",
-					"name": "Not in a UGS!",
-					"commentText": "Please come back when you are in a UGS."
-				}
+                    "name": "Thank you!",
+                    "commentText": "Thanks for answering."
+                }
 			]
 		}
 	]

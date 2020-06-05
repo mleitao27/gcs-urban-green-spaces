@@ -34,8 +34,8 @@ const SurveyScreenExtension = props => {
     const [loaded, setLoaded] = useState(null);
     const [form, setForm] = useState(null);
 
-    const [status, setStatus] = useState(0);
-    const [statusKey, setStatusKey] = useState(0);
+    const [status, setStatus] = useState(-1);
+    const [statusKey, setStatusKey] = useState(-1);
 
     useEffect(() => {
         (async () => {
@@ -92,7 +92,8 @@ const SurveyScreenExtension = props => {
             },
             body: JSON.stringify({
                 email:  props.navigation.state.params.email,
-                answer: data
+                answer: data,
+                type: form.type
             })
         });
         
@@ -109,13 +110,20 @@ const SurveyScreenExtension = props => {
     else if (loaded === true)
         formContent = (
             <ScrollView style={styles.formContainer}>
-                <Form key={statusKey} json={form} extension={FormExtension} onSubmit={onSubmit} showSubmitButton={false} />
+                <Form key={statusKey} json={form.form} extension={FormExtension} onSubmit={onSubmit} showSubmitButton={false} />
             </ScrollView>
-        );
+    );
+
+    const getHeight = () => {
+        if (form === null) return '100%';
+        else if (form.type === 'details') return '0%';
+        else if (form.type === 'base') return '70%';
+        else return '100%';
+    };
     
     return (
         <View style={styles.container}>
-            <View style={{width: '100%', height: fixHeight}}>
+            <View style={{width: '100%', height: getHeight()}}>
                 <MapView
                     provider={PROVIDER_GOOGLE}
                     style={styles.map}
@@ -127,7 +135,6 @@ const SurveyScreenExtension = props => {
                     }}
                     showsUserLocation={true}
                     showsMyLocationButton={true}
-                    onRegionChangeComplete={() => {setFixHeight('70%')}}
                 >
                 </MapView>
             </View>

@@ -6,7 +6,12 @@
 				{
 					"type": "ext:yn",
 					"name": "Are you in an Urban Green Space?"
-				}				
+				},
+				{
+                    "type": "ext:sensor",
+					"subtype": "geolocation",
+					"name": "geolocation"
+                }		
 			]
 		}
 	]
