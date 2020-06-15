@@ -9,10 +9,10 @@ const UserList = props => {
         props.userList.map(user => {
         return (
             <UserItem
-            key={user.email}
-            user={user}
-            changeUserType={props.changeUserType}
-            removeUser={props.removeUser}
+                key={user.email}
+                user={user}
+                changeUserType={props.changeUserType}
+                removeUser={props.removeUser}
             />
         );
         })

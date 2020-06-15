@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
     View,
     StyleSheet,
     ScrollView,
     Text,
     Dimensions,
-    Alert
+    Alert,
+    TouchableOpacity
 } from 'react-native';
 
 import * as Location from 'expo-location';
@@ -19,126 +20,30 @@ import FormExtension from './FormExtension';
 import FeedbackHandler from './FeedbackHandler';
 
 import config from './config';
+import Colors from '../constants/colors';
+
+import { Ionicons } from '@expo/vector-icons';
+
+import FormScreen from './FormScreen';
 
 const SurveyScreenExtension = props => {
 
-    const [fixHeight, setFixHeight] = useState('100%');
+    const [mode, setMode] = useState('form');
 
-    // State to store location
-    const [location, setLocation] = useState({latitude: 38.726608, longitude: -9.1405415});
-    // State to store geocode
-    const [geocode, setGeocode] = useState(null);
-    // State to store error message (not used)
-    const [errorMessage, setErrorMessage] = useState('');
-
-    const [loaded, setLoaded] = useState(null);
-    const [form, setForm] = useState(null);
-
-    const [status, setStatus] = useState(-1);
-    const [statusKey, setStatusKey] = useState(-1);
-
-    useEffect(() => {
-        (async () => {
-            await getLocationAsync();
-            
-            const res = await fetch(`${config.serverURL}/api/surveys/`,{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email:  props.navigation.state.params.email,
-                    status: status
-                })
-            });
-    
-            if (res.status == 200) {
-                setForm(await res.json());
-                setStatusKey(status);
-                setLoaded(true);
-            }
-            else
-                Alert.alert('ERROR', 'Form unavailable.');
-
-        })();
-    }, [status]);
-
-    // Get geolocation
-    const getLocationAsync = async () => {
-        // Gets permissions
-        let { status } = await Permissions.askAsync(Permissions.LOCATION);
-        if (status !== 'granted') {
-            setErrorMessage('Permission to access location was denied');
-        }
-
-        // Gets coordinates
-        let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest });
-        const { latitude, longitude } = location.coords;
-        await getGeocodeAsync({ latitude, longitude });
-        setLocation({ latitude, longitude });
-    };
-    
-    // Get geocode
-    const getGeocodeAsync = async (location) => {
-        let geocode = await Location.reverseGeocodeAsync(location);
-        setGeocode(geocode);
-    };
-
-    const onSubmit = async (data) => {
-        const res = await fetch(`${config.serverURL}/api/surveys/answer`,{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email:  props.navigation.state.params.email,
-                answer: data,
-                type: form.type
-            })
-        });
-        
-        if (res.status == 200) {
-            const newStatus = await res.json();
-            setStatus(newStatus.status);
-        }
-        //FeedbackHandler();
-    };
-
-    let formContent = <View style={styles.fallbackTextContainer}><Text style={styles.text}>Loading survey...</Text></View>
-    if (loaded === false)
-        formContent = <View style={styles.fallbackTextContainer}><Text style={styles.text}>Unable to load survey. Please go back.</Text></View>
-    else if (loaded === true)
-        formContent = (
-            <ScrollView style={styles.formContainer}>
-                <Form key={statusKey} json={form.form} extension={FormExtension} onSubmit={onSubmit} showSubmitButton={false} />
-            </ScrollView>
-    );
-
-    const getHeight = () => {
-        if (form === null) return '100%';
-        else if (form.type === 'details') return '0%';
-        else if (form.type === 'base') return '70%';
-        else return '100%';
-    };
+    let content = <View/>;
+    if (mode === 'form') content = <FormScreen navigation={props.navigation} />;
     
     return (
         <View style={styles.container}>
-            <View style={{width: '100%', height: getHeight()}}>
-                <MapView
-                    provider={PROVIDER_GOOGLE}
-                    style={styles.map}
-                    region={{
-                        latitude: location.latitude,
-                        longitude: location.longitude,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421,
-                    }}
-                    showsUserLocation={true}
-                    showsMyLocationButton={true}
-                >
-                </MapView>
+            <View style={styles.btnContainer}>
+                <TouchableOpacity style={{...styles.iconContainer, ...{backgroundColor: mode === 'form' ? Colors.primary : Colors.secondary}}} onPress={() => setMode('form')}>
+                    <Ionicons name="md-paper" size={24} color={mode === 'form' ? Colors.secondary : Colors.primary} />
+                </TouchableOpacity>
+                <TouchableOpacity style={{...styles.iconContainer, ...{backgroundColor: mode === 'map' ? Colors.primary : Colors.secondary}}} onPress={() => setMode('map')}>
+                    <Ionicons name="md-map" size={24} color={mode === 'map' ? Colors.secondary : Colors.primary} />
+                </TouchableOpacity>
             </View>
-            {formContent}
+            {content}
         </View>
     );
 };
@@ -146,24 +51,19 @@ const SurveyScreenExtension = props => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,        
-        justifyContent: 'flex-start',
-        alignItems: 'center'
-    },
-    map: {
-        ...StyleSheet.absoluteFillObject
-    },
-    formContainer: {
-        width: '100%'
-    },
-    text: {
-        fontSize: Dimensions.get('window').width*0.05
-    },
-    fallbackTextContainer: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center'
     },
+    btnContainer: {
+        width: '100%',
+        height: Dimensions.get('window').height*0.06,
+        flexDirection: 'row'
+    },
+    iconContainer: {
+        width: '50%',
+        alignItems:'center',
+        justifyContent: 'center'
+    }
 });
 
 export default SurveyScreenExtension;

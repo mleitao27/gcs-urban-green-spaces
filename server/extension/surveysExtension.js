@@ -12,15 +12,32 @@ var dbStorage = require('./dbExtension');
 
 var fs = require('fs');
 
+const IN_UGS = 0;
+const NOT_UGS = 1;
+const UGS_LIST = 2;
+const ADD_UGS = 3;
+const ABOUT_UGS = 4;
+const NEW_UGS = 5;
+const ANIMALS = 6;
+const VEGETATION = 7;
+const MANMADE = 8;
+const ANIMALS_OTHER = 9;
+const VEGETATION_OTHER = 10;
+const MANMADE_OTHER = 11;
+const MOTIVATION = 12;
+const MOTIVATION_OTHER = 13;
+const FEELING = 14;
+const THANKYOU = 15;
+
 const getForm = (req, res) => {
     cache.get(req.body.email)
     .then(async result => {
         // If user not in cache
-        if (typeof result === 'undefined') res.status(404).send();
+        if (typeof result === 'undefined') res.status(403).send();
         else {
             const status = await db.getDocument('status', {user: req.body.email});
             const details = await db.getDocument('details', {email: req.body.email});
-
+            
             if (status.length === 0) {
                 const newStatus = {
                     user: req.body.email,
@@ -29,16 +46,19 @@ const getForm = (req, res) => {
                     geolocation: null,
                     answer: await resetAnswer(req.body.email)
                 };
-
+                
                 db.insertDocument('status', newStatus);
                 res.status(200).send(details.length === 1 ? {form: baseArray[0], type: 'base'} : {form: detailsJSON, type: 'details'});
-
+                
             } else if (status.length === 1) {
                 if (status[0].details === false) detailsSurvey(req, res);
                 else {
+                    const answer = await db.getDocument('answers', {_id: status[0].answer});
                     if (req.body.status !== status[0].base) {
                         db.updateDocument('status', {user: req.body.email}, {base: 0, answer: await resetAnswer(req.body.email)});
-                        db.deleteDocument('answers', {_id: status[0].answer});
+                        if (answer.length === 1 && answer[0].done === false) {
+                            db.deleteDocument('answers', {_id: status[0].answer});
+                        }
                         res.status(200).send({form: baseArray[0], type: 'base'});
                     } else baseSurvey(req, res, status[0]);
                 }
@@ -50,37 +70,45 @@ const getForm = (req, res) => {
 };
 
 const baseSurvey = async (req, res, status) => {
-    if (status.base === 0) {
+    var form = baseArray[status.base];
+    if (status.base === IN_UGS) {
         const oldAnswer = await db.getDocument('answers', {_id: status.answer});
         if (oldAnswer.length !==0 && oldAnswer[0].data.length === 0) db.deleteDocument('answers', {_id: status.answer});
         db.updateDocument('status', {user: req.body.email}, {answer: await resetAnswer(req.body.email)});
     }
-    else if (status.base === 1) {
+    else if (status.base === NOT_UGS) {
         db.deleteDocument('answers', {_id: status.answer});
     }
-    else if (status.base === 2) {
+    else if (status.base === UGS_LIST) {
 
         // Get position
         // Calculate distance
         const ugs = await db.getDocument('ugs', {});
         var choices = [];
-        ugs.map(space => {
-            if (calcDistance(parseFloat(space.lat), parseFloat(space.long), parseFloat(status.geolocation.lat), parseFloat(status.geolocation.long)) <= Math.round(Math.sqrt(parseFloat(space.area)/Math.PI)))
-            choices.push(space.name);
-        });
+        var ids = [];
+        if (ugs.length > 0)
+            ugs.map(space => {
+                if (calcDistance(parseFloat(space.lat), parseFloat(space.long), parseFloat(status.geolocation.lat), parseFloat(status.geolocation.long)) <= Math.round(Math.sqrt(parseFloat(space.area)/Math.PI))+1000) {
+                    if (typeof ids.find(element => element === space.id) === 'undefined') {
+                        ids.push(space.id);
+                        choices.push(space.name);
+                    }
+                }
+            });
         choices.push('Other');
 
         var content = baseArray[2];
         
         content.pages[0].elements[0].choices = choices;
 
-        fs.writeFile('./extension/data/base2.json', JSON.stringify(content), function (err) {
-            if (err) throw err;
-        });
+        form = content;
         
     }
+    else if (status.base === THANKYOU) {
+        db.updateDocument('answers', {_id: status.answer}, {done: true});
+    }
     
-    res.status(200).send({form: baseArray[status.base], type: 'base'});
+    res.status(200).send({form, type: 'base'});
 };
 
 const detailsSurvey = (req, res) => {
@@ -91,7 +119,7 @@ const processAnswer = (req, res) => {
     cache.get(req.body.email)
     .then(async result => {
         // If user not in cache
-        if (typeof result === 'undefined') res.status(404).send();
+        if (typeof result === 'undefined') res.status(403).send();
         else {
             console.log(req.body);
             
@@ -100,19 +128,19 @@ const processAnswer = (req, res) => {
             // Differenciated Feedback
             feedback.diffFeedback();
             // Database storage
-            dbStorage.storeAnswer(req.body.email, req.body.answer, req.body.type);
-            
             const status = await db.getDocument('status', {user: req.body.email});
-            
+            dbStorage.storeAnswer(req.body.email, req.body.answer, req.body.type);
+
             var newStatus;
             if (req.body.type === 'base') {
-                newStatus = getNewStatus(req.body.email, status[0].base, req.body.answer);
+                newStatus = getNewStatus(req.body.email, status[0].base, {data: req.body.answer, id: status[0].answer});
                 db.updateDocument('status', {user: req.body.email}, {base: newStatus});
             }
             else if (req.body.type === 'details') {
                 newStatus = 0;
                 db.updateDocument('status', {user: req.body.email}, {base: newStatus, details: true});
             }
+            
             
             res.status(200).send({status: newStatus});
         }
@@ -123,68 +151,90 @@ const getNewStatus = (email, oldStatus, answer) => {
     
     let other;
     
-    if (oldStatus === 0) {
-        if (answer[0].value === false) return 1;
+    if (oldStatus === IN_UGS) {
+        if (answer.data[0].value === false) return NOT_UGS;
         else {
-            db.updateDocument('status', {user: email}, {geolocation: {lat: answer[1].value.data.latitude, long: answer[1].value.data.longitude}});
-            return 2;
+            db.updateDocument('status', {user: email}, {geolocation: {lat: answer.data[1].value.data.latitude, long: answer.data[1].value.data.longitude}});
+            return UGS_LIST;
         }
     }
-    else if (oldStatus === 2) {
-        if (answer[0].value === 'Other') return 3;
-        else return 4;
+    else if (oldStatus === NOT_UGS) {
+        return NOT_UGS;
     }
-    else if (oldStatus === 3) {
-        if (answer[0].value === false) return 4;
-        else return 5;
+    else if (oldStatus === UGS_LIST) {
+        if (answer.data[0].value === 'Other') return NEW_UGS;
+        else if (answer.data[0].value === '') return ADD_UGS;
+        else return ABOUT_UGS;
     }
-    else if (oldStatus === 4) {
-        return 6;
+    else if (oldStatus === ADD_UGS) {
+        if (answer.data[0].value === false) return NOT_UGS;
+        else return NEW_UGS;
     }
-    else if (oldStatus === 5) {
-        return 4;
+    else if (oldStatus === ABOUT_UGS) {
+        return ANIMALS;
     }
-    else if (oldStatus === 6) {
+    else if (oldStatus === NEW_UGS) {
+        db.insertDocument('newugs', {
+            name: answer.data.find(a => a.name === 'What is this UGS name?').value,
+            area: answer.data.find(a => a.name === 'What is its area?').value,
+            geolocation: answer.data.find(a => a.name === 'geolocation').value.data,
+            answer: answer.id
+        });
+        return ABOUT_UGS;
+    }
+    else if (oldStatus === ANIMALS) {
         other = false;
-        answer[0].value.map(a => {
+        answer.data[0].value.map(a => {
             if (a === 'other') other = true;
         });
 
-        if (other == true) return 9;
-        else return 7;
+        if (other == true) return ANIMALS_OTHER;
+        else return VEGETATION;
     }
-    else if (oldStatus === 7) {
+    else if (oldStatus === VEGETATION) {
         other = false;
-        answer[0].value.map(a => {
+        answer.data[0].value.map(a => {
             if (a === 'other') other = true;
         });
         
-        if (other == true) return 10;
-        else return 8;
+        if (other == true) return VEGETATION_OTHER;
+        else return MANMADE;
     }
-    else if (oldStatus === 8) {
+    else if (oldStatus === MANMADE) {
         other = false;
-        answer[0].value.map(a => {
+        answer.data[0].value.map(a => {
             if (a === 'other') other = true;
         });
         
-        if (other == true) return 11;
-        else return 12;
+        if (other == true) return MANMADE_OTHER;
+        else return MOTIVATION;
     }
-    else if (oldStatus === 9) {
-        return 7;
+    else if (oldStatus === MOTIVATION) {
+        other = false;
+        answer.data[0].value.map(a => {
+            if (a === 'other') other = true;
+        });
+        
+        if (other == true) return MOTIVATION_OTHER;
+        else return FEELING;
     }
-    else if (oldStatus === 10) {
-        return 8;
+    else if (oldStatus === ANIMALS_OTHER) {
+        return VEGETATION;
     }
-    else if (oldStatus === 11) {
-        return 12;
+    else if (oldStatus === VEGETATION_OTHER) {
+        return MANMADE;
     }
-    else if (oldStatus === 12) {
-        return 13;
+    else if (oldStatus === MANMADE_OTHER) {
+        return MOTIVATION;
     }
-    else if (oldStatus === 13) {
-        return 13;
+    else if (oldStatus === MOTIVATION_OTHER) {
+        return FEELING;
+    }
+    else if (oldStatus === FEELING) {
+        return THANKYOU;
+    }
+    else if (oldStatus === THANKYOU) {
+        return THANKYOU;
     }
     
 };
@@ -197,15 +247,12 @@ const submitForm = (req, res) => {
     
 };
 
-const mapSurvey = () => {
-    res.status(200).send({form: baseArray[0]});
-};
-
 const resetAnswer = (email) => {
     const newAnswer = {
         user: email,
         timestamp: new Date(),
-        data: []
+        data: [],
+        done: false
     };
 
     return db.insertDocument('answers', newAnswer);

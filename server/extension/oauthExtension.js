@@ -4,7 +4,7 @@ var axios = require('axios');
 
 var db = require('../modules/db');
 var cache = require('../modules/cache');
-var config = require('../extension/config');
+var config = require('./config');
 
 // Oauth register handler
 const registerHandler = async (req, res) => {

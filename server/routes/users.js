@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
   cache.get(req.body.adminEmail)
   .then(async result => {
     // If user not in cache
-    if (typeof result === 'undefined') res.status(404).send();
+    if (typeof result === 'undefined') res.status(403).send();
     else {
       // Get existing users from db
       const users = await db.loadCollection('users');
@@ -96,7 +96,7 @@ router.post('/changeType', async (req, res) => {
   cache.get(req.body.adminEmail)
     .then(async result => {
       // Check if admin is in the cache
-      if (typeof result === 'undefined') res.status(404).send();
+      if (typeof result === 'undefined') res.status(403).send();
       else {
         // Get existing users from db
         const users = await db.loadCollection('users');
@@ -112,7 +112,7 @@ router.post('/remove', async (req, res) => {
   cache.get(req.body.adminEmail)
     .then(async result => {
       // Check if admin is in the cache
-      if (typeof result === 'undefined') res.status(404).send();
+      if (typeof result === 'undefined') res.status(403).send();
       else {
         const users = await db.loadCollection('users');
         // Check if admin pasword correct

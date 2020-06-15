@@ -33,7 +33,9 @@ var getDocument = async (collectionName, search) => {
 
 var updateDocument = async (collectionName, search, newDocument) => {
     const collection = await loadCollection(collectionName);
-    await collection.updateOne(search, {$set: newDocument});
+    const result = await collection.find().toArray();
+    if (result.length > 0)
+        await collection.updateOne(search, {$set: newDocument});
 };
 
 var deleteDocument = async (collectionName, search) => {

@@ -1,0 +1,16 @@
+{
+    "pages": [
+        {
+            "name": "page1",
+            "elements": [
+                {
+                    "type": "dropdown",
+                    "name": "In which UGS are you?",
+                    "choices": [
+                        "Other"
+                    ]
+                }
+            ]
+        }
+    ]
+}

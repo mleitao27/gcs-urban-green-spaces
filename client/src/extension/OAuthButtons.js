@@ -16,9 +16,8 @@ const OAuthButtons = props => {
     
     // Send user params to server to login/register
     const oauthServerConnection = (params) => {
-        axios.post(`${config.serverURL}/api/users/oauth/${props.method}`, params)
+        axios.post(`${config.serverURL}/api/oauth/${props.method}`, params)
         .then(res => {
-            console.log(res);
             // If login set session state parameters
             if (props.method === 'login') {
                 props.onLogin(true, params.email, res.data.type);

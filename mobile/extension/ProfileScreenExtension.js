@@ -31,25 +31,39 @@ const ProfileScreenExtension = props => {
             if (res.status == 200) {
                 setProfile(await res.json());
             }
+            else if (res.status === 403) {
+                Alert.alert('ERROR', 'Login Timeout.');
+                props.navigation.state.params.logout();
+                props.navigation.navigate({routeName: 'Main'});
+            }
             else
-                Alert.alert('ERROR', 'Profile unavailable.');
+                Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
 
         })();        
     }, [edited]);
 
     const editProfile = async () => {
-        const res = await fetch(`${config.serverURL}/api/profile/edit`,{
-            method: 'GET',
+        const res = await fetch(`${config.serverURL}/api/profile/requestEdit`,{
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify({
+                email:  props.navigation.state.params.email
+            })
         });
 
         if (res.status == 200) {
             setForm(await res.json());
             setEdit(true);
         }
-        else Alert.alert('ERROR', 'Form unavailable.');
+        else if (res.status === 403) {
+            Alert.alert('ERROR', 'Login Timeout.');
+            props.navigation.state.params.logout();
+            props.navigation.navigate({routeName: 'Main'});
+        }
+        else
+            Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
 
     };
 
@@ -69,6 +83,13 @@ const ProfileScreenExtension = props => {
             setEdit(false);
             setEdited(!edited);
         }
+        else if (res.status === 403) {
+            Alert.alert('ERROR', 'Login Timeout.');
+            props.navigation.state.params.logout();
+            props.navigation.navigate({routeName: 'Main'});
+        }
+        else
+            Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
     };
 
     let content = <View style={styles.fallbackTextContainer}><Text style={styles.text}>Loading Profile...</Text></View>

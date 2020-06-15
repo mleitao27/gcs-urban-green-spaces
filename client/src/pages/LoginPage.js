@@ -42,6 +42,8 @@ const LoginPage = props => {
             console.log(error);
             props.onLogin(false, '', '');
             if (error.response.status === 404) alert('ERROR : User not registered.');
+            else
+                alert('ERROR : Unexpected error. Contact system admin.');
         });
 
         // Empty input fields

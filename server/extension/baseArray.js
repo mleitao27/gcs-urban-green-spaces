@@ -1,33 +1,53 @@
-const base0JSON = require('./data/base0.json');
-const base1JSON = require('./data/base1.json');
-const base2JSON = require('./data/base2.json');
-const base3JSON = require('./data/base3.json');
-const base4JSON = require('./data/base4.json');
-const base5JSON = require('./data/base5.json');
-const base6JSON = require('./data/base6.json');
-const base7JSON = require('./data/base7.json');
-const base8JSON = require('./data/base8.json');
-const base9JSON = require('./data/base9.json');
-const base10JSON = require('./data/base10.json');
-const base11JSON = require('./data/base11.json');
-const base12JSON = require('./data/base12.json');
-const base13JSON = require('./data/base13.json');
+const IN_UGS = require('./data/base_IN_UGS.json');
+const NOT_UGS = require('./data/base_NOT_UGS.json');
+const UGS_LIST = require('./data/base_UGS_LIST.json');
+const ADD_UGS = require('./data/base_ADD_UGS.json');
+const ABOUT_UGS = require('./data/base_ABOUT_UGS.json');
+const NEW_UGS = require('./data/base_NEW_UGS.json');
+const ANIMALS = require('./data/base_ANIMALS.json');
+const VEGETATION = require('./data/base_VEGETATION.json');
+const MANMADE = require('./data/base_MANMADE.json');
+const ANIMALS_OTHER = require('./data/base_ANIMALS_OTHER.json');
+const VEGETATION_OTHER = require('./data/base_VEGETATION_OTHER.json');
+const MANMADE_OTHER = require('./data/base_MANMADE_OTHER.json');
+const FEELING = require('./data/base_FEELING.json');
+const THANKYOU = require('./data/base_THANKYOU.json');
+const MOTIVATION = require('./data/base_MOTIVATION.json');
+const MOTIVATION_OTHER = require('./data/base_MOTIVATION_OTHER.json');
 
 const baseArray = [
-    base0JSON,
-    base1JSON,
-    base2JSON,
-    base3JSON,
-    base4JSON,
-    base5JSON,
-    base6JSON,
-    base7JSON,
-    base8JSON,
-    base9JSON,
-    base10JSON,
-    base11JSON,
-    base12JSON,
-    base13JSON
+    // 0
+    IN_UGS,
+    // 1
+    NOT_UGS,
+    // 2
+    UGS_LIST,
+    // 3
+    ADD_UGS,
+    // 4
+    ABOUT_UGS,
+    // 5
+    NEW_UGS,
+    // 6
+    ANIMALS,
+    // 7
+    VEGETATION,
+    // 8
+    MANMADE,
+    // 9
+    ANIMALS_OTHER,
+    // 10
+    VEGETATION_OTHER,
+    // 11
+    MANMADE_OTHER,
+    // 12
+    MOTIVATION,
+    // 13
+    MOTIVATION_OTHER,
+    // 14
+    FEELING,
+    // 15
+    THANKYOU,
 ];
 
 exports.baseArray = baseArray;

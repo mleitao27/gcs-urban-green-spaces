@@ -13,9 +13,10 @@ const storeAnswer = async (email, answer, type) => {
             if (type === 'base') {
                 const answers = await db.getDocument('answers', {_id: status[0].answer});
                 let answerData = [];
-                if (answer.length === 1) answerData = answers[0].data;
                 
+                if (answers.length === 1) answerData = answers[0].data;
                 answer.map(a => answerData.push(a));
+
                 await db.updateDocument('answers', {_id: status[0].answer}, {data: answerData});
             }
             else if (type === 'details') {

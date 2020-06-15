@@ -13,11 +13,15 @@
 						},
 						{
 							"value": "bush",
-							"imageLink": "http://192.168.1.78:3000/public/bush.png"
+							"imageLink": "http://192.168.1.78:3000/public/bush1.png"
 						},
 						{
 							"value": "flower",
 							"imageLink": "http://192.168.1.78:3000/public/flower.png"
+						},
+						{
+							"value": "mushroom",
+							"imageLink": "http://192.168.1.78:3000/public/mushroom.png"
 						},
 						{
 							"value": "other",

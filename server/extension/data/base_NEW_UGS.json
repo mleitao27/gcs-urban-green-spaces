@@ -9,10 +9,11 @@
 				},
 				{
                     "type": "text",
-                    "name": "What is its radius?"
+                    "name": "What is its area?"
                 },
 				{
-                    "type": "ext:sensor",
+					"type": "ext:sensor",
+					"name": "geolocation",
                     "subtype": "geolocation"
                 }			
 			]

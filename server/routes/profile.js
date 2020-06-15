@@ -8,12 +8,12 @@ router.post('/', async (req, res) => {
     profileExtension.getProfile(req, res);
 });
 
-router.get('/edit', async (req, res) => {
-    profileExtension.editProfileGET(req, res);
+router.post('/requestEdit', async (req, res) => {
+    profileExtension.requestEditProfile(req, res);
 });
 
 router.post('/edit', async (req, res) => {
-    profileExtension.editProfilePOST(req, res);
+    profileExtension.editProfile(req, res);
 });
 
 

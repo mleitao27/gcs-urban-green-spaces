@@ -26,7 +26,7 @@ const AdminPage = props => {
         .catch(error => {
             console.log(error);
             // If admin logged out reset session state
-            if (error.response.status === 404)
+            if (error.response.status === 403)
                 props.onLogout(false, '', '');
         });
     };
@@ -50,7 +50,7 @@ const AdminPage = props => {
         .catch(error => {
             console.log(error);
             // If admin logged out reset session state
-            if (error.response.status === 404)
+            if (error.response.status === 403)
                 props.onLogout(false, '', '');
         });
     };
@@ -78,7 +78,7 @@ const AdminPage = props => {
             if (error.response.status === 401)
                 alert('ERROR : Incorrect admin password.');
             // If admin logged out reset session state
-            else if (error.response.status === 404)
+            else if (error.response.status === 403)
                 props.onLogout(false, '', '');
         });
     };

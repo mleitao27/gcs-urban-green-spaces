@@ -1,12 +1,11 @@
 import React from 'react';
-import ResearcherExtension from '../extension/ResearcherExtension';
+import ResearcherPageExtension from '../extension/ResearcherPageExtension';
 
 const ResearcherPage = props => {
     
     return (
         <React.Fragment>
-            <h1>Researcher Page</h1>
-            <ResearcherExtension userEmail={props.userEmail}></ResearcherExtension>
+            <ResearcherPageExtension onLogout={props.onLogout} userEmail={props.userEmail} isLogged={props.isLogged}></ResearcherPageExtension>
         </React.Fragment>
     );
 };

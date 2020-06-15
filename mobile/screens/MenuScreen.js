@@ -7,8 +7,7 @@ import config from '../extension/config';
 
 import CustomButton from '../components/CustomButton';
 
-const MenuScreen
- = props => {
+const MenuScreen = props => {
     
     const logout = async () => {
         const res = await fetch(`${config.serverURL}/api/users/logout`,{
@@ -28,19 +27,19 @@ const MenuScreen
         <View>
             <CustomButton
                 title='Profile'
-                onPress={() => props.navigation.navigate({routeName: 'Profile', params: {email: props.email}})}
+                onPress={() => props.navigation.navigate({routeName: 'Profile', params: {email: props.email, logout: logout}})}
                 backgroundColor={Colors.primary}
                 textColor={Colors.secondary}
                 />
             <CustomButton
                 title='Survey'
-                onPress={() => props.navigation.navigate({routeName: 'Survey', params: {email: props.email}})}
+                onPress={() => props.navigation.navigate({routeName: 'Survey', params: {email: props.email, logout: logout}})}
                 backgroundColor={Colors.primary}
                 textColor={Colors.secondary}
                 />
             <CustomButton
                 title='Results'
-                onPress={() => props.navigation.navigate({routeName: 'Results'})}
+                onPress={() => props.navigation.navigate({routeName: 'Results', params: {email: props.email, logout: logout}})}
                 backgroundColor={Colors.primary}
                 textColor={Colors.secondary}
                 />

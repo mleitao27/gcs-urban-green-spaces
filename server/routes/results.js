@@ -4,7 +4,8 @@ var router = express.Router();
 
 const resultsExtension = require('../extension/resultsExtension');
 
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
+    resultsExtension.getResults(req, res);
 });
 
 
