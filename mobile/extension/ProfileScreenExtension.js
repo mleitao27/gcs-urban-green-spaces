@@ -162,7 +162,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingTop: Dimensions.get('window').height*0.01,
-        paddingBottom: Dimensions.get('window').height*0.05
+        paddingBottom: Dimensions.get('window').height*0.05,
+        paddingHorizontal: Dimensions.get('window').width * 0.02
     },
     formContainer: {
         width: '100%'
