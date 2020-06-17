@@ -97,7 +97,7 @@ const ProfileScreenExtension = props => {
         if (!edit) {
             content = (
                 <View style={styles.container}>
-                    <View>
+                    <View style={styles.textContainer}>
                         <View style={styles.userContainer}>
                             <Text style={styles.nameText}>{profile.name} ({profile.type})</Text>
                             <Text style={styles.emailText}>{profile.email}</Text>
@@ -159,11 +159,15 @@ const ProfileScreenExtension = props => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,        
+        width: '100%',
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingTop: Dimensions.get('window').height*0.01,
         paddingBottom: Dimensions.get('window').height*0.05,
         paddingHorizontal: Dimensions.get('window').width * 0.02
+    },
+    textContainer: {
+        width: '100%'
     },
     formContainer: {
         width: '100%'
