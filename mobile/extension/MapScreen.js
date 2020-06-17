@@ -6,7 +6,8 @@ import {
     Text,
     Dimensions,
     Alert,
-    TouchableOpacity
+    TouchableOpacity,
+    Image
 } from 'react-native';
 
 import * as Location from 'expo-location';
@@ -17,22 +18,19 @@ import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { Form } from 'react-native-json-forms';
 import FormExtension from './FormExtension';
 
-import FeedbackHandler from './FeedbackHandler';
-
 import config from './config';
 
-const FormScreen = props => {
+const MapScreen = props => {
 
     // State to store location
     const [location, setLocation] = useState({latitude: 38.726608, longitude: -9.1405415});
     // State to store error message (not used)
     const [errorMessage, setErrorMessage] = useState('');
+    const [key, setKey] = useState(true);
+    const [submitted, setSubmitted] = useState(true);
 
-    const [loaded, setLoaded] = useState(null);
     const [form, setForm] = useState(null);
-
-    const [status, setStatus] = useState(-1);
-    const [statusKey, setStatusKey] = useState(-1);
+    const [markers, setMarkers] = useState(null);
 
     const [mapHeight, setMapHeight] = useState('100%');
 
@@ -63,24 +61,44 @@ const FormScreen = props => {
     useEffect(() => {
         (async () => {
             
-            const res = await fetch(`${config.serverURL}/api/surveys/`,{
+            const resForm = await fetch(`${config.serverURL}/api/surveys/`,{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     email:  props.navigation.state.params.email,
-                    status: status,
-                    type: 'form'
+                    type: 'map'
                 })
             });
     
-            if (res.status == 200) {
-                setForm(await res.json());
-                setStatusKey(status);
-                setLoaded(true);
+            if (resForm.status == 200) {
+                setForm(await resForm.json());
+                setKey(!key);
             }
-            else if (res.status === 403) {
+            else if (resForm.status === 403) {
+                Alert.alert('ERROR', 'Login Timeout.');
+                props.navigation.state.params.logout();
+                props.navigation.navigate({routeName: 'Main'});
+            }
+            else
+                Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
+            
+            const resMarkers = await fetch(`${config.serverURL}/api/surveys/getMarkers/`,{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email:  props.navigation.state.params.email
+                })
+            });
+    
+            if (resMarkers.status == 200) {
+                const markers = await resMarkers.json();
+                setMarkers(markers.markers);
+            }
+            else if (resMarkers.status === 403) {
                 Alert.alert('ERROR', 'Login Timeout.');
                 props.navigation.state.params.logout();
                 props.navigation.navigate({routeName: 'Main'});
@@ -89,7 +107,7 @@ const FormScreen = props => {
                 Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
 
         })();
-    }, [status]);
+    }, [submitted]);
 
     const onSubmit = async (data) => {
         const res = await fetch(`${config.serverURL}/api/surveys/answer`,{
@@ -105,11 +123,7 @@ const FormScreen = props => {
         });
         
         if (res.status == 200) {
-            const newStatus = await res.json();
-            setStatus(newStatus.status);
-            // Change this
-            if (parseInt(newStatus.status) != 15 && parseInt(newStatus.status) != 1)
-                setLoaded(null);
+            setSubmitted(!submitted);
         }
         else if (res.status === 403) {
             Alert.alert('ERROR', 'Login Timeout.');
@@ -118,28 +132,49 @@ const FormScreen = props => {
         }
         else
             Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
-        //FeedbackHandler();
     };
 
     let formContent = <View />;
-    if (loaded === null)
-        formContent = <View style={styles.fallbackTextContainer}><Text style={styles.text}>Loading survey...</Text></View>
-    else if (loaded === false)
-        formContent = <View style={styles.fallbackTextContainer}><Text style={styles.text}>Unable to load survey. Please go back.</Text></View>
-    else if (loaded === true)
+    if (form !== null)
         formContent = (
             <ScrollView style={styles.formContainer}>
-                <Form key={statusKey} json={form.form} extension={FormExtension} onSubmit={onSubmit} showSubmitButton={false} />
+                <Form key={key} json={form.form} extension={FormExtension} onSubmit={onSubmit} showSubmitButton={false} />
             </ScrollView>
-    );
-
-    const getHeight = () => {
-        if (form === null) setMapHeight('100%');
-        else if (form.type === 'details') setMapHeight('0%');
-        else if (form.type === 'base') setMapHeight('60%');
-        else setMapHeight('60%');
-    };
+        );
     
+    let markersContent = <View/>;
+    if (markers != null)
+        markersContent = (
+            markers.map(marker => {
+                return (
+                    <Marker
+                        key={`${props.navigation.state.params.email}${marker.marker}${marker.lat}${marker.long}`}
+                        coordinate={{latitude: marker.lat, longitude: marker.long}}
+                    >
+                        <View style={styles.markerContainer}>
+                            <Image
+                                source={{uri:'http://192.168.1.78:3000/public/marker1.png'}}
+                                style={{flex:1, tintColor: 'white', position: 'absolute', width: Dimensions.get('window').width*0.11,
+                                height: Dimensions.get('window').width*0.11}}
+                            />
+                            <Image
+                                source={{uri:marker.imageLink}}
+                                style={styles.markerIcon}
+                            />
+                            <Image
+                                source={{uri:'http://192.168.1.78:3000/public/marker.png'}}
+                                style={{flex:1, tintColor: marker.color}}
+                            />
+                        </View>
+                    </Marker>
+                );
+            })
+        );
+
+        const getHeight = () => {
+            setMapHeight('60%');
+        };
+
     return (
         <View style={styles.container}>
             <View style={{width: '100%', height: mapHeight}}>
@@ -156,6 +191,7 @@ const FormScreen = props => {
                     showsMyLocationButton={true}
                     onRegionChangeComplete={getHeight}
                 >
+                {markersContent}
                 </MapView>
             </View>
             {formContent}
@@ -177,14 +213,19 @@ const styles = StyleSheet.create({
     formContainer: {
         width: '100%'
     },
-    text: {
-        fontSize: Dimensions.get('window').width*0.05
+    markerContainer: {
+        width: Dimensions.get('window').width*0.11,
+        height: Dimensions.get('window').width*0.11
     },
-    fallbackTextContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
+    markerIcon: {
+        backgroundColor: 'white',
+        overflow: 'hidden',
+        width: Dimensions.get('window').width*0.03, 
+        height: Dimensions.get('window').width*0.03,
+        position: 'absolute',
+        top:Dimensions.get('window').width*0.025,
+        left:Dimensions.get('window').width*0.04
+    }
 });
 
-export default FormScreen;
+export default MapScreen;

@@ -20,5 +20,9 @@ router.post('/feedback', async (req, res) => {
     surveyExtension.returnFeedback(req, res);
 });
 
+router.post('/getMarkers', async (req, res) => {
+    surveyExtension.getMarkers(req, res);
+});
+
 // Export router
 module.exports = router;

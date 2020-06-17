@@ -49,7 +49,7 @@ const GeolocationSensor = props => {
             // Send location data(geocode + lat + long) to form component
             props.onChange(props.pageIndex, props.index, {sensor: 'geolocation', data: { ...geocode[0], ...location }});
         
-            return () => {
+        return () => {
             cancel = true;
         };
     }, [location, geocode]);

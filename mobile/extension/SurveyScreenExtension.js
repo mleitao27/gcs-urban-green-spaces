@@ -9,22 +9,13 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-import * as Location from 'expo-location';
-import * as Permissions from 'expo-permissions';
-
-import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
-
-import {Form} from 'react-native-json-forms';
-import FormExtension from './FormExtension';
-
-import FeedbackHandler from './FeedbackHandler';
-
-import config from './config';
 import Colors from '../constants/colors';
 
 import { Ionicons } from '@expo/vector-icons';
 
 import FormScreen from './FormScreen';
+import MapScreen from './MapScreen';;
+
 
 const SurveyScreenExtension = props => {
 
@@ -32,6 +23,7 @@ const SurveyScreenExtension = props => {
 
     let content = <View/>;
     if (mode === 'form') content = <FormScreen navigation={props.navigation} />;
+    else if (mode === 'map') content = <MapScreen navigation={props.navigation} />;
     
     return (
         <View style={styles.container}>

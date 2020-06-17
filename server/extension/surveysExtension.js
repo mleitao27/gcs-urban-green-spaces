@@ -6,6 +6,7 @@ var cache = require('../modules/cache');
 var baseArray = require('./baseArray').baseArray;
 const errorJSON = require('./data/error.json');
 const detailsJSON = require('./data/details.json');
+const mappingJSON = require('./data/mapping.json');
 
 var feedback = require('./feedbackExtension');
 var dbStorage = require('./dbExtension');
@@ -35,35 +36,39 @@ const getForm = (req, res) => {
         // If user not in cache
         if (typeof result === 'undefined') res.status(403).send();
         else {
-            const status = await db.getDocument('status', {user: req.body.email});
-            const details = await db.getDocument('details', {email: req.body.email});
-            
-            if (status.length === 0) {
-                const newStatus = {
-                    user: req.body.email,
-                    base: details.length === 1 ? 0 : -1,
-                    details: details.length === 1 ? true : false,
-                    geolocation: null,
-                    answer: await resetAnswer(req.body.email)
-                };
+            if (req.body.type === 'map') res.status(200).send({form: mappingJSON, type: 'map'});
+            else if (req.body.type === 'form') {
+
+                const status = await db.getDocument('status', {user: req.body.email});
+                const details = await db.getDocument('details', {email: req.body.email});
                 
-                db.insertDocument('status', newStatus);
-                res.status(200).send(details.length === 1 ? {form: baseArray[0], type: 'base'} : {form: detailsJSON, type: 'details'});
-                
-            } else if (status.length === 1) {
-                if (status[0].details === false) detailsSurvey(req, res);
-                else {
-                    const answer = await db.getDocument('answers', {_id: status[0].answer});
-                    if (req.body.status !== status[0].base) {
-                        db.updateDocument('status', {user: req.body.email}, {base: 0, answer: await resetAnswer(req.body.email)});
-                        if (answer.length === 1 && answer[0].done === false) {
-                            db.deleteDocument('answers', {_id: status[0].answer});
-                        }
-                        res.status(200).send({form: baseArray[0], type: 'base'});
-                    } else baseSurvey(req, res, status[0]);
+                if (status.length === 0) {
+                    const newStatus = {
+                        user: req.body.email,
+                        base: details.length === 1 ? 0 : -1,
+                        details: details.length === 1 ? true : false,
+                        geolocation: null,
+                        answer: await resetAnswer(req.body.email)
+                    };
+                    
+                    db.insertDocument('status', newStatus);
+                    res.status(200).send(details.length === 1 ? {form: baseArray[0], type: 'base'} : {form: detailsJSON, type: 'details'});
+                    
+                } else if (status.length === 1) {
+                    if (status[0].details === false) detailsSurvey(req, res);
+                    else {
+                        const answer = await db.getDocument('answers', {_id: status[0].answer});
+                        if (req.body.status !== status[0].base) {
+                            db.updateDocument('status', {user: req.body.email}, {base: 0, answer: await resetAnswer(req.body.email)});
+                            if (answer.length === 1 && answer[0].done === false) {
+                                db.deleteDocument('answers', {_id: status[0].answer});
+                            }
+                            res.status(200).send({form: baseArray[0], type: 'base'});
+                        } else baseSurvey(req, res, status[0]);
+                    }
+                } else {
+                    res.status(200).send({form: errorJSON});
                 }
-            } else {
-                res.status(200).send({form: errorJSON});
             }
         }
     });
@@ -115,6 +120,19 @@ const detailsSurvey = (req, res) => {
     res.status(200).send({form: detailsJSON, type: 'details'});
 };
 
+const getMarkers = async (req, res) => {
+    cache.get(req.body.email)
+    .then(async result => {
+        // If user not in cache
+        if (typeof result === 'undefined') res.status(403).send();
+        else {
+            const markers = await db.getDocument('markers', {email: req.body.email});
+            if (markers.length > 0)
+                res.status(200).send(markers[0]);
+        }
+    });
+};
+
 const processAnswer = (req, res) => {
     cache.get(req.body.email)
     .then(async result => {
@@ -135,14 +153,18 @@ const processAnswer = (req, res) => {
             if (req.body.type === 'base') {
                 newStatus = getNewStatus(req.body.email, status[0].base, {data: req.body.answer, id: status[0].answer});
                 db.updateDocument('status', {user: req.body.email}, {base: newStatus});
+                res.status(200).send({status: newStatus});
             }
             else if (req.body.type === 'details') {
                 newStatus = 0;
                 db.updateDocument('status', {user: req.body.email}, {base: newStatus, details: true});
+                res.status(200).send({status: newStatus});
+            }
+            else if (req.body.type === 'map') {
+                res.status(200).send();
             }
             
             
-            res.status(200).send({status: newStatus});
         }
     });
 };
@@ -275,3 +297,4 @@ exports.getForm = getForm;
 exports.submitForm = submitForm;
 exports.processAnswer = processAnswer;
 exports.returnFeedback = returnFeedback;
+exports.getMarkers = getMarkers;

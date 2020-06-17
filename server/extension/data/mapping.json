@@ -1,0 +1,55 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+					"type": "ext:geomarker",
+					"name": "What was your motivation to come here?",
+					"markers": [
+						{
+							"value": "like",
+							"imageLink": "http://192.168.1.78:3000/public/like.png",
+							"color": "#1BA261"
+						},
+						{
+							"value": "dislike",
+							"imageLink": "http://192.168.1.78:3000/public/dislike.png",
+							"color": "#EA4335"
+						},
+						{
+							"value": "sun",
+							"imageLink": "http://192.168.1.78:3000/public/sun.png",
+							"color": "#EB8F00"
+						},
+						{
+							"value": "wind",
+							"imageLink": "http://192.168.1.78:3000/public/wind.png",
+							"color": "#477CE3"
+						},
+						{
+							"value": "shade",
+							"imageLink": "http://192.168.1.78:3000/public/shade.png",
+							"color": "#D5D8DB"
+						},
+						{
+							"value": "animal",
+							"imageLink": "http://192.168.1.78:3000/public/squirrel.png",
+							"color": "#8C5F3D"
+						},
+						{
+							"value": "vegetation",
+							"imageLink": "http://192.168.1.78:3000/public/tree.png",
+							"color": "#8DC44F"
+						},
+						{
+							"value": "manmade",
+							"imageLink": "http://192.168.1.78:3000/public/gazebo.png",
+							"color": "#737373"
+						}
+					]
+				}		
+			]
+		}
+	]
+}

@@ -3,6 +3,7 @@ import YNElement from './YNElement';
 import InfoElement from './InfoElement';
 import FeelElement from './FeelElement';
 import ZipElement from './ZipElement';
+import GeoMarkerElement from './GeoMarkerElement';
 
 const ext = [
     {
@@ -24,6 +25,10 @@ const ext = [
     {
         type: 'ext:zip',
         component: ZipElement
+    },
+    {
+        type: 'ext:geomarker',
+        component: GeoMarkerElement
     }
 ];
 
