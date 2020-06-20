@@ -20,10 +20,10 @@ import FormExtension from './FormExtension';
 
 import config from './config';
 
-const MapScreen = props => {
+const SurveyMapScreen = props => {
 
     // State to store location
-    const [location, setLocation] = useState({latitude: 38.726608, longitude: -9.1405415});
+    const [mapRegion, setMapRegion] = useState({latitude: 38.726608, longitude: -9.1405415, latitudeDelta: 0.000922, longitudeDelta: 0.000421});
     // State to store error message (not used)
     const [errorMessage, setErrorMessage] = useState('');
     const [key, setKey] = useState(true);
@@ -48,7 +48,7 @@ const MapScreen = props => {
             // Gets coordinates
             let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest });
             const { latitude, longitude } = location.coords;
-            if (cancel === false) setLocation({ latitude, longitude });
+            if (cancel === false) setMapRegion({ latitude:latitude, longitude:longitude, latitudeDelta:mapRegion.latitudeDelta, longitudeDelta:mapRegion.longitudeDelta });
         };
 
         getLocationAsync();
@@ -170,10 +170,11 @@ const MapScreen = props => {
                 );
             })
         );
-
-        const getHeight = () => {
-            setMapHeight('60%');
-        };
+        
+    const onRegionChangeComplete = (region) => {
+        setMapRegion(region);
+        setMapHeight('60%');
+    };
 
     return (
         <View style={styles.container}>
@@ -181,15 +182,10 @@ const MapScreen = props => {
                 <MapView
                     provider={PROVIDER_GOOGLE}
                     style={styles.map}
-                    region={{
-                        latitude: location.latitude,
-                        longitude: location.longitude,
-                        latitudeDelta: 0.000922,
-                        longitudeDelta: 0.000421,
-                    }}
+                    region={mapRegion}
                     showsUserLocation={true}
                     showsMyLocationButton={true}
-                    onRegionChangeComplete={getHeight}
+                    onRegionChangeComplete={onRegionChangeComplete}
                 >
                 {markersContent}
                 </MapView>
@@ -228,4 +224,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default MapScreen;
+export default SurveyMapScreen;

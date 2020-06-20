@@ -13,8 +13,8 @@ import Colors from '../constants/colors';
 
 import { Ionicons } from '@expo/vector-icons';
 
-import FormScreen from './FormScreen';
-import MapScreen from './MapScreen';;
+import SurveyFormScreen from './SurveyFormScreen';
+import SurveyMapScreen from './SurveyMapScreen';;
 
 
 const SurveyScreenExtension = props => {
@@ -22,8 +22,8 @@ const SurveyScreenExtension = props => {
     const [mode, setMode] = useState('form');
 
     let content = <View/>;
-    if (mode === 'form') content = <FormScreen navigation={props.navigation} />;
-    else if (mode === 'map') content = <MapScreen navigation={props.navigation} />;
+    if (mode === 'form') content = <SurveyFormScreen navigation={props.navigation} />;
+    else if (mode === 'map') content = <SurveyMapScreen navigation={props.navigation} />;
     
     return (
         <View style={styles.container}>
