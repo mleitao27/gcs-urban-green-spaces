@@ -5,7 +5,7 @@
 			"elements": [
 				{
 					"type": "ext:geomarker",
-					"name": "What was your motivation to come here?",
+					"name": "Add marker...",
 					"markers": [
 						{
 							"value": "like",
