@@ -36,7 +36,7 @@ const ResultsScreenExtension = props => {
         })();        
     }, []);
 
-    let content = <View><Text>Loading Results...</Text></View>
+    let content = <View><Text>Loading Results...</Text></View>;
     if (results !== null)
         content = (
             <FlatList
