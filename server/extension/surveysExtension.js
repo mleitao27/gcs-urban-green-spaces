@@ -2,6 +2,7 @@ var express = require('express');
 
 var db = require('../modules/db');
 var cache = require('../modules/cache');
+var config = require('./config');
 
 var baseArray = require('./baseArray').baseArray;
 const errorJSON = require('./data/error.json');
@@ -28,7 +29,11 @@ const MANMADE_OTHER = 11;
 const MOTIVATION = 12;
 const MOTIVATION_OTHER = 13;
 const FEELING = 14;
-const THANKYOU = 15;
+const END = 15;
+const GOOGLE = 16;
+const YNGOOGLE = 17;
+const SKIPSURVEY = 18;
+const SENSORS = 19;
 
 const getForm = (req, res) => {
     cache.get(req.body.email)
@@ -48,6 +53,8 @@ const getForm = (req, res) => {
                         base: details.length === 1 ? 0 : -1,
                         details: details.length === 1 ? true : false,
                         geolocation: null,
+                        weather: null,
+                        googlefit: null,
                         answer: await resetAnswer(req.body.email)
                     };
                     
@@ -93,7 +100,7 @@ const baseSurvey = async (req, res, status) => {
         var ids = [];
         if (ugs.length > 0)
             ugs.map(space => {
-                if (calcDistance(parseFloat(space.lat), parseFloat(space.long), parseFloat(status.geolocation.lat), parseFloat(status.geolocation.long)) <= Math.round(Math.sqrt(parseFloat(space.area)/Math.PI))+1000) {
+                if (calcDistance(parseFloat(space.lat), parseFloat(space.long), parseFloat(status.geolocation.lat), parseFloat(status.geolocation.long)) <= Math.round(Math.sqrt(parseFloat(space.area)/Math.PI)) + config.inUgsOffset) {
                     if (typeof ids.find(element => element === space.id) === 'undefined') {
                         ids.push(space.id);
                         choices.push(space.name);
@@ -109,8 +116,9 @@ const baseSurvey = async (req, res, status) => {
         form = content;
         
     }
-    else if (status.base === THANKYOU) {
+    else if (status.base === END) {
         db.updateDocument('answers', {_id: status.answer}, {done: true});
+        form = {weather: status.weather, googlefit: status.googlefit}
     }
     
     res.status(200).send({form, type: 'base'});
@@ -133,7 +141,7 @@ const getMarkers = async (req, res) => {
     });
 };
 
-const processAnswer = (req, res) => {
+const processAnswer = async (req, res) => {
     cache.get(req.body.email)
     .then(async result => {
         // If user not in cache
@@ -151,7 +159,7 @@ const processAnswer = (req, res) => {
 
             var newStatus;
             if (req.body.type === 'base') {
-                newStatus = getNewStatus(req.body.email, status[0].base, {data: req.body.answer, id: status[0].answer});
+                newStatus = await getNewStatus(req.body.email, status[0].base, {data: req.body.answer, id: status[0].answer});
                 db.updateDocument('status', {user: req.body.email}, {base: newStatus});
                 res.status(200).send({status: newStatus});
             }
@@ -169,16 +177,54 @@ const processAnswer = (req, res) => {
     });
 };
 
-const getNewStatus = (email, oldStatus, answer) => {
+const getNewStatus = async (email, oldStatus, answer) => {
     
     let other;
+    let status;
+    let answers;
     
     if (oldStatus === IN_UGS) {
         if (answer.data[0].value === false) return NOT_UGS;
         else {
-            db.updateDocument('status', {user: email}, {geolocation: {lat: answer.data[1].value.data.latitude, long: answer.data[1].value.data.longitude}});
-            return UGS_LIST;
+            
+            status = await db.getDocument('status', {user: email});
+            answers = await db.getDocument('answers', {user: email});
+
+            if (typeof answers.find(a => Math.abs(a.timestamp - new Date()) < 1000 * config.recentAnswer && JSON.stringify(status[0].answer) !== JSON.stringify(a._id)) != 'undefined')
+                return SKIPSURVEY;
+
+            return SENSORS;
         }
+    }
+    else if (oldStatus === SKIPSURVEY) {
+        if (answer.data[0].value === false) return SENSORS;
+        else {
+            status = await db.getDocument('status', {user: email});
+            db.deleteDocument('answers', {_id: status[0].answer});
+            return END;
+        }
+    }
+    else if (oldStatus === SENSORS) {
+        
+        answer.data.map(d => {
+            if (d.name === 'geolocation')
+                db.updateDocument('status', {user: email}, {geolocation: {lat: d.value.data.latitude, long: d.value.data.longitude}});
+            else if (d.name === 'weather')
+                db.updateDocument('status', {user: email}, {weather: d.value.data});
+        });
+        
+        return YNGOOGLE;
+    }
+    else if (oldStatus === YNGOOGLE) {
+        if (answer.data[0].value === false) return UGS_LIST;
+        else return GOOGLE;
+    }
+    else if (oldStatus === GOOGLE) {
+        answer.data.map(d => {
+            if (d.name === 'googlefit')
+                db.updateDocument('status', {user: email}, {googlefit: d.value.data});
+        });
+        return UGS_LIST;
     }
     else if (oldStatus === NOT_UGS) {
         return NOT_UGS;
@@ -253,10 +299,10 @@ const getNewStatus = (email, oldStatus, answer) => {
         return FEELING;
     }
     else if (oldStatus === FEELING) {
-        return THANKYOU;
+        return END;
     }
-    else if (oldStatus === THANKYOU) {
-        return THANKYOU;
+    else if (oldStatus === END) {
+        return END;
     }
     
 };

@@ -1,4 +1,8 @@
 const IN_UGS = require('./data/base_IN_UGS.json');
+const SKIPSURVEY = require('./data/base_SKIPSURVEY.json');
+const SENSORS = require('./data/base_SENSORS.json');
+const YNGOOGLE = require('./data/base_YNGOOGLE.json');
+const GOOGLE = require('./data/base_GOOGLE.json');
 const NOT_UGS = require('./data/base_NOT_UGS.json');
 const UGS_LIST = require('./data/base_UGS_LIST.json');
 const ADD_UGS = require('./data/base_ADD_UGS.json');
@@ -48,6 +52,14 @@ const baseArray = [
     FEELING,
     // 15
     THANKYOU,
+    // 16
+    GOOGLE,
+    // 17
+    YNGOOGLE,
+    // 18
+    SKIPSURVEY,
+    // 19
+    SENSORS
 ];
 
 exports.baseArray = baseArray;

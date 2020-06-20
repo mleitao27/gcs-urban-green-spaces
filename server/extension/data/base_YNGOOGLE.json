@@ -5,7 +5,7 @@
 			"elements": [
 				{
 					"type": "ext:yn",
-					"name": "Are you in an Urban Green Space?"
+					"name": "Do you want to share your Google Fit data?"
 				}
 			]
 		}

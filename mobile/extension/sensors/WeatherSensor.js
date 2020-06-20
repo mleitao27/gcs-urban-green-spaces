@@ -39,7 +39,7 @@ const WeatherSensor = props => {
         });
 
         const currentWeather = await res.json();
-        props.onChange(props.pageIndex, props.index, {...{sensor: 'weather'}, ...{data:currentWeather.main}});
+        props.onChange(props.pageIndex, props.index, {...{sensor: 'weather'}, ...{data:{...currentWeather.main, description: currentWeather.weather[0].description}}});
         setStop(true);
     };
 

@@ -1,0 +1,17 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+                    "type": "ext:sensor",
+                    "subtype": "googlefit",
+					"name": "googlefit",
+					"config": {
+						"data": ["steps", "distance", "calories", "activeMinutes"]
+					}
+				}	
+			]
+		}
+	]
+}

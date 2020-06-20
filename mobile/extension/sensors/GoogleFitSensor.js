@@ -46,12 +46,12 @@ const GoogleFitSensor = props => {
 
             const dataSources = await res.json();
 
-            console.log(res.status);
+            //console.log(res.status);
 
             if (dataSources.dataSource.length === 0) {
               props.onChange(props.pageIndex, props.index, {sensor: 'googlefit', data: 'empty'});
             } else {
-              dataSources.dataSource.map(source => console.log(source.dataStreamId));
+              //dataSources.dataSource.map(source => console.log(source.dataStreamId));
 
               props.config.data.map(async data => {
   
