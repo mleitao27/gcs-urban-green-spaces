@@ -23,7 +23,8 @@ import config from './config';
 const SurveyMapScreen = props => {
 
     // State to store location
-    const [mapRegion, setMapRegion] = useState({latitude: 38.726608, longitude: -9.1405415, latitudeDelta: 0.000922, longitudeDelta: 0.000421});
+    const [location, setLocation] = useState({latitude: 38.726608, longitude: -9.1405415});
+    const [locationDelta, setLocationDelta] = useState({latitudeDelta: 0.000922, longitudeDelta: 0.000421});
     // State to store error message (not used)
     const [errorMessage, setErrorMessage] = useState('');
     const [key, setKey] = useState(true);
@@ -48,7 +49,7 @@ const SurveyMapScreen = props => {
             // Gets coordinates
             let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest });
             const { latitude, longitude } = location.coords;
-            if (cancel === false) setMapRegion({ latitude:latitude, longitude:longitude, latitudeDelta:mapRegion.latitudeDelta, longitudeDelta:mapRegion.longitudeDelta });
+            if (cancel === false) setLocation({latitude: latitude, longitude: longitude});
         };
 
         getLocationAsync();
@@ -172,7 +173,8 @@ const SurveyMapScreen = props => {
         );
         
     const onRegionChangeComplete = (region) => {
-        setMapRegion(region);
+        setLocationDelta({latitudeDelta: region.latitudeDelta, longitudeDelta: region.longitudeDelta});
+        setLocation({latitude: Math.round(region.latitude*1000000)/1000000, longitude: Math.round(region.longitude*1000000)/1000000});
         setMapHeight('60%');
     };
 
@@ -182,7 +184,12 @@ const SurveyMapScreen = props => {
                 <MapView
                     provider={PROVIDER_GOOGLE}
                     style={styles.map}
-                    region={mapRegion}
+                    region={{
+                        latitude: location.latitude,
+                        longitude: location.longitude,
+                        latitudeDelta: locationDelta.latitudeDelta,
+                        longitudeDelta: locationDelta.longitudeDelta,
+                    }}
                     showsUserLocation={true}
                     showsMyLocationButton={true}
                     onRegionChangeComplete={onRegionChangeComplete}

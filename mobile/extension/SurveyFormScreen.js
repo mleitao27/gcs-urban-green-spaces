@@ -19,12 +19,15 @@ import FormExtension from './FormExtension';
 
 import FeedbackHandler from './FeedbackHandler';
 
+import SensorsData from './SensorsData';
+
 import config from './config';
 
 const SurveyFormScreen = props => {
 
-    // State to store location
-    const [mapRegion, setMapRegion] = useState({latitude: 38.726608, longitude: -9.1405415, latitudeDelta: 0.000922, longitudeDelta: 0.000421});
+    // Stat e to store location
+    const [location, setLocation] = useState({latitude: 38.726608, longitude: -9.1405415});
+    const [locationDelta, setLocationDelta] = useState({latitudeDelta: 0.000922, longitudeDelta: 0.000421});
     // State to store error message (not used)
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -51,7 +54,7 @@ const SurveyFormScreen = props => {
             let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest });
             const { latitude, longitude } = location.coords;
             //if (cancel === false) setLocation({ latitude, longitude });
-            if (cancel === false) setMapRegion({ latitude:latitude, longitude:longitude, latitudeDelta:mapRegion.latitudeDelta, longitudeDelta:mapRegion.longitudeDelta });
+            if (cancel === false) setLocation({latitude: latitude, longitude: longitude});
         };
 
         getLocationAsync();
@@ -92,7 +95,47 @@ const SurveyFormScreen = props => {
         })();
     }, [status]);
 
+    const submitPhoto = async (data) => {
+        let index;
+        let base64 = null;
+
+        data.map((d, i) => {
+            if (d.type === 'camera' && d.value !== '') {
+                index = i;
+                base64 = data[i].value;
+                base64.append('email', props.navigation.state.params.email);
+                data[index].value = '';
+            }
+        });
+        
+        if (base64 !== null) {
+            const res = await fetch(`${config.serverURL}/api/surveys/answerImage`,{
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'multipart/form-data',
+                },
+                body: base64
+            });
+            
+            if (res.status == 200) {
+                data[index].value = await res.json();
+            }
+            else if (res.status === 403) {
+                Alert.alert('ERROR', 'Login Timeout.');
+                props.navigation.state.params.logout();
+                props.navigation.navigate({routeName: 'Main'});
+            }
+            else
+                Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
+        }
+        return data;
+    };
+
     const onSubmit = async (data) => {
+
+        data = await submitPhoto(data);
+
         const res = await fetch(`${config.serverURL}/api/surveys/answer`,{
             method: 'POST',
             headers: {
@@ -106,6 +149,7 @@ const SurveyFormScreen = props => {
         });
         
         if (res.status == 200) {
+            // Send image
             const newStatus = await res.json();
             setStatus(newStatus.status);
             // Change this
@@ -129,19 +173,8 @@ const SurveyFormScreen = props => {
         formContent = <View style={styles.fallbackTextContainer}><Text style={styles.text}>Unable to load survey. Please go back.</Text></View>
     else if (loaded === true) {
         if (statusKey === 15) {
-            let googleContent = <View/>;
-            if (form.form.googlefit !== null)
-                googleContent = (
-                    <View>
-                        {form.form.googlefit.map(g => {return <Text key={g.type}>{g.type}: {g.value}</Text>})}
-                    </View>
-                );
             formContent = (
-                <View>
-                    <Text>{form.form.weather.temp}</Text>
-                    <Text>{form.form.weather.description}</Text>
-                    {googleContent}
-                </View>
+                <SensorsData form={form} />
             );
         }
         else 
@@ -160,7 +193,8 @@ const SurveyFormScreen = props => {
     };
 
     const onRegionChangeComplete = (region) => {
-        setMapRegion(region);
+        setLocationDelta({latitudeDelta: region.latitudeDelta, longitudeDelta: region.longitudeDelta});
+        setLocation({latitude: Math.round(region.latitude*1000000)/1000000, longitude: Math.round(region.longitude*1000000)/1000000});
         getHeight();
     };
     
@@ -170,7 +204,12 @@ const SurveyFormScreen = props => {
                 <MapView
                     provider={PROVIDER_GOOGLE}
                     style={styles.map}
-                    region={mapRegion}
+                    region={{
+                        latitude: location.latitude,
+                        longitude: location.longitude,
+                        latitudeDelta: locationDelta.latitudeDelta,
+                        longitudeDelta: locationDelta.longitudeDelta,
+                    }}
                     showsUserLocation={true}
                     showsMyLocationButton={true}
                     onRegionChangeComplete={onRegionChangeComplete}
