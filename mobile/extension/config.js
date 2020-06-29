@@ -10,7 +10,8 @@ const config = {
         }
     },
     serverURL: 'http://192.168.1.78:3000',
-    OWMAPIKey: '890df5db881a1a76b5f7ccc04b1a5e0c'
+    OWMAPIKey: '890df5db881a1a76b5f7ccc04b1a5e0c',
+    language: 'en'
 };
 
 export default config;
