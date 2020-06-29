@@ -1,136 +1,198 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View } from 'react-native';
 
 import config from '../config';
 import * as Google from 'expo-google-app-auth';
 
+import googleActivities from './googleActivities.json';
+
 const GoogleFitSensor = props => {
 
-    const [stop, setStop] = useState(false);
+  const [stop, setStop] = useState(false);
 
-    useEffect(() => {
+  useEffect(() => {
 
-      if (stop === false)
-        googleResponse();
+    if (stop === false)
+      googleResponse();
 
-    }, []);
+  }, []);
 
-    const googleResponse = async() => {
-        try {
-          const { type, accessToken, user } = await Google.logInAsync({
-            androidClientId: config.credentials.google.androidClientId,
-            iosClientId: config.credentials.google.iosClientId,
-            scopes: [
-                "profile",
-                "email",
-                "https://www.googleapis.com/auth/fitness.activity.read", 
-                "https://www.googleapis.com/auth/fitness.activity.write",
-                "https://www.googleapis.com/auth/fitness.location.read",
-                "https://www.googleapis.com/auth/fitness.location.write"
-            ]
-          })
-          if (type === "success") {
+  const processTimeInterval = (value) => {
+    if (isNaN(value) || typeof value === 'undefined' || value === null || value === true || value === false || value === '') {
+      return 0;
+    }
+    else return parseInt(value);
+  };
 
-            const now = new Date();
-            
-            let dataTypeName;
-            let dataSourceId;
-            let varType;
-            let final = [];
-            let valid = true;
+  const googleResponse = async () => {
+    try {
+      const { type, accessToken, user } = await Google.logInAsync({
+        androidClientId: config.credentials.google.androidClientId,
+        iosClientId: config.credentials.google.iosClientId,
+        scopes: [
+          "profile",
+          "email",
+          "https://www.googleapis.com/auth/fitness.activity.read",
+          "https://www.googleapis.com/auth/fitness.activity.write",
+          "https://www.googleapis.com/auth/fitness.location.read",
+          "https://www.googleapis.com/auth/fitness.location.write"
+        ]
+      })
+      if (type === "success") {
 
-            let res = await fetch(`https://www.googleapis.com/fitness/v1/users/me/dataSources`, {
-              method: 'GET',
-              headers: { Authorization: `Bearer ${accessToken}` }
-            });
+        const now = new Date();
+        const startHours = processTimeInterval(props.config.timeInterval.hours);
+        const startMinutes = processTimeInterval(props.config.timeInterval.minutes);
+        const startSeconds = processTimeInterval (props.config.timeInterval.seconds);
+        const startTime = now.getTime() - (startHours*60*60 + startMinutes*60 + startSeconds) * 1000;
 
-            const dataSources = await res.json();
+        let dataTypeName;
+        let dataSourceId;
+        let varType;
+        let final = [];
+        let valid = true;
+        let finalValue;
+        let sourceData;
+        let size;
 
-            //console.log(res.status);
-
-            if (dataSources.dataSource.length === 0) {
-              props.onChange(props.pageIndex, props.index, {sensor: 'googlefit', data: 'empty'});
-            } else {
-              //dataSources.dataSource.map(source => console.log(source.dataStreamId));
-
-              props.config.data.map(async data => {
-  
-                if (data === 'steps') {
-                  dataTypeName = 'com.google.step_count.delta';
-                  dataSourceId = 'derived:com.google.step_count.delta:com.google.android.gms:estimated_steps';
-                  varType = 'intVal';
-                }
-                else if (data === 'distance') {
-                  dataTypeName = 'com.google.distance.delta';
-                  dataSourceId = 'derived:com.google.distance.delta:com.google.android.gms:from_steps<-merge_step_deltas';
-                  varType = 'fpVal';
-                }
-                else if (data === 'calories') {
-                  dataTypeName = 'com.google.calories.expended';
-                  dataSourceId = 'derived:com.google.calories.expended:com.google.android.gms:merge_calories_expended';
-                  varType = 'fpVal';
-                }
-                else if (data === 'activeMinutes') {
-                  dataTypeName = 'com.google.active_minutes';
-                  dataSourceId = 'derived:com.google.active_minutes:com.google.android.gms:from_steps<-estimated_steps';
-                  varType = 'intVal';
-                } 
-                else {
-                  valid = false;
-                }
-
-                final.push(await getData(data, accessToken, now, dataTypeName, dataSourceId, varType, valid));
-              
-                if (final.length === props.config.data.length) {
-                  props.onChange(props.pageIndex, props.index, {sensor: 'googlefit', data: final});
-                  setStop(true);
-                }  
-              });
-            }
-          } else {
-            // If user closes pop up window
-            console.log("cancelled");
-            props.onChange(props.pageIndex, props.index, {sensor: 'googlefit', data: 'cancelled'});
-          }
-        } catch (e) {
-          // Session errors
-          console.log("error", e);
-          props.onChange(props.pageIndex, props.index, {sensor: 'googlefit', data: 'error'});
-        }
-      };
-
-      const getData = async (data, accessToken, now, dataTypeName, dataSourceId, varType, valid) => {
-        if (valid === false) return {type: data, value: 'undefined'};
-        let res = await fetch(`https://www.googleapis.com/fitness/v1/users/me/dataset:aggregate`, {
-            method: 'POST',
-            headers: { Authorization: `Bearer ${accessToken}` },
-            body: JSON.stringify({
-                "aggregateBy": [{
-                  "dataTypeName": dataTypeName,
-                  "dataSourceId": dataSourceId
-                }],
-                "bucketByTime": { "durationMillis": now.getTime() - (now.getTime()-24*60*60*1000) },
-                "startTimeMillis": now.getTime()-24*60*60*1000,
-                "endTimeMillis": now.getTime()
-              })
+        let res = await fetch(`https://www.googleapis.com/fitness/v1/users/me/dataSources`, {
+          method: 'GET',
+          headers: { Authorization: `Bearer ${accessToken}` }
         });
 
-        const sources = await res.json();
+        const dataSources = await res.json();
+
+        if (dataSources.dataSource.length === 0) {
+          props.onChange(props.pageIndex, props.index, { sensor: 'googlefit', data: null });
+        } else {
+
+          props.config.data.map(async data => {
+
+            if (data === 'steps') {
+              dataTypeName = 'com.google.step_count.delta';
+              varType = 'intVal';
+            }
+            else if (data === 'distance') {
+              dataTypeName = 'com.google.distance.delta';
+              varType = 'fpVal';
+            }
+            else if (data === 'calories') {
+              dataTypeName = 'com.google.calories.expended';
+              varType = 'fpVal';
+            }
+            else if (data === 'activeMinutes') {
+              dataTypeName = 'com.google.active_minutes';
+              varType = 'intVal';
+            }
+            else if (data === 'activity') {
+              dataTypeName = 'com.google.activity.segment';
+              varType = 'intVal';
+            }
+            else {
+              valid = false;
+            }
+
+            dataSourceId = getDataSources(dataSources.dataSource, `derived:${dataTypeName}`);
+            
+            sourceData = await getData(data, accessToken, now, dataTypeName, dataSourceId, varType, valid, startTime);
+
+            if (sourceData[0].data.type === 'activity') finalValue = [];
+            else finalValue = 0;
+
+            size = 0;
+
+            for (let t of sourceData) {
+              if (t.data.value !== null) {
+                for (let v of t.data.value) {
+                  if (sourceData[0].data.type === 'activity') {
+                    finalValue = [];
+                    if (v[t.varType] < 122) finalValue.push(googleActivities[v[t.varType]]);
+                  } else {
+                    finalValue = finalValue + v[t.varType];
+                    size = size + 1;
+                  }
+                }
+              }
+            }
+
+            sourceData[0].data.value = sourceData[0].data.type === 'activity' ? finalValue : finalValue/size;
+            final.push(sourceData[0].data);
+
+            if (final.length === props.config.data.length) {
+              props.onChange(props.pageIndex, props.index, { sensor: 'googlefit', data: final });
+              setStop(true);
+            }
+          });
+        }
+      } else {
+        // If user closes pop up window
+        // console.log("cancelled");
+        props.onChange(props.pageIndex, props.index, { sensor: 'googlefit', data: null });
+      }
+    } catch (e) {
+      // Session errors
+      // console.log("error", e);
+      props.onChange(props.pageIndex, props.index, { sensor: 'googlefit', data: null });
+    }
+  };
+
+  const getDataSources = (sources, mySource) => {
+
+    let finalSources = [];
+
+    sources.map(source => {
+      if (source.dataStreamId.search(mySource) !== -1) finalSources.push(source.dataStreamId);
+    });
+
+    return finalSources;
+  };
+
+  const getData = async (metric, accessToken, now, dataTypeName, dataSourceId, varType, valid, startTime) => {
+
+    let data;
+
+    if (valid === false) return { data: { type: metric, value: null }, varType };
+    
+    if (dataSourceId.length > 0) {
+
+      data = await Promise.all(dataSourceId.map(async (source) => {
+
+        const res = await fetch(`https://www.googleapis.com/fitness/v1/users/me/dataset:aggregate`, {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${accessToken}` },
+          body: JSON.stringify({
+            "aggregateBy": [{
+              "dataTypeName": dataTypeName,
+              "dataSourceId": source
+            }],
+            "bucketByTime": { "durationMillis": now.getTime() - startTime },
+            "startTimeMillis": startTime,
+            "endTimeMillis": now.getTime()
+          })
+        });
         
-        if (res.status === 200) return checkMetric(data, sources, varType);
-        else return {type: data, value: 'unauthorized'};
+        const sources = await res.json();
+        if (res.status === 200) {
+          if (typeof sources.error === 'undefined') return { data: checkMetric(metric, sources, varType), varType };
+          else return { data: { type: metric, value: null }, varType }; 
+        }
+        else return { data: { type: metric, value: null }, varType };
+      }));
+    }
+      
+      return data;
+  };
 
-      };
+  const checkMetric = (metric, sources, varType) => {
 
-      const checkMetric = (metric, sources, varType) => {        
-        if (sources.bucket.length === 0) return {type: metric, value: ''};
-        else if (sources.bucket[0].dataset.length === 0) return {type: metric, value: ''};
-        else if (sources.bucket[0].dataset[0].point.length === 0) return {type: metric, value: ''};
-        else if (sources.bucket[0].dataset[0].point[0].value.length === 0) return {type: metric, value: ''};
-        else return {type: metric, value: sources.bucket[0].dataset[0].point[0].value[0][varType]};
-      };
+    if (sources.bucket.length === 0) return { type: metric, value: null };
+    else if (sources.bucket[0].dataset.length === 0) return { type: metric, value: null };
+    else if (sources.bucket[0].dataset[0].point.length === 0) return { type: metric, value: null };
+    else if (sources.bucket[0].dataset[0].point[0].value.length === 0) return { type: metric, value: null };
+    else return { type: metric, value: sources.bucket[0].dataset[0].point[0].value };
+  };
 
-    return <View />;
+  return <View />;
 };
 
 export default GoogleFitSensor;
