@@ -11,7 +11,9 @@ const UGSList = props => {
                     ugs={ugs}
                     removeUGS={props.removeUGS}
                     validateUGS={props.validateUGS}
-                    editUGS={props.editUGS} 
+                    editUGS={props.editUGS}
+                    onLogout={props.onLogout}
+                    email={props.email}
                 />
             );
         })

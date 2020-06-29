@@ -1,4 +1,4 @@
-import React, { useState  } from 'react';
+import React, { useState } from 'react';
 
 import axios from 'axios';
 import config from './config';
@@ -10,7 +10,7 @@ import ExpiredSessionPage from '../pages/ExpiredSessionPage';
 
 const ResearcherPageExtension = props => {
 
-    const [newugs, setNewugs] = useState([]);
+    const [newugs, setNewugs] = useState(null);
 
     const renderNewUgsList = () => {
         const params = {
@@ -18,8 +18,9 @@ const ResearcherPageExtension = props => {
         };
         axios.post(`${config.serverURL}/api/researcher/getUGS`, params)
         .then(res => {
-            if (res.status === 200)
+            if (res.status === 200) {
                 setNewugs(res.data.ugs);
+            }
         })
         .catch(error => {
             if (error.response.status === 403) {
@@ -29,10 +30,11 @@ const ResearcherPageExtension = props => {
         });
     };
 
-    const removeUGS = (ugs, answer) => {
+    const removeUGS = (ugs, answer, photo) => {
         const params = {
             ugs,
             answer,
+            photo,
             email: props.userEmail
         };
         axios.post(`${config.serverURL}/api/researcher/removeUGS`, params)
@@ -48,10 +50,11 @@ const ResearcherPageExtension = props => {
         });
     };
 
-    const validateUGS = (ugs, answer) => {
+    const validateUGS = (ugs, answer, photo) => {
         const params = {
             ugs,
             answer,
+            photo,
             email: props.userEmail
         };
         axios.post(`${config.serverURL}/api/researcher/validateUGS`, params)
@@ -87,22 +90,21 @@ const ResearcherPageExtension = props => {
         });
     };
 
+    let listContent = <React.Fragment />;
+    if (newugs !== null) {
+        if (newugs.length === 0)
+            listContent = <h3>No new UGS found in the database!</h3>;
+        else
+            listContent = <UGSList list={newugs} email={props.userEmail} removeUGS={removeUGS} validateUGS={validateUGS} editUGS={editUGS} onLogout={props.onLogout}/>;
+    }
+
     let content = (
         <React.Fragment>
             <h1>Researcher Page</h1>
-            <UGSList list={newugs} removeUGS={removeUGS} validateUGS={validateUGS} editUGS={editUGS} />
+            {listContent}
             <MainButton title='NEW UGS LIST' onClick={renderNewUgsList} />
         </React.Fragment>
     );
-    if (newugs.length === 0)
-        content = (
-            <React.Fragment>
-                <h1>Researcher Page</h1>
-                <h3>No new UGS found in the database!</h3>
-                <MainButton title='NEW UGS LIST' onClick={renderNewUgsList} />
-            </React.Fragment>
-        );
-
     if (!props.isLogged)
         content = <ExpiredSessionPage />;
 
