@@ -8,6 +8,9 @@ router.post('/', async (req, res) => {
     resultsExtension.getResults(req, res);
 });
 
+router.post('/image', async (req, res) => {
+    resultsExtension.getImageResults(req, res);
+});
 
 // Export router
 module.exports = router;
