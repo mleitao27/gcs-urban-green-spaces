@@ -177,6 +177,17 @@ const processAnswer = async (req, res) => {
     });
 };
 
+const processImage = async (req, res) => {
+    cache.get(req.body.email)
+    .then(async result => {
+        // If user not in cache
+        if (typeof result === 'undefined') res.status(403).send();
+        else {            
+            res.status(200).send(await db.insertDocument('photos', {email: req.body.email, valid: false, base64: req.body.image_data}));
+        }
+    });
+};
+
 const getNewStatus = async (email, oldStatus, answer) => {
     
     let other;
@@ -246,6 +257,7 @@ const getNewStatus = async (email, oldStatus, answer) => {
             name: answer.data.find(a => a.name === 'What is this UGS name?').value,
             area: answer.data.find(a => a.name === 'What is its area?').value,
             geolocation: answer.data.find(a => a.name === 'geolocation').value.data,
+            photo: answer.data.find(a => a.name === 'What does the UGS looks like?').value,
             answer: answer.id
         });
         return ABOUT_UGS;
@@ -342,5 +354,6 @@ const calcDistance = (lat1, lon1, lat2, lon2) => {
 exports.getForm = getForm;
 exports.submitForm = submitForm;
 exports.processAnswer = processAnswer;
+exports.processImage = processImage;
 exports.returnFeedback = returnFeedback;
 exports.getMarkers = getMarkers;
