@@ -53,6 +53,7 @@ const removeUGS = async (req, res) => {
         else {
             await db.deleteDocument('answers', {_id: new mongodb.ObjectID(req.body.answer)});
             await db.deleteDocument('newugs', {_id: new mongodb.ObjectID(req.body.ugs)});
+            await db.deleteDocument('photos', {_id: req.body.photo !== '' ? new mongodb.ObjectID(req.body.photo) : req.body.photo});
             res.status(200).send();
         }
     });
@@ -69,6 +70,7 @@ const validateUGS = async (req, res) => {
             const newugs = await db.getDocument('newugs', {_id: new mongodb.ObjectID(req.body.ugs)});
             const ugs = await db.getDocument('ugs', {});
             const answer = await db.getDocument('answers', {_id: new mongodb.ObjectID(req.body.answer)});
+            const photo = await db.getDocument('photos', {_id: req.body.photo !== '' ? new mongodb.ObjectID(req.body.photo) : req.body.photo});
 
             if (newugs.length > 0)
                 db.insertDocument('ugs', {
@@ -87,6 +89,10 @@ const validateUGS = async (req, res) => {
                     if (d.name === 'In which UGS are you?') d.value = newugs[0].name;
                 });
                 await db.updateDocument('answers', {_id: new mongodb.ObjectID(req.body.answer)}, {data});
+            }
+
+            if (photo.length > 0) {
+                await db.updateDocument('photos', {_id: new mongodb.ObjectID(req.body.photo)}, {valid: true, ugs: newugs[0].name});
             }
 
             res.status(200).send();
