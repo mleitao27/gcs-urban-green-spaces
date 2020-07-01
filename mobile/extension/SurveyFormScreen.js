@@ -38,6 +38,7 @@ const SurveyFormScreen = props => {
     const [statusKey, setStatusKey] = useState(-1);
 
     const [mapHeight, setMapHeight] = useState('100%');
+    const [afterDetails, setAfterDetails] = useState(false);
 
     useEffect(() => {
 
@@ -63,6 +64,13 @@ const SurveyFormScreen = props => {
             cancel = true;
         };
     }, []);
+
+    useEffect(() => {
+        if (mapHeight ==='0%') {
+            getHeight();
+            setAfterDetails(true);
+        }
+    }, [statusKey]);
 
     useEffect(() => {
         (async () => {
@@ -193,10 +201,18 @@ const SurveyFormScreen = props => {
     };
 
     const onRegionChangeComplete = (region) => {
-        setLocationDelta({latitudeDelta: region.latitudeDelta, longitudeDelta: region.longitudeDelta});
+        
+        if (afterDetails === true) {
+            setLocationDelta(({latitudeDelta: 0.000922, longitudeDelta: 0.000421}));
+            setAfterDetails(false);
+        }
+        else setLocationDelta({latitudeDelta: region.latitudeDelta, longitudeDelta: region.longitudeDelta});
+        
         setLocation({latitude: Math.round(region.latitude*1000000)/1000000, longitude: Math.round(region.longitude*1000000)/1000000});
+
         getHeight();
     };
+
     
     return (
         <View style={styles.container}>
