@@ -1,0 +1,14 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+					"type": "ext:feel",
+					"name": "Como se sente?",
+					"id": "BASE_FEELING"
+				}					
+			]
+		}
+	]
+}

@@ -1,0 +1,36 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+					"type": "imagepicker",
+					"name": "What animal elements can be found in this UGS?",
+					"choices": [
+						{
+							"value": "bird",
+							"imageLink": "http://192.168.1.78:3000/public/bird.png"
+						},
+						{
+							"value": "insect",
+							"imageLink": "http://192.168.1.78:3000/public/insect.png"
+						},
+						{
+							"value": "squirrel",
+							"imageLink": "http://192.168.1.78:3000/public/squirrel.png"
+						},
+						{
+							"value": "lizard",
+							"imageLink": "http://192.168.1.78:3000/public/lizard.png"
+						},
+						{
+							"value": "other",
+							"imageLink": "http://192.168.1.78:3000/public/other.png"
+						}
+					],
+					"id": "BASE_ANIMAL"
+				}		
+			]
+		}
+	]
+}

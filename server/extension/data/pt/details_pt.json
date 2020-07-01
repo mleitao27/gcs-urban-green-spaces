@@ -1,0 +1,61 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+					"type": "expression",
+					"name": "Details Survey",
+					"commentText": "In order to know you better please answer this survey.",
+					"id": "DETAILS_TITLE"
+				},
+				{
+					"type": "datepicker",
+					"name": "Data de Nascimento",
+					"mode": "manual",
+					"id": "DETAILS_BIRTH"
+                },
+                {
+					"type": "ext:zip",
+					"name": "Código Postal",
+					"id": "DETAILS_ZIP"
+                },
+                {
+					"type": "radiogroup",
+					"name": "Género",
+					"choices": [
+						"Male",
+                        "Female",
+                        "Other"
+					],
+					"id": "DETAILS_GENDER"
+				},
+                {
+					"type": "radiogroup",
+					"name": "Educação",
+					"choices": [
+						"Middle School",
+						"High School",
+						"Bachelor",
+						"Master",
+						"Doctorate"
+					],
+					"id": "DETAILS_EDUCATION"
+                },
+                {
+					"type": "radiogroup",
+					"name": "Vencimento",
+					"choices": [
+						"0 - 500€",
+                        "501 - 1000€",
+                        "1001 - 1500€",
+                        "1501 - 2500€",
+                        "2501 - 5000€",
+                        "> 5000€"
+					],
+					"id": "DETAILS_INCOME"
+				}
+			]
+		}
+	]
+}

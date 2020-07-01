@@ -1,0 +1,36 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+					"type": "imagepicker",
+					"name": "Que tipo de mobiliário urbano há neste espaço verde?",
+					"choices": [
+						{
+							"value": "bench",
+							"imageLink": "http://192.168.1.78:3000/public/bench.png"
+						},
+						{
+							"value": "gazebo",
+							"imageLink": "http://192.168.1.78:3000/public/gazebo.png"
+						},
+						{
+							"value": "swing",
+							"imageLink": "http://192.168.1.78:3000/public/swing.png"
+						},
+						{
+							"value": "kiosk",
+							"imageLink": "http://192.168.1.78:3000/public/kiosk.png"
+						},
+						{
+							"value": "other",
+							"imageLink": "http://192.168.1.78:3000/public/other.png"
+						}
+					],
+					"id": "BASE_MANMADE"
+				}		
+			]
+		}
+	]
+}

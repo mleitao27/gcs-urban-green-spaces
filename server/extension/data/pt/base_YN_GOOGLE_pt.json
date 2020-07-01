@@ -1,0 +1,14 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+					"type": "ext:yn",
+					"name": "Pretende partilhar os seus dados do Google Fit?",
+					"id": "BASE_YN_GOOGLE"
+				}
+			]
+		}
+	]
+}

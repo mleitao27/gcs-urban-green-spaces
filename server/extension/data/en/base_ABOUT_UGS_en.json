@@ -1,0 +1,19 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+					"type": "radiogroup",
+					"name": "About this UGS...",
+					"choices": [
+						"One of my favourites",
+						"Meh",
+						"Avoid it"
+					],
+					"id": "BASE_ABOUT_UGS"
+				}				
+			]
+		}
+	]
+}
