@@ -4,15 +4,15 @@ var db = require('../modules/db');
 var cache = require('../modules/cache');
 var config = require('./config');
 
-var baseArray = require('./baseArray').baseArray;
+var baseSurvey = require('./baseSurvey').baseSurvey[config.language];
+var detailsSurvey = require('./detailsSurvey').detailsSurvey[config.language];
 const errorJSON = require('./data/error.json');
-const detailsJSON = require('./data/details.json');
 const mappingJSON = require('./data/mapping.json');
 
 var feedback = require('./feedbackExtension');
 var dbStorage = require('./dbExtension');
 
-var fs = require('fs');
+var strings = require('./strings').strings;
 
 const IN_UGS = 0;
 const NOT_UGS = 1;
@@ -30,9 +30,9 @@ const MOTIVATION = 12;
 const MOTIVATION_OTHER = 13;
 const FEELING = 14;
 const END = 15;
-const GOOGLE = 16;
-const YNGOOGLE = 17;
-const SKIPSURVEY = 18;
+const GOOGLE_FIT = 16;
+const YN_GOOGLE = 17;
+const SKIP_SURVEY = 18;
 const SENSORS = 19;
 
 const getForm = (req, res) => {
@@ -59,10 +59,10 @@ const getForm = (req, res) => {
                     };
                     
                     db.insertDocument('status', newStatus);
-                    res.status(200).send(details.length === 1 ? {form: baseArray[0], type: 'base'} : {form: detailsJSON, type: 'details'});
+                    res.status(200).send(details.length === 1 ? {form: baseSurvey[0], type: 'base'} : {form: detailsSurvey, type: 'details'});
                     
                 } else if (status.length === 1) {
-                    if (status[0].details === false) detailsSurvey(req, res);
+                    if (status[0].details === false) getDetailsSurvey(req, res);
                     else {
                         const answer = await db.getDocument('answers', {_id: status[0].answer});
                         if (req.body.status !== status[0].base) {
@@ -70,8 +70,8 @@ const getForm = (req, res) => {
                             if (answer.length === 1 && answer[0].done === false) {
                                 db.deleteDocument('answers', {_id: status[0].answer});
                             }
-                            res.status(200).send({form: baseArray[0], type: 'base'});
-                        } else baseSurvey(req, res, status[0]);
+                            res.status(200).send({form: baseSurvey[0], type: 'base'});
+                        } else getBaseSurvey(req, res, status[0]);
                     }
                 } else {
                     res.status(200).send({form: errorJSON});
@@ -81,8 +81,8 @@ const getForm = (req, res) => {
     });
 };
 
-const baseSurvey = async (req, res, status) => {
-    var form = baseArray[status.base];
+const getBaseSurvey = async (req, res, status) => {
+    var form = baseSurvey[status.base];
     if (status.base === IN_UGS) {
         const oldAnswer = await db.getDocument('answers', {_id: status.answer});
         if (oldAnswer.length !==0 && oldAnswer[0].data.length === 0) db.deleteDocument('answers', {_id: status.answer});
@@ -109,7 +109,7 @@ const baseSurvey = async (req, res, status) => {
             });
         choices.push('Other');
 
-        var content = baseArray[2];
+        var content = baseSurvey[2];
         
         content.pages[0].elements[0].choices = choices;
 
@@ -124,8 +124,8 @@ const baseSurvey = async (req, res, status) => {
     res.status(200).send({form, type: 'base'});
 };
 
-const detailsSurvey = (req, res) => {
-    res.status(200).send({form: detailsJSON, type: 'details'});
+const getDetailsSurvey = (req, res) => {
+    res.status(200).send({form: detailsSurvey, type: 'details'});
 };
 
 const getMarkers = async (req, res) => {
@@ -202,12 +202,12 @@ const getNewStatus = async (email, oldStatus, answer) => {
             answers = await db.getDocument('answers', {user: email});
 
             if (typeof answers.find(a => Math.abs(a.timestamp - new Date()) < 1000 * config.recentAnswer && JSON.stringify(status[0].answer) !== JSON.stringify(a._id)) != 'undefined')
-                return SKIPSURVEY;
+                return SKIP_SURVEY;
 
             return SENSORS;
         }
     }
-    else if (oldStatus === SKIPSURVEY) {
+    else if (oldStatus === SKIP_SURVEY) {
         if (answer.data[0].value === false) return SENSORS;
         else {
             status = await db.getDocument('status', {user: email});
@@ -218,21 +218,21 @@ const getNewStatus = async (email, oldStatus, answer) => {
     else if (oldStatus === SENSORS) {
         
         answer.data.map(d => {
-            if (d.name === 'geolocation')
+            if (d.id === strings.BASE_SENSORS_GEOLOCATION)
                 db.updateDocument('status', {user: email}, {geolocation: {lat: d.value.data.latitude, long: d.value.data.longitude}});
-            else if (d.name === 'weather')
+            else if (d.id === strings.BASE_SENSORS_WEATHER)
                 db.updateDocument('status', {user: email}, {weather: d.value.data});
         });
         
-        return YNGOOGLE;
+        return YN_GOOGLE;
     }
-    else if (oldStatus === YNGOOGLE) {
+    else if (oldStatus === YN_GOOGLE) {
         if (answer.data[0].value === false) return UGS_LIST;
-        else return GOOGLE;
+        else return GOOGLE_FIT;
     }
-    else if (oldStatus === GOOGLE) {
+    else if (oldStatus === GOOGLE_FIT) {
         answer.data.map(d => {
-            if (d.name === 'googlefit')
+            if (d.id === strings.BASE_GOOGLE_FIT)
                 db.updateDocument('status', {user: email}, {googlefit: d.value.data});
         });
         return UGS_LIST;
@@ -254,10 +254,10 @@ const getNewStatus = async (email, oldStatus, answer) => {
     }
     else if (oldStatus === NEW_UGS) {
         db.insertDocument('newugs', {
-            name: answer.data.find(a => a.name === 'What is this UGS name?').value,
-            area: answer.data.find(a => a.name === 'What is its area?').value,
-            geolocation: answer.data.find(a => a.name === 'geolocation').value.data,
-            photo: answer.data.find(a => a.name === 'What does the UGS looks like?').value,
+            name: answer.data.find(a => a.id === strings.BASE_NEW_UGS_NAME).value,
+            area: answer.data.find(a => a.id === strings.BASE_NEW_UGS_AREA).value,
+            geolocation: answer.data.find(a => a.id === strings.BASE_NEW_UGS_GEOLOCATION).value.data,
+            photo: answer.data.find(a => a.id === strings.BASE_NEW_UGS_PHOTO).value,
             answer: answer.id
         });
         return ABOUT_UGS;

@@ -3,7 +3,10 @@ var express = require('express');
 var db = require('../modules/db');
 var cache = require('../modules/cache');
 
-const detailsJSON = require('./data/details.json');
+var config = require('./config');
+var strings = require('./strings').strings;
+
+var detailsSurvey = require('./detailsSurvey').detailsSurvey[config.language];
 
 const getProfile = (req, res) => {
     cache.get(req.body.email)
@@ -19,11 +22,11 @@ const getProfile = (req, res) => {
                     name: user[0].name,
                     email: user[0].email,
                     type: user[0].type,
-                    birth: details[0].details.find(detail => detail.name === 'Date of Birth').value,
-                    zip: details[0].details.find(detail => detail.name === 'ZIP Code').value,
-                    gender: details[0].details.find(detail => detail.name === 'Gender').value,
-                    education: details[0].details.find(detail => detail.name === 'Education').value,
-                    income: details[0].details.find(detail => detail.name === 'Income').value
+                    birth: details[0].details.find(detail => detail.id === strings.DETAILS_BIRTH).value,
+                    zip: details[0].details.find(detail => detail.id === strings.DETAILS_ZIP).value,
+                    gender: details[0].details.find(detail => detail.id === strings.DETAILS_GENDER).value,
+                    education: details[0].details.find(detail => detail.id === strings.DETAILS_EDUCATION).value,
+                    income: details[0].details.find(detail => detail.id === strings.DETAILS_INCOME).value
         
                 });
             else
@@ -48,7 +51,7 @@ const requestEditProfile = (req, res) => {
     .then(async result => {
         if (typeof result === 'undefined') res.status(403).send();
         else {
-            res.status(200).send(detailsJSON);
+            res.status(200).send(detailsSurvey);
         }
     });
 };

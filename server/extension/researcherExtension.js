@@ -4,6 +4,8 @@ var mongodb = require('mongodb');
 var db = require('../modules/db');
 var cache = require('../modules/cache');
 
+var strings = require('./strings').strings;
+
 const getUGS = async (req, res) => {
     cache.get(req.body.email)
     .then(async result => {
@@ -31,8 +33,8 @@ const editUGS = async (req, res) => {
             if (answer.length > 0) {
                 let data = answer[0].data;
                 data.map(d => {
-                    if (d.name === 'What is this UGS name?') d.value = edit.name;
-                    else if (d.name === 'What is its area?') d.value = edit.area;
+                    if (d.id === strings.BASE_NEW_UGS_NAME) d.value = edit.name;
+                    else if (d.id === strings.BASE_NEW_UGS_AREA) d.value = edit.area;
                 });
 
                 await db.updateDocument('answers', {_id: new mongodb.ObjectID(req.body.answer)}, {data});
@@ -86,7 +88,7 @@ const validateUGS = async (req, res) => {
             if (answer.length > 0) {
                 let data = answer[0].data;
                 data.map(d => {
-                    if (d.name === 'In which UGS are you?') d.value = newugs[0].name;
+                    if (d.id === strings.BASE_UGS_LIST) d.value = newugs[0].name;
                 });
                 await db.updateDocument('answers', {_id: new mongodb.ObjectID(req.body.answer)}, {data});
             }
