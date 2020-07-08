@@ -9,6 +9,8 @@ import {
 import Colors from '../constants/colors';
 import CustomButton from '../components/CustomButton';
 
+import IconAD from 'react-native-vector-icons/AntDesign';
+
 const YNElement = props => {
     
     const answer = (enteredValue) => {
@@ -20,16 +22,16 @@ const YNElement = props => {
             <Text style={styles.title}>{props.props.name}</Text>
             <View style={styles.btnContainer}>
                 <CustomButton
-                    title='Yes'
+                    title={<IconAD name={'like2'} size={Dimensions.get('window').width*0.1} color={Colors.primary}/>}
                     onPress={answer.bind(this, true)}
-                    backgroundColor={Colors.secondary}
-                    textColor={Colors.primary}
+                    backgroundColor={'#0F9D58'}
+                    textColor={Colors.secondary}
                 />
                 <CustomButton
-                    title='No'
+                    title={<IconAD name={'dislike2'} size={Dimensions.get('window').width*0.1} color={Colors.primary}/>}
                     onPress={answer.bind(this, false)}
-                    backgroundColor={Colors.secondary}
-                    textColor={Colors.primary}
+                    backgroundColor={'#DB4437'}
+                    textColor={Colors.secondary}
                 />
             </View>
         </View>

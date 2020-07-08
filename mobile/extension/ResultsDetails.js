@@ -7,23 +7,26 @@ import CustomButton from '../components/CustomButton';
 import IconFA5 from 'react-native-vector-icons/FontAwesome5';
 import config from './config';
 
+import strings from './strings.json';
+import dictionary from './dictionaryExtension.json';
+
 const ResultsDetails = props => {
 
-    const animal = props.data.find(d => d.name === 'What animal elements can be found in this UGS?' && d.type === 'imagepicker').value;
+    const animal = props.data.find(d => d.id === strings.BASE_ANIMAL).value;
     let otherAnimal = animal.find(a => a === 'other');
-    const vegetation = props.data.find(d => d.name === 'What vegetation elements can be found in this UGS?' && d.type === 'imagepicker').value;
+    const vegetation = props.data.find(d => d.id === strings.BASE_VEGETATION).value;
     let otherVegetation = vegetation.find(v => v === 'other');
-    const manmade = props.data.find(d => d.name === 'What man made elements can be found in this UGS?' && d.type === 'imagepicker').value;
+    const manmade = props.data.find(d => d.id === strings.BASE_MANMADE).value;
     let otherManmade = manmade.find(m => m === 'other');
-    const motivation = props.data.find(d => d.name === 'What was your motivation to come here?' && d.type === 'imagepicker').value;
+    const motivation = props.data.find(d => d.id === strings.BASE_MOTIVATION).value;
     let otherMotivation = motivation.find(m => m === 'other');
 
     let otherAnimalContent = <View/>;
     if (typeof otherAnimal !== 'undefined') {
-        otherAnimal = props.data.find(d => d.name === 'What animal elements can be found in this UGS?' && d.type === 'text').value;
+        otherAnimal = props.data.find(d => d.id === strings.BASE_ANIMAL_OTHER).value;
         otherAnimalContent = (
             <View>
-                <Text style={styles.title}>Other animal elements:</Text>
+                <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_ANIMAL_OTHER}:</Text>
                 <Text style={styles.text}>{otherAnimal}</Text>
             </View>
         );
@@ -31,10 +34,10 @@ const ResultsDetails = props => {
     
     let otherVegetationContent = <View />;
     if (typeof otherVegetation !== 'undefined') {
-        otherVegetation = props.data.find(d => d.name === 'What vegetation elements can be found in this UGS?' && d.type === 'text').value;
+        otherVegetation = props.data.find(d => d.id === strings.BASE_VEGETATION_OTHER).value;
         otherVegetationContent = (
             <View>
-                <Text style={styles.title}>Other vegetation elements:</Text>
+                <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_VEGETATION_OTHER}:</Text>
                 <Text style={styles.text}>{otherVegetation}</Text>
             </View>
         );
@@ -42,10 +45,10 @@ const ResultsDetails = props => {
 
     let otherManmadeContent = <View />;
     if (typeof otherManmade !== 'undefined') {
-        otherManmade = props.data.find(d => d.name === 'What man made elements can be found in this UGS?' && d.type === 'text').value;
+        otherManmade = props.data.find(d => d.id === strings.BASE_MANMADE_OTHER).value;
         otherManmadeContent = (
             <View>
-                <Text style={styles.title}>Other man made elements:</Text>
+                <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_MANMADE_OTHER}:</Text>
                 <Text style={styles.text}>{otherManmade}</Text>
             </View>
         );
@@ -53,20 +56,20 @@ const ResultsDetails = props => {
 
     let otherMotivationContent = <View />;
     if (typeof otherMotivation !== 'undefined') {
-        otherMotivation = props.data.find(d => d.name === 'What was your motivation to come here?' && d.type === 'text').value;
+        otherMotivation = props.data.find(d => d.id === strings.BASE_MOTIVATION_OTHER).value;
         otherMotivationContent = (
             <View>
-                <Text style={styles.title}>Other motivation:</Text>
+                <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_MOTIVATION_OTHER}:</Text>
                 <Text style={styles.text}>{otherMotivation}</Text>
             </View>
         );
     }
 
-    const aboutUGS = props.data.find(d => d.name === 'About this UGS...').value;
+    const aboutUGS = props.data.find(d => d.id === strings.BASE_ABOUT_UGS).value;
     let aboutUGSContent = <View />;
     if (aboutUGS !== '')
         aboutUGSContent = (
-            <Text style={styles.text}>{props.data.find(d => d.name === 'About this UGS...').value}</Text>
+            <Text style={styles.text}>{props.data.find(d => d.id === strings.BASE_ABOUT_UGS).value}</Text>
         );
     
     const getFeelingIcon = value => {
@@ -91,18 +94,18 @@ const ResultsDetails = props => {
 
         return feelings[value-1];
     };
-    const feeling = props.data.find(d => d.name === 'How are you feeling here?').value;
+    const feeling = props.data.find(d => d.id === strings.BASE_FEELING).value;
     let feelingContent = getFeelingIcon(feeling);
 
     return (
             <ScrollView style={styles.container}>
             <View style={styles.marginBottom}>
-                <Text style={styles.title}>Your opinion about the UGS:</Text>
+                <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_ABOUT_UGS}:</Text>
                 {aboutUGSContent}
             </View>
 
             <View style={styles.marginBottom}>
-                <Text style={styles.title}>Animal elements:</Text>
+                <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_ANIMAL}:</Text>
                 <View style={styles.imageContainer}>
                     {animal.filter(value => value !== 'other').map(d => {
                         return <CustomImage key={d} imageLink={d} style={styles.image}/>;
@@ -112,7 +115,7 @@ const ResultsDetails = props => {
             </View>
 
             <View style={styles.marginBottom}>
-                <Text style={styles.title}>Vegetation elements:</Text>
+                <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_VEGETATION}:</Text>
                 <View style={styles.imageContainer}>
                     {vegetation.filter(value => value !== 'other').map(d => {
                         return <CustomImage key={d} imageLink={d} style={styles.image}/>;
@@ -122,7 +125,7 @@ const ResultsDetails = props => {
             </View>
 
             <View style={styles.marginBottom}>
-                <Text style={styles.title}>Man made elements:</Text>
+                <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_MANMADE}:</Text>
                 <View style={styles.imageContainer}>
                     {manmade.filter(value => value !== 'other').map(d => {
                         return <CustomImage key={d} imageLink={d} style={styles.image}/>;
@@ -136,7 +139,7 @@ const ResultsDetails = props => {
             </View>
 
             <View style={styles.marginBottom}>
-                <Text style={styles.title}>How you felt:</Text>
+                <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_FEELING}:</Text>
                 {feelingContent}
             </View>
            

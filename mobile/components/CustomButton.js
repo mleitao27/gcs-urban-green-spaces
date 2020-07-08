@@ -20,11 +20,17 @@ const CustomButton = props => {
         ButtonComponent = TouchableNativeFeedback;
     }
 
+    let buttonContent = <View/>;
+    if (typeof props.title === 'string')
+        buttonContent = <Text style={{...styles.buttonText, color: props.textColor}}>{props.title}</Text>;
+    else if (typeof props.title === 'object')
+        buttonContent = <View style={{...styles.buttonText, color: props.textColor}}>{props.title}</View>;
+
     return(
         <View style={styles.buttonContainer}>
             <ButtonComponent activeOpacity={0.6} onPress={props.onPress}>
                 <View style={{...styles.button, backgroundColor: props.backgroundColor}}>
-                    <Text style={{...styles.buttonText, color: props.textColor}}>{props.title}</Text>
+                    {buttonContent}
                 </View>
             </ButtonComponent>
         </View>

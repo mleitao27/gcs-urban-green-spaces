@@ -41,8 +41,8 @@ const PickerElement = props => {
                 props.props.markers.map(marker => {
                     return (
                         <TouchableOpacity key={marker.value} style={styles.item} onPress={pick.bind(this, marker.value, marker.imageLink, marker.color)}>
-                            <Text style={styles.text}>{marker.value}</Text>
-                            <Image style={styles.image} source={{uri: marker.imageLink}} />
+                            <Text style={styles.text}>{marker.label}</Text>
+                            <Image style={{...styles.image, ...{tintColor:marker.color}}} source={{uri: marker.imageLink}} />
                         </TouchableOpacity>
                     )
                 })

@@ -6,7 +6,7 @@ var cache = require('../modules/cache');
 var config = require('./config');
 var strings = require('./strings').strings;
 
-var detailsSurvey = require('./detailsSurvey').detailsSurvey[config.language];
+var surveysArray = require('./surveysArray').surveysArray;
 
 const getProfile = (req, res) => {
     cache.get(req.body.email)
@@ -26,8 +26,11 @@ const getProfile = (req, res) => {
                     zip: details[0].details.find(detail => detail.id === strings.DETAILS_ZIP).value,
                     gender: details[0].details.find(detail => detail.id === strings.DETAILS_GENDER).value,
                     education: details[0].details.find(detail => detail.id === strings.DETAILS_EDUCATION).value,
-                    income: details[0].details.find(detail => detail.id === strings.DETAILS_INCOME).value
-        
+                    income: details[0].details.find(detail => detail.id === strings.DETAILS_INCOME).value,
+                    frequency: details[0].details.find(detail => detail.id === strings.DETAILS_FREQUENCY).value,
+                    timeofday: details[0].details.find(detail => detail.id === strings.DETAILS_TIMEOFDAY).value,
+                    timeofweek: details[0].details.find(detail => detail.id === strings.DETAILS_TIMEOFWEEK).value,
+                    transportation: details[0].details.find(detail => detail.id === strings.DETAILS_TRANSPORTATION).value
                 });
             else
                 res.status(200).send({
@@ -39,19 +42,21 @@ const getProfile = (req, res) => {
                     gender: '',
                     education: '',
                     income: '',
-        
+                    frequency: '',
+                    timeofday: '',
+                    timeofweek: '',
+                    transportation: ''
                 }); 
         }
     });
 };
 
 const requestEditProfile = (req, res) => {
-    console.log(req.body.email);
     cache.get(req.body.email)
     .then(async result => {
         if (typeof result === 'undefined') res.status(403).send();
         else {
-            res.status(200).send(detailsSurvey);
+            res.status(200).send(surveysArray.detailsSurvey[req.body.language]);
         }
     });
 };

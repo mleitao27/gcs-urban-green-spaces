@@ -83,7 +83,8 @@ const SurveyFormScreen = props => {
                 body: JSON.stringify({
                     email:  props.navigation.state.params.email,
                     status: status,
-                    type: 'form'
+                    type: 'form',
+                    language: props.navigation.state.params.language
                 })
             });
     
@@ -152,7 +153,8 @@ const SurveyFormScreen = props => {
             body: JSON.stringify({
                 email:  props.navigation.state.params.email,
                 answer: data,
-                type: form.type
+                type: form.type,
+                language: props.navigation.state.params.language
             })
         });
         

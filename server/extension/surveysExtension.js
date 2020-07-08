@@ -4,15 +4,15 @@ var db = require('../modules/db');
 var cache = require('../modules/cache');
 var config = require('./config');
 
-var baseSurvey = require('./baseSurvey').baseSurvey[config.language];
-var detailsSurvey = require('./detailsSurvey').detailsSurvey[config.language];
+var surveysArray = require('./surveysArray').surveysArray;
 const errorJSON = require('./data/error.json');
-const mappingJSON = require('./data/mapping.json');
 
 var feedback = require('./feedbackExtension');
 var dbStorage = require('./dbExtension');
 
 var strings = require('./strings').strings;
+
+const dictionary = require('./data/dictionary.json');
 
 const IN_UGS = 0;
 const NOT_UGS = 1;
@@ -41,7 +41,7 @@ const getForm = (req, res) => {
         // If user not in cache
         if (typeof result === 'undefined') res.status(403).send();
         else {
-            if (req.body.type === 'map') res.status(200).send({form: mappingJSON, type: 'map'});
+            if (req.body.type === 'map') res.status(200).send({form: surveysArray.mappingSurvey[req.body.language], type: 'map'});
             else if (req.body.type === 'form') {
 
                 const status = await db.getDocument('status', {user: req.body.email});
@@ -59,7 +59,7 @@ const getForm = (req, res) => {
                     };
                     
                     db.insertDocument('status', newStatus);
-                    res.status(200).send(details.length === 1 ? {form: baseSurvey[0], type: 'base'} : {form: detailsSurvey, type: 'details'});
+                    res.status(200).send(details.length === 1 ? {form: surveysArray.baseSurvey[req.body.language][0], type: 'base'} : {form: surveysArray.detailsSurvey[req.body.language], type: 'details'});
                     
                 } else if (status.length === 1) {
                     if (status[0].details === false) getDetailsSurvey(req, res);
@@ -70,7 +70,7 @@ const getForm = (req, res) => {
                             if (answer.length === 1 && answer[0].done === false) {
                                 db.deleteDocument('answers', {_id: status[0].answer});
                             }
-                            res.status(200).send({form: baseSurvey[0], type: 'base'});
+                            res.status(200).send({form: surveysArray.baseSurvey[req.body.language][0], type: 'base'});
                         } else getBaseSurvey(req, res, status[0]);
                     }
                 } else {
@@ -82,7 +82,7 @@ const getForm = (req, res) => {
 };
 
 const getBaseSurvey = async (req, res, status) => {
-    var form = baseSurvey[status.base];
+    var form = surveysArray.baseSurvey[req.body.language][status.base];
     if (status.base === IN_UGS) {
         const oldAnswer = await db.getDocument('answers', {_id: status.answer});
         if (oldAnswer.length !==0 && oldAnswer[0].data.length === 0) db.deleteDocument('answers', {_id: status.answer});
@@ -107,9 +107,9 @@ const getBaseSurvey = async (req, res, status) => {
                     }
                 }
             });
-        choices.push('Other');
+        choices.push(dictionary[req.body.language].OTHER);
 
-        var content = baseSurvey[2];
+        var content = surveysArray.baseSurvey[req.body.language][2];
         
         content.pages[0].elements[0].choices = choices;
 
@@ -125,7 +125,7 @@ const getBaseSurvey = async (req, res, status) => {
 };
 
 const getDetailsSurvey = (req, res) => {
-    res.status(200).send({form: detailsSurvey, type: 'details'});
+    res.status(200).send({form: surveysArray.detailsSurvey[req.body.language], type: 'details'});
 };
 
 const getMarkers = async (req, res) => {
@@ -159,7 +159,7 @@ const processAnswer = async (req, res) => {
 
             var newStatus;
             if (req.body.type === 'base') {
-                newStatus = await getNewStatus(req.body.email, status[0].base, {data: req.body.answer, id: status[0].answer});
+                newStatus = await getNewStatus(req.body.email, status[0].base, {data: req.body.answer, id: status[0].answer}, req.body.language);
                 db.updateDocument('status', {user: req.body.email}, {base: newStatus});
                 res.status(200).send({status: newStatus});
             }
@@ -188,7 +188,7 @@ const processImage = async (req, res) => {
     });
 };
 
-const getNewStatus = async (email, oldStatus, answer) => {
+const getNewStatus = async (email, oldStatus, answer, language) => {
     
     let other;
     let status;
@@ -241,7 +241,7 @@ const getNewStatus = async (email, oldStatus, answer) => {
         return NOT_UGS;
     }
     else if (oldStatus === UGS_LIST) {
-        if (answer.data[0].value === 'Other') return NEW_UGS;
+        if (answer.data[0].value === dictionary[language].OTHER) return NEW_UGS;
         else if (answer.data[0].value === '') return ADD_UGS;
         else return ABOUT_UGS;
     }

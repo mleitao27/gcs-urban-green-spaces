@@ -7,9 +7,9 @@
 					"type": "radiogroup",
 					"name": "Acerca deste espaço verde...",
 					"choices": [
-						"One of my favourites",
+						"Um dos meus favoritos",
 						"Meh",
-						"Avoid it"
+						"Evito"
 					],
 					"id": "BASE_ABOUT_UGS"
 				}				

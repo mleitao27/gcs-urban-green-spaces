@@ -8,6 +8,8 @@ import Colors from '../constants/colors';
 import OAuthButtons from '../extension/OAuthButtons';
 import CustomButton from '../components/CustomButton';
 
+import dictionary from '../data/dictionary.json';
+
 const RegisterScreen = props => {
 
     const [name, setName] = useState('');
@@ -56,7 +58,7 @@ const RegisterScreen = props => {
                 <View style={globalStyles.formContainer}>
                     <TextInput
                         style={globalStyles.formElement}
-                        placeholder="Name"
+                        placeholder={dictionary[props.navigation.state.params.language].NAME}
                         placeholderTextColor="#ccc"
                         value={name}
                         onChangeText={nameInputHandler}
@@ -77,12 +79,12 @@ const RegisterScreen = props => {
                         secureTextEntry={true}
                     />
                     <CustomButton
-                        title='Register'
+                        title={dictionary[props.navigation.state.params.language].REGISTER}
                         onPress={register}
                         backgroundColor={Colors.secondary}
                         textColor={Colors.primary}    
                     />
-                    <OAuthButtons method={'register'} navigation={props.navigation}/>
+                    <OAuthButtons method={'register'} navigation={props.navigation} language={props.navigation.state.params.language}/>
                 </View>
             </View>
         </TouchableWithoutFeedback>

@@ -19,6 +19,9 @@ import Colors from '../constants/colors';
 import CustomButton from '../components/CustomButton';
 import MenuScreen from './MenuScreen';
 import OAuthButtons from '../extension/OAuthButtons';
+import LanguagePicker from '../components/LanguagePicker';
+
+import dictionary from '../data/dictionary.json';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -27,6 +30,9 @@ const MainScreen = props => {
     const [isLogged, setIsLogged] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const [language, setLanguage] = useState('en');
+
     
     const changeLoggedState = (state, email, password) => {
         setIsLogged(state);
@@ -86,25 +92,29 @@ const MainScreen = props => {
                     secureTextEntry={true}
                     />
                 <CustomButton
-                    title='Login'
+                    title={dictionary[language].LOGIN}
                     onPress={login}
                     backgroundColor={Colors.secondary}
                     textColor={Colors.primary}
                     />
-                <OAuthButtons method={'login'} onLogin={changeLoggedState} />
+                <OAuthButtons method={'login'} onLogin={changeLoggedState} language={language} />
 
                 <View style={styles.textContainer}>
-                    <Text style={styles.text}>Not registered yet? </Text>
-                    <TouchableOpacity onPress={() => props.navigation.navigate({routeName: 'Register'})}>
-                        <Text style={[styles.text, styles.textUnderline]}>Click here!</Text>
+                    <Text style={styles.text}>{dictionary[language].NOT_REGISTERED} </Text>
+                    <TouchableOpacity onPress={() => props.navigation.navigate({routeName: 'Register', params: {language: language}})}>
+                        <Text style={[styles.text, styles.textUnderline]}>{dictionary[language].CLICK_HERE}</Text>
                     </TouchableOpacity>
                 </View>
             </View>
+            <LanguagePicker
+                language={language}
+                setLanguage={newLanguage => setLanguage(newLanguage)}
+            />
         </View>
     );
 
     if (isLogged)
-        content = <MenuScreen navigation={props.navigation} onLogout={changeLoggedState} email={email} />;
+        content = <MenuScreen navigation={props.navigation} onLogout={changeLoggedState} email={email} language={language}/>;
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -117,7 +127,10 @@ const MainScreen = props => {
 
 const styles = StyleSheet.create({
     textContainer: {
-        flexDirection: 'row'
+        flexDirection: 'column',
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     text: {
         color:'#ccc',

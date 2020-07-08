@@ -8,6 +8,8 @@ import FormExtension from './FormExtension';
 
 import CustomButton from '../components/CustomButton';
 
+import dictionary from './dictionaryExtension.json';
+
 const ProfileScreenExtension = props => {
 
     const [profile, setProfile] = useState(null);
@@ -49,7 +51,8 @@ const ProfileScreenExtension = props => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email:  props.navigation.state.params.email
+                email:  props.navigation.state.params.email,
+                language: props.navigation.state.params.language
             })
         });
 
@@ -92,7 +95,7 @@ const ProfileScreenExtension = props => {
             Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
     };
 
-    let content = <View style={styles.fallbackTextContainer}><Text style={styles.text}>Loading Profile...</Text></View>
+    let content = <View style={styles.fallbackTextContainer}><Text style={styles.text}>{dictionary[props.navigation.state.params.language].PROFILE_LOADING}</Text></View>
     if (profile !== null) {
         if (!edit) {
             content = (
@@ -104,28 +107,48 @@ const ProfileScreenExtension = props => {
                         </View>
 
                         <View style={styles.rowContainer}>
-                            <Text style={styles.detailText}>Date of Birth: </Text>
+                            <Text style={styles.detailText}>{dictionary[props.navigation.state.params.language].PROFILE_BIRTH}: </Text>
                             <Text style={styles.text}>{profile.birth}</Text>
                         </View>
                         
                         <View style={styles.rowContainer}>
-                            <Text style={styles.detailText}>Zip Code: </Text>    
+                            <Text style={styles.detailText}>{dictionary[props.navigation.state.params.language].PROFILE_ZIP}: </Text>    
                             <Text style={styles.text}>{profile.zip}</Text>
                         </View>
                         
                         <View style={styles.rowContainer}>
-                            <Text style={styles.detailText}>Gender: </Text>
+                            <Text style={styles.detailText}>{dictionary[props.navigation.state.params.language].PROFILE_GENDER}: </Text>
                             <Text style={styles.text}>{profile.gender}</Text>
                         </View>
 
                         <View style={styles.rowContainer}>
-                            <Text style={styles.detailText}>Education: </Text>
+                            <Text style={styles.detailText}>{dictionary[props.navigation.state.params.language].PROFILE_EDUCATION}: </Text>
                             <Text style={styles.text}>{profile.education}</Text>
                         </View>
 
                         <View style={styles.rowContainer}>    
-                            <Text style={styles.detailText}>Income: </Text>
+                            <Text style={styles.detailText}>{dictionary[props.navigation.state.params.language].PROFILE_INCOME}: </Text>
                             <Text style={styles.text}>{profile.income}</Text>
+                        </View>
+
+                        <View>    
+                            <Text style={styles.detailText}>{dictionary[props.navigation.state.params.language].PROFILE_FREQUENCY}: </Text>
+                            <Text style={styles.text}>{profile.frequency}</Text>
+                        </View>
+
+                        <View>    
+                            <Text style={styles.detailText}>{dictionary[props.navigation.state.params.language].PROFILE_TIMEOFDAY}: </Text>
+                            <Text style={styles.text}>{profile.timeofday}</Text>
+                        </View>
+
+                        <View>    
+                            <Text style={styles.detailText}>{dictionary[props.navigation.state.params.language].PROFILE_TIMEOFWEEK}: </Text>
+                            <Text style={styles.text}>{profile.timeofweek}</Text>
+                        </View>
+
+                        <View>    
+                            <Text style={styles.detailText}>{dictionary[props.navigation.state.params.language].PROFILE_TRANSPORTATION}: </Text>
+                            <Text style={styles.text}>{profile.transportation}</Text>
                         </View>
                     </View>
 

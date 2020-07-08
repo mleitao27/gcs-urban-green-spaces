@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { View } from 'react-native';
+import { View, TouchableOpacity, Text, Image, StyleSheet, Dimensions } from 'react-native';
 
 import Colors from '../constants/colors';
 import config from '../extension/config';
 
 import CustomButton from '../components/CustomButton';
+
+import dictionary from '../data/dictionary.json';
 
 const MenuScreen = props => {
     
@@ -22,24 +24,24 @@ const MenuScreen = props => {
         
         props.onLogout(false, '', '');
     };
-
+    
     return (
         <View>
             <CustomButton
-                title='Profile'
-                onPress={() => props.navigation.navigate({routeName: 'Profile', params: {email: props.email, logout: logout}})}
+                title={dictionary[props.language].PROFILE}
+                onPress={() => props.navigation.navigate({routeName: 'Profile', params: {email: props.email, logout: logout, language: props.language}})}
                 backgroundColor={Colors.primary}
                 textColor={Colors.secondary}
                 />
             <CustomButton
-                title='Survey'
-                onPress={() => props.navigation.navigate({routeName: 'Survey', params: {email: props.email, logout: logout}})}
+                title={dictionary[props.language].SURVEY}
+                onPress={() => props.navigation.navigate({routeName: 'Survey', params: {email: props.email, logout: logout, language: props.language}})}
                 backgroundColor={Colors.primary}
                 textColor={Colors.secondary}
                 />
             <CustomButton
-                title='Results'
-                onPress={() => props.navigation.navigate({routeName: 'Results', params: {email: props.email, logout: logout}})}
+                title={dictionary[props.language].RESULTS}
+                onPress={() => props.navigation.navigate({routeName: 'Results', params: {email: props.email, logout: logout, language: props.language}})}
                 backgroundColor={Colors.primary}
                 textColor={Colors.secondary}
                 />
@@ -53,5 +55,13 @@ const MenuScreen = props => {
     );
 };
 
-export default MenuScreen
-;
+const styles = StyleSheet.create({
+    languageImage: {
+        width: Dimensions.get('window').width*0.15,
+        height: Dimensions.get('window').width*0.15,
+        borderWidth: 1,
+        borderRadius: Dimensions.get('window').height
+    }
+});
+
+export default MenuScreen;

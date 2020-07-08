@@ -5,7 +5,7 @@
 			"elements": [
 				{
                     "type": "expression",
-                    "name": "Thank you!",
+                    "name": "Obrigado!",
                     "commentText": "Obrigado por responder.",
 					"id": "BASE_THANK_YOU"
                 }

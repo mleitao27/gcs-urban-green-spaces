@@ -54,6 +54,53 @@
                         "> 5000€"
 					],
 					"id": "DETAILS_INCOME"
+				},
+                {
+					"type": "radiogroup",
+					"name": "How frequently do you visit UGS?",
+					"choices": [
+						"Every day",
+						"2 to 3 days a week",
+						"Once a week",
+						"2 to 3 days a month",
+						"Once a month",
+						"Less than once a month"
+					],
+					"id": "DETAILS_FREQUENCY"
+				},
+				{
+					"type": "radiogroup",
+					"name": "In which time of the day do you usually visit UGS?",
+					"choices": [
+						"In the morning",
+						"In the afternoon",
+						"At night",
+						"It varies"
+					],
+					"id": "DETAILS_TIMEOFDAY"
+				},
+				{
+					"type": "radiogroup",
+					"name": "In which time of the week do you usually visit UGS?",
+					"choices": [
+						"In week days",
+						"In the weekend",
+						"All week",
+						"It varies"
+					],
+					"id": "DETAILS_TIMEOFWEEK"
+				},
+				{
+					"type": "radiogroup",
+					"name": "Which mean of transportation do you use to visit UGS?",
+					"choices": [
+						"On foot",
+						"By bicycle",
+						"By car/motocycle",
+						"Public transportation",
+						"Other"
+					],
+					"id": "DETAILS_TRANSPORTATION"
 				}
 			]
 		}

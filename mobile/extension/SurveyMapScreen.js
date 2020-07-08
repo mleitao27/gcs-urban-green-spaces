@@ -69,7 +69,8 @@ const SurveyMapScreen = props => {
                 },
                 body: JSON.stringify({
                     email:  props.navigation.state.params.email,
-                    type: 'map'
+                    type: 'map',
+                    language: props.navigation.state.params.language
                 })
             });
     
@@ -154,7 +155,7 @@ const SurveyMapScreen = props => {
                     >
                         <View style={styles.markerContainer}>
                             <Image
-                                source={{uri:'http://192.168.1.78:3000/public/marker1.png'}}
+                                source={{uri:`${config.serverURL}/public/marker1.png`}}
                                 style={{flex:1, tintColor: 'white', position: 'absolute', width: Dimensions.get('window').width*0.11,
                                 height: Dimensions.get('window').width*0.11}}
                             />
@@ -163,7 +164,7 @@ const SurveyMapScreen = props => {
                                 style={styles.markerIcon}
                             />
                             <Image
-                                source={{uri:'http://192.168.1.78:3000/public/marker.png'}}
+                                source={{uri:`${config.serverURL}/public/marker.png`}}
                                 style={{flex:1, tintColor: marker.color}}
                             />
                         </View>

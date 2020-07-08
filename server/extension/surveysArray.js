@@ -40,91 +40,109 @@ const THANK_YOU_pt = require('./data/pt/base_THANK_YOU_pt.json');
 const MOTIVATION_pt = require('./data/pt/base_MOTIVATION_pt.json');
 const MOTIVATION_OTHER_pt = require('./data/pt/base_MOTIVATION_OTHER_pt.json');
 
-const baseSurvey = {
-    'en': [
-        // 0
-        IN_UGS_en,
-        // 1
-        NOT_UGS_en,
-        // 2
-        UGS_LIST_en,
-        // 3
-        ADD_UGS_en,
-        // 4
-        ABOUT_UGS_en,
-        // 5
-        NEW_UGS_en,
-        // 6
-        ANIMALS_en,
-        // 7
-        VEGETATION_en,
-        // 8
-        MANMADE_en,
-        // 9
-        ANIMALS_OTHER_en,
-        // 10
-        VEGETATION_OTHER_en,
-        // 11
-        MANMADE_OTHER_en,
-        // 12
-        MOTIVATION_en,
-        // 13
-        MOTIVATION_OTHER_en,
-        // 14
-        FEELING_en,
-        // 15
-        THANK_YOU_en,
-        // 16
-        GOOGLE_FIT_en,
-        // 17
-        YN_GOOGLE_en,
-        // 18
-        SKIP_SURVEY_en,
-        // 19
-        SENSORS_en
-    ],
-    'pt': [
-        // 0
-        IN_UGS_pt,
-        // 1
-        NOT_UGS_pt,
-        // 2
-        UGS_LIST_pt,
-        // 3
-        ADD_UGS_pt,
-        // 4
-        ABOUT_UGS_pt,
-        // 5
-        NEW_UGS_pt,
-        // 6
-        ANIMALS_pt,
-        // 7
-        VEGETATION_pt,
-        // 8
-        MANMADE_pt,
-        // 9
-        ANIMALS_OTHER_pt,
-        // 10
-        VEGETATION_OTHER_pt,
-        // 11
-        MANMADE_OTHER_pt,
-        // 12
-        MOTIVATION_pt,
-        // 13
-        MOTIVATION_OTHER_pt,
-        // 14
-        FEELING_pt,
-        // 15
-        THANK_YOU_pt,
-        // 16
-        GOOGLE_FIT_pt,
-        // 17
-        YN_GOOGLE_pt,
-        // 18
-        SKIP_SURVEY_pt,
-        // 19
-        SENSORS_pt
-    ]
+const DETAILS_en = require('./data/en/details_en.json');
+
+const DETAILS_pt = require('./data/pt/details_pt.json');
+
+const MAPPING_en = require('./data/en/mapping_en.json');
+
+const MAPPING_pt = require('./data/pt/mapping_pt.json');
+
+const surveysArray = {
+    baseSurvey: {
+        'en': [
+            // 0
+            IN_UGS_en,
+            // 1
+            NOT_UGS_en,
+            // 2
+            UGS_LIST_en,
+            // 3
+            ADD_UGS_en,
+            // 4
+            ABOUT_UGS_en,
+            // 5
+            NEW_UGS_en,
+            // 6
+            ANIMALS_en,
+            // 7
+            VEGETATION_en,
+            // 8
+            MANMADE_en,
+            // 9
+            ANIMALS_OTHER_en,
+            // 10
+            VEGETATION_OTHER_en,
+            // 11
+            MANMADE_OTHER_en,
+            // 12
+            MOTIVATION_en,
+            // 13
+            MOTIVATION_OTHER_en,
+            // 14
+            FEELING_en,
+            // 15
+            THANK_YOU_en,
+            // 16
+            GOOGLE_FIT_en,
+            // 17
+            YN_GOOGLE_en,
+            // 18
+            SKIP_SURVEY_en,
+            // 19
+            SENSORS_en
+        ],
+        'pt': [
+            // 0
+            IN_UGS_pt,
+            // 1
+            NOT_UGS_pt,
+            // 2
+            UGS_LIST_pt,
+            // 3
+            ADD_UGS_pt,
+            // 4
+            ABOUT_UGS_pt,
+            // 5
+            NEW_UGS_pt,
+            // 6
+            ANIMALS_pt,
+            // 7
+            VEGETATION_pt,
+            // 8
+            MANMADE_pt,
+            // 9
+            ANIMALS_OTHER_pt,
+            // 10
+            VEGETATION_OTHER_pt,
+            // 11
+            MANMADE_OTHER_pt,
+            // 12
+            MOTIVATION_pt,
+            // 13
+            MOTIVATION_OTHER_pt,
+            // 14
+            FEELING_pt,
+            // 15
+            THANK_YOU_pt,
+            // 16
+            GOOGLE_FIT_pt,
+            // 17
+            YN_GOOGLE_pt,
+            // 18
+            SKIP_SURVEY_pt,
+            // 19
+            SENSORS_pt
+        ]
+    },
+    detailsSurvey: {
+        'en': DETAILS_en,
+        'pt': DETAILS_pt
+    },
+    mappingSurvey: {
+        'en': MAPPING_en,
+        'pt': MAPPING_pt
+    }
 };
 
-exports.baseSurvey = baseSurvey;
+exports.surveysArray = surveysArray;

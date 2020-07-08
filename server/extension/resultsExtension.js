@@ -21,7 +21,10 @@ const getImageResults = (req, res) => {
         // If user not in cache
         if (typeof result === 'undefined') res.status(403).send();
         else {
-            res.status(200).send(await db.getDocument('photos', {ugs: req.body.photo}));         
+            if (typeof req.body.photo !== 'undefined')
+                res.status(200).send(await db.getDocument('photos', {_id: new mongodb.ObjectID(req.body.photo)}));         
+            else if (typeof req.body.ugs !== 'undefined')
+                res.status(200).send(await db.getDocument('photos', {ugs: req.body.ugs}));         
         }
     });
 };

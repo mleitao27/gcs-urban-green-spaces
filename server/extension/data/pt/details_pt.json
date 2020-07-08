@@ -5,8 +5,8 @@
 			"elements": [
 				{
 					"type": "expression",
-					"name": "Details Survey",
-					"commentText": "In order to know you better please answer this survey.",
+					"name": "Questionário Pessoal",
+					"commentText": "De forma a conhecê-lo(a) melhor, por favor responda ao seguinte questionário.",
 					"id": "DETAILS_TITLE"
 				},
 				{
@@ -24,9 +24,9 @@
 					"type": "radiogroup",
 					"name": "Género",
 					"choices": [
-						"Male",
-                        "Female",
-                        "Other"
+						"Masculino",
+                        "Feminino",
+                        "Outro"
 					],
 					"id": "DETAILS_GENDER"
 				},
@@ -34,11 +34,11 @@
 					"type": "radiogroup",
 					"name": "Educação",
 					"choices": [
-						"Middle School",
-						"High School",
-						"Bachelor",
-						"Master",
-						"Doctorate"
+						"Ensino Básico",
+						"Ensino Secundário",
+						"Licenciatura",
+						"Mestrado",
+						"Doutoramento"
 					],
 					"id": "DETAILS_EDUCATION"
                 },
@@ -54,6 +54,53 @@
                         "> 5000€"
 					],
 					"id": "DETAILS_INCOME"
+				},
+                {
+					"type": "radiogroup",
+					"name": "Com que frequência visita espaços verdes?",
+					"choices": [
+						"Todos os dias",
+						"2 a 3 vezes por semana",
+						"1 vez por semana",
+						"2 a 3 vezes por mês",
+						"1 vez por mês",
+						"Menos de 1 vez por mês"
+					],
+					"id": "DETAILS_FREQUENCY"
+				},
+				{
+					"type": "radiogroup",
+					"name": "Em que parte do dia normalmente frequenta espaços verdes?",
+					"choices": [
+						"De manhã",
+						"À tarde",
+						"À noite",
+						"É variável"
+					],
+					"id": "DETAILS_TIMEOFDAY"
+				},
+				{
+					"type": "radiogroup",
+					"name": "Em que parte da semana normalmente frequenta espaços verdes?",
+					"choices": [
+						"Nos dias de semana",
+						"Nos fins-de-semana",
+						"Durante toda a semana",
+						"É variável"
+					],
+					"id": "DETAILS_TIMEOFWEEK"
+				},
+				{
+					"type": "radiogroup",
+					"name": "Que meios de transporte utiliza para chegar aos espaços verdes que visita?",
+					"choices": [
+						"A pé",
+						"De bicicleta",
+						"De carro/mota",
+						"Transportes públicos",
+						"Outro"
+					],
+					"id": "DETAILS_TRANSPORTATION"
 				}
 			]
 		}

@@ -16,13 +16,15 @@ import * as Google from 'expo-google-app-auth';
 
 import config from './config';
 
+import dictionary from './dictionaryExtension.json';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const OAuthButtons = props => {
 
-  let method = 'Login with';
-  if (props.method === 'register') method = 'Register w/';
+  let method = dictionary[props.language].OAUTH_LOGIN;
+  if (props.method === 'register') method = dictionary[props.language].OAUTH_REGISTER;
 
   const oauthServerConnection = async (params) => {
     const res = await fetch(`${config.serverURL}/api/oauth/${props.method}`,{

@@ -7,6 +7,9 @@ import CustomImage from './CustomImage';
 
 import config from './config';
 
+import strings from './strings.json';
+import dictionary from './dictionaryExtension.json';
+
 const ResultsItem = props => {
 
     const [imageResults, setImageResults] = useState(null);
@@ -17,7 +20,7 @@ const ResultsItem = props => {
 
         const getImage = async () => {
 
-            const ugsName = props.data.data.find(d => d.name === 'In which UGS are you?');
+            const ugsName = props.data.data.find(d => d.id === strings.BASE_UGS_LIST);
             
             if (typeof ugsName !== 'undefined')
                 if (ugsName.value !== '' && ugsName.value !== 'Other') {
@@ -28,7 +31,7 @@ const ResultsItem = props => {
                         },
                         body: JSON.stringify({
                             email:  props.navigation.state.params.email,
-                            photo: ugsName.value
+                            ugs: ugsName.value
                         })
                     });
                     if (res.status === 200) {
@@ -63,10 +66,10 @@ const ResultsItem = props => {
         const year = date.getFullYear();
         const hours = date.getHours();
         const minutes = date.getMinutes();
-        const ugs = props.data.data.find(d => d.name === 'In which UGS are you?').value;
-        const temp = props.data.data.find(d => d.name === 'weather').value.data.temp;
-        const weather = props.data.data.find(d => d.name === 'weather').value.data.description;
-        const motivation = props.data.data.find(d => d.name === 'What was your motivation to come here?').value;
+        const ugs = props.data.data.find(d => d.id === strings.BASE_UGS_LIST).value;
+        const temp = props.data.data.find(d => d.id === strings.BASE_SENSORS_WEATHER).value.data.temp;
+        const weather = props.data.data.find(d => d.id === strings.BASE_SENSORS_WEATHER).value.data.description;
+        const motivation = props.data.data.find(d => d.id === strings.BASE_MOTIVATION).value;
 
         let BackgroundComponent ;
         if (imageResults !== null)
@@ -90,9 +93,9 @@ const ResultsItem = props => {
                         </View>
                     </View>
                     <View>
-                        <Text>Motivation:</Text>
+                        <Text>{dictionary[props.navigation.state.params.language].RESULTS_MOTIVATION}:</Text>
                         <View style={styles.motivation}>
-                            {motivation.map(m => {return <CustomImage key={m} imageLink={m} style={styles.motivationIcon}/>})}
+                            {motivation.map(m => {return <CustomImage key={m} imageLink={m === 'other' ? dictionary[props.navigation.state.params.language].OTHER : m} style={styles.motivationIcon}/>})}
                         </View>
                     </View>
                 </View>

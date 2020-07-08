@@ -1,0 +1,22 @@
+{
+    "en": {
+        "PROFILE": "Profile",
+        "SURVEY": "Survey",
+        "RESULTS": "Results",
+        "NOT_REGISTERED": "Not registered yet?",
+        "CLICK_HERE": "Click here!",
+        "NAME": "Name",
+        "LOGIN": "Login",
+        "REGISTER": "Register"
+    },
+    "pt": {
+        "PROFILE": "Perfil",
+        "SURVEY": "Questionário",
+        "RESULTS": "Resultados",
+        "NOT_REGISTERED": "Ainda não está registado?",
+        "CLICK_HERE": "Clique aqui!",
+        "NAME": "Nome",
+        "LOGIN": "Entrar",
+        "REGISTER": "Registar"
+    }
+}
