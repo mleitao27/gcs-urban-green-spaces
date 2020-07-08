@@ -30,8 +30,8 @@ const LanguagePicker = props => {
                 props.setLanguage(config.languages[index+1]);
             }
         } else {
-            setLanguage(null);
-            props.setLanguage(null);
+            setLanguage(config.languages[0]);
+            props.setLanguage(config.languages[0]);
         }
     };
 
