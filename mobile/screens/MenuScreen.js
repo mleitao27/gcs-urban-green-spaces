@@ -55,13 +55,4 @@ const MenuScreen = props => {
     );
 };
 
-const styles = StyleSheet.create({
-    languageImage: {
-        width: Dimensions.get('window').width*0.15,
-        height: Dimensions.get('window').width*0.15,
-        borderWidth: 1,
-        borderRadius: Dimensions.get('window').height
-    }
-});
-
 export default MenuScreen;

@@ -5,7 +5,7 @@ var router = express.Router();
 const surveyExtension = require('../extension/surveysExtension');
 
 var multer  = require('multer')
-var upload = multer({ dest: 'uploads/', limits: { fieldSize: 25 * 1024 * 1024 } })
+var upload = multer({ limits: { fieldSize: 25 * 1024 * 1024 } })
 
 router.post('/', async (req, res) => {
     surveyExtension.getForm(req, res);
