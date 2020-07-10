@@ -20,6 +20,8 @@
         "RESULTS_MOTIVATION": "Motivation",
         "RESULTS_MOTIVATION_OTHER": "Other motivation",
         "RESULTS_FEELING": "How you felt",
+        "RESULTS_ANSWERS_TITLE": "Answers",
+        "RESULTS_MARKERS_TITLE": "Markers",
         "OAUTH_LOGIN": "Login with",
         "OAUTH_REGISTER": "Register w/",
         "OTHER": "other"
@@ -45,6 +47,8 @@
         "RESULTS_MOTIVATION": "Motivação",
         "RESULTS_MOTIVATION_OTHER": "Outra motivação",
         "RESULTS_FEELING": "Como se sentiu",
+        "RESULTS_ANSWERS_TITLE": "Respostas",
+        "RESULTS_MARKERS_TITLE": "Pontos de Interesse",
         "OAUTH_LOGIN": "Entrar com",
         "OAUTH_REGISTER": "Registar c/",
         "OTHER": "outro"

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Dimensions } from 'react-native';
-import config from './config';
+import config from '../config';
 
 const CustomImage = props => {
     

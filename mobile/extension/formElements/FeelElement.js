@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import IconFA5 from 'react-native-vector-icons/FontAwesome5';
-import Colors from '../constants/colors';
+import Colors from '../../constants/colors';
 
 const FeelElement = props => {
 

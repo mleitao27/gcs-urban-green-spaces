@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 
-import config from '../config';
+import config from '../../config';
 
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';

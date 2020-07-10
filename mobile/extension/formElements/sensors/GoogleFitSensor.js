@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
-import config from '../config';
+import config from '../../config';
 import * as Google from 'expo-google-app-auth';
 
 import googleActivities from './googleActivities.json';

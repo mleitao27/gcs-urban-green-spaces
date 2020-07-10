@@ -1,9 +1,9 @@
-import SensorElement from './SensorElement';
-import YNElement from './YNElement';
-import InfoElement from './InfoElement';
-import FeelElement from './FeelElement';
-import ZipElement from './ZipElement';
-import GeoMarkerElement from './GeoMarkerElement';
+import SensorElement from './formElements/SensorElement';
+import YNElement from './formElements/YNElement';
+import InfoElement from './formElements/InfoElement';
+import FeelElement from './formElements/FeelElement';
+import ZipElement from './formElements/ZipElement';
+import GeoMarkerElement from './formElements/GeoMarkerElement';
 
 const ext = [
     {

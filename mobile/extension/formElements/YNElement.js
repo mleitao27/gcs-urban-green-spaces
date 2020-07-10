@@ -6,8 +6,8 @@ import {
     Dimensions,
 } from 'react-native';
 
-import Colors from '../constants/colors';
-import CustomButton from '../components/CustomButton';
+import Colors from '../../constants/colors';
+import CustomButton from '../../components/CustomButton';
 
 import IconAD from 'react-native-vector-icons/AntDesign';
 

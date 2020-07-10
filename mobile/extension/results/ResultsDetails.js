@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { View, ScrollView, Text, StyleSheet, Dimensions, TouchableOpacity, Image, SafeAreaView } from 'react-native';
 
-import CustomImage from './CustomImage';
-import CustomButton from '../components/CustomButton';
+import CustomImage from '../components/CustomImage';
+import CustomButton from '../../components/CustomButton';
 
 import IconFA5 from 'react-native-vector-icons/FontAwesome5';
-import config from './config';
+import config from '../config';
 
-import strings from './strings.json';
-import dictionary from './dictionaryExtension.json';
+import strings from '../strings.json';
+import dictionary from '../dictionaryExtension.json';
 
 const ResultsDetails = props => {
 
