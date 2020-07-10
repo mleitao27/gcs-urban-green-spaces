@@ -2,6 +2,7 @@ var express = require('express');
 
 var db = require('../modules/db');
 var cache = require('../modules/cache');
+var strings = require('./strings').strings;
 
 const storeAnswer = async (email, answer, type) => {
     const result = await cache.get(email);
@@ -10,14 +11,20 @@ const storeAnswer = async (email, answer, type) => {
     else {
         if (type === 'map') {
             const markers = await db.getDocument('markers', {email});
+            let marker = answer.find(m => m.id === strings.MAPPING_MARKER);
+            let date = answer.find(m => m.id === strings.MAPPING_DATE);
+            let time = answer.find(m => m.id === strings.MAPPING_TIME);
+
+            let newMarker = {...marker.value, date: date.value, time: time.value};
+            
             if (markers.length === 0) {
-                db.insertDocument('markers', {email, markers: [answer[0].value]});
+                db.insertDocument('markers', {email, markers: [newMarker]});
             }
             else {
                 var temp = markers[0].markers;
 
                 if (typeof temp.find(t => t.lat === answer[0].value.lat && t.long === answer[0].value.long) === 'undefined') {
-                    temp.push(answer[0].value);
+                    temp.push(newMarker);
                     db.updateDocument('markers', {email}, {markers: temp});
                 }
             }

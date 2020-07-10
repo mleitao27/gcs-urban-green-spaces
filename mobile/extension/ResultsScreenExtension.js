@@ -1,80 +1,60 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, Alert } from 'react-native';
+import React, { useEffect, useState, useCallback } from 'react';
+import {
+    View,
+    StyleSheet,
+    ScrollView,
+    Text,
+    Dimensions,
+    Alert,
+    TouchableOpacity
+} from 'react-native';
 
-import config from './config';
+import Colors from '../constants/colors';
 
-import ResultsItem from './ResultsItem';
-import ResultsDetails from './ResultsDetails';
+import { Ionicons } from '@expo/vector-icons';
 
-const ResultsScreenExtension = props => {
+import ResultsFormScreen from './results/ResultsFormScreen';
+import ResultsMapScreen from './results/ResultsMapScreen';
 
-    const [results, setResults] = useState(null);
-    const [details, setDetails] = useState(false);
-    const [detailsData, setDetailsData] = useState(null);
 
-    useEffect(() => {
-        (async () => {
-            
-            const res = await fetch(`${config.serverURL}/api/results/`,{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email:  props.navigation.state.params.email
-                })
-            });
+const SurveyScreenExtension = props => {
+
+    const [mode, setMode] = useState('form');
+
+    let content = <View/>;
+    if (mode === 'form') content = <ResultsFormScreen navigation={props.navigation} />;
+    else if (mode === 'map') content = <ResultsMapScreen navigation={props.navigation} />;
     
-            if (res.status === 200) {
-                setResults(await res.json());
-            }
-            else if (res.status === 403) {
-                Alert.alert('ERROR', 'Login Timeout.');
-                props.navigation.state.params.logout();
-                props.navigation.navigate({routeName: 'Main'});
-            }
-            else
-                Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
-
-        })();        
-    }, []);
-
-    const showDetailedResults = (data) => {
-        setDetailsData(data);
-        setDetails(true);
-    };
-
-    const exitDetailedResults = () => {
-        setDetails(false);
-    };
-
-    let content = <View><Text>Loading Results...</Text></View>;
-    if (results !== null)
-        content = (
-            <FlatList
-                keyExtractor={item => item._id}
-                data={results}
-                renderItem={itemData => (
-                    <ResultsItem data={itemData.item} onPress={showDetailedResults} navigation={props.navigation}/>
-                )}
-              />
-        );
-    if (details === true)
-    content = (
-        <ResultsDetails data={detailsData} onExit={exitDetailedResults} navigation={props.navigation}/>
-    );
-
     return (
         <View style={styles.container}>
+            <View style={styles.btnContainer}>
+                <TouchableOpacity style={{...styles.iconContainer, ...{backgroundColor: mode === 'form' ? Colors.primary : Colors.secondary}}} onPress={() => setMode('form')}>
+                    <Ionicons name="md-paper" size={24} color={mode === 'form' ? Colors.secondary : Colors.primary} />
+                </TouchableOpacity>
+                <TouchableOpacity style={{...styles.iconContainer, ...{backgroundColor: mode === 'map' ? Colors.primary : Colors.secondary}}} onPress={() => setMode('map')}>
+                    <Ionicons name="md-map" size={24} color={mode === 'map' ? Colors.secondary : Colors.primary} />
+                </TouchableOpacity>
+            </View>
             {content}
         </View>
     );
 };
 
+
 const styles = StyleSheet.create({
     container: {
         flex: 1
+    },
+    btnContainer: {
+        width: '100%',
+        height: Dimensions.get('window').height*0.06,
+        flexDirection: 'row'
+    },
+    iconContainer: {
+        width: '50%',
+        alignItems:'center',
+        justifyContent: 'center'
     }
 });
 
-export default ResultsScreenExtension;
+export default SurveyScreenExtension;
