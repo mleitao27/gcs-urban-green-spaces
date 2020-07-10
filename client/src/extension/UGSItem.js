@@ -14,9 +14,10 @@ const UGSItem = props => {
             if (props.ugs.photo !== '') {
                 const params = {
                     email: props.email,
-                    photo: props.ugs.photo
+                    photo: props.ugs.photo,
+                    type: 'image'
                 };
-                axios.post(`${config.serverURL}/api/results/image`, params)
+                axios.post(`${config.serverURL}/api/results/`, params)
                 .then(res => {
                     if (res.status === 200) {
                         if (res.data.length > 0)

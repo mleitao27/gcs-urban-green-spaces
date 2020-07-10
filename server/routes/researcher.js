@@ -4,20 +4,20 @@ var router = express.Router();
 
 const researcherExtension = require('../extension/researcherExtension');
 
-router.post('/getUGS', async (req, res) => {
-    researcherExtension.getUGS(req, res);
+router.post('/getData', async (req, res) => {
+    researcherExtension.getData(req, res);
 });
 
-router.post('/editUGS', async (req, res) => {
-    researcherExtension.editUGS(req, res);
+router.post('/editData', async (req, res) => {
+    researcherExtension.editData(req, res);
 });
 
-router.post('/removeUGS', async (req, res) => {
-    researcherExtension.removeUGS(req, res);
+router.post('/removeData', async (req, res) => {
+    researcherExtension.removeData(req, res);
 });
 
-router.post('/validateUGS', async (req, res) => {
-    researcherExtension.validateUGS(req, res);
+router.post('/validateData', async (req, res) => {
+    researcherExtension.validateData(req, res);
 });
 
 

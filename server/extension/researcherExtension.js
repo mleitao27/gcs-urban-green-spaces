@@ -6,7 +6,7 @@ var cache = require('../modules/cache');
 
 var strings = require('./strings').strings;
 
-const getUGS = async (req, res) => {
+const getData = async (req, res) => {
     cache.get(req.body.email)
     .then(async result => {
         // If user not in cache
@@ -19,7 +19,7 @@ const getUGS = async (req, res) => {
 
 };
 
-const editUGS = async (req, res) => {
+const editData = async (req, res) => {
 
     cache.get(req.body.email)
     .then(async result => {
@@ -46,7 +46,7 @@ const editUGS = async (req, res) => {
 
 };
 
-const removeUGS = async (req, res) => {
+const removeData = async (req, res) => {
 
     cache.get(req.body.email)
     .then(async result => {
@@ -62,7 +62,7 @@ const removeUGS = async (req, res) => {
 
 };
 
-const validateUGS = async (req, res) => {
+const validateData = async (req, res) => {
 
     cache.get(req.body.email)
     .then(async result => {
@@ -103,7 +103,7 @@ const validateUGS = async (req, res) => {
 
 };
 
-exports.getUGS = getUGS;
-exports.editUGS = editUGS;
-exports.removeUGS = removeUGS;
-exports.validateUGS = validateUGS;
+exports.getData = getData;
+exports.editData = editData;
+exports.removeData = removeData;
+exports.validateData = validateData;

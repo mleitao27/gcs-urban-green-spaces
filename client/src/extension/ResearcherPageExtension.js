@@ -16,7 +16,7 @@ const ResearcherPageExtension = props => {
         const params = {
             email: props.userEmail
         };
-        axios.post(`${config.serverURL}/api/researcher/getUGS`, params)
+        axios.post(`${config.serverURL}/api/researcher/getData`, params)
         .then(res => {
             if (res.status === 200) {
                 setNewugs(res.data.ugs);
@@ -37,7 +37,7 @@ const ResearcherPageExtension = props => {
             photo,
             email: props.userEmail
         };
-        axios.post(`${config.serverURL}/api/researcher/removeUGS`, params)
+        axios.post(`${config.serverURL}/api/researcher/removeData`, params)
         .then(res => {
             if (res.status === 200)
                 renderNewUgsList();
@@ -57,7 +57,7 @@ const ResearcherPageExtension = props => {
             photo,
             email: props.userEmail
         };
-        axios.post(`${config.serverURL}/api/researcher/validateUGS`, params)
+        axios.post(`${config.serverURL}/api/researcher/validateData`, params)
         .then(res => {
             if (res.status === 200)
                 renderNewUgsList();
@@ -77,7 +77,7 @@ const ResearcherPageExtension = props => {
             edit,
             email: props.userEmail
         };
-        axios.post(`${config.serverURL}/api/researcher/editUGS`, params)
+        axios.post(`${config.serverURL}/api/researcher/editData`, params)
         .then(res => {
             if (res.status === 200)
                 renderNewUgsList();
