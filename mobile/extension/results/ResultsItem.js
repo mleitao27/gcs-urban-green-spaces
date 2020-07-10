@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, Dimensions, TouchableOpacity, ImageBackground, Image } from 'react-native';
 
-import Colors from '../constants/colors';
+import Colors from '../../constants/colors';
 
-import CustomImage from './CustomImage';
+import CustomImage from '../components/CustomImage';
 
-import config from './config';
+import config from '../config';
 
-import strings from './strings.json';
-import dictionary from './dictionaryExtension.json';
+import strings from '../strings.json';
+import dictionary from '../dictionaryExtension.json';
 
 const ResultsItem = props => {
 
@@ -24,14 +24,15 @@ const ResultsItem = props => {
             
             if (typeof ugsName !== 'undefined')
                 if (ugsName.value !== '' && ugsName.value !== 'Other') {
-                    const res = await fetch(`${config.serverURL}/api/results/image`,{
+                    const res = await fetch(`${config.serverURL}/api/results/`,{
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
                             email:  props.navigation.state.params.email,
-                            ugs: ugsName.value
+                            ugs: ugsName.value,
+                            type: 'image'
                         })
                     });
                     if (res.status === 200) {
@@ -71,7 +72,7 @@ const ResultsItem = props => {
         const weather = props.data.data.find(d => d.id === strings.BASE_SENSORS_WEATHER).value.data.description;
         const motivation = props.data.data.find(d => d.id === strings.BASE_MOTIVATION).value;
 
-        let BackgroundComponent ;
+        let BackgroundComponent;
         if (imageResults !== null)
             BackgroundComponent = (
                 <Image source={{uri: imageResults}} style={styles.backgroundImage}/>
@@ -104,7 +105,7 @@ const ResultsItem = props => {
     }
 
     return (
-        <View style={{alignItems: 'center'}}>
+        <View style={styles.center}>
             {content}
         </View>
     );
@@ -151,6 +152,9 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 16,
         fontWeight: "bold"
+    },
+    center: {
+        alignItems: 'center'
     }
 });
 

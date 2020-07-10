@@ -13,8 +13,8 @@ import Colors from '../constants/colors';
 
 import { Ionicons } from '@expo/vector-icons';
 
-import SurveyFormScreen from './SurveyFormScreen';
-import SurveyMapScreen from './SurveyMapScreen';;
+import SurveyFormScreen from './surveys/SurveyFormScreen';
+import SurveyMapScreen from './surveys/SurveyMapScreen';
 
 
 const SurveyScreenExtension = props => {

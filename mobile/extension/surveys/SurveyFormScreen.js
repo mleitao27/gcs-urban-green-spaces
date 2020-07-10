@@ -6,8 +6,7 @@ import {
     Text,
     Dimensions,
     Alert,
-    TouchableOpacity,
-    Image
+    TouchableOpacity
 } from 'react-native';
 
 import * as Location from 'expo-location';
@@ -16,24 +15,30 @@ import * as Permissions from 'expo-permissions';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 
 import { Form } from 'react-native-json-forms';
-import FormExtension from './FormExtension';
+import FormExtension from '../FormExtension';
 
-import config from './config';
+import FeedbackHandler from '../FeedbackHandler';
 
-const SurveyMapScreen = props => {
+import SensorsData from '../components/SensorsData';
 
-    // State to store location
+import config from '../config';
+
+const SurveyFormScreen = props => {
+
+    // Stat e to store location
     const [location, setLocation] = useState({latitude: 38.726608, longitude: -9.1405415});
     const [locationDelta, setLocationDelta] = useState({latitudeDelta: 0.000922, longitudeDelta: 0.000421});
     // State to store error message (not used)
     const [errorMessage, setErrorMessage] = useState('');
-    const [key, setKey] = useState(true);
-    const [submitted, setSubmitted] = useState(true);
 
+    const [loaded, setLoaded] = useState(null);
     const [form, setForm] = useState(null);
-    const [markers, setMarkers] = useState(null);
+
+    const [status, setStatus] = useState(-1);
+    const [statusKey, setStatusKey] = useState(-1);
 
     const [mapHeight, setMapHeight] = useState('100%');
+    const [afterDetails, setAfterDetails] = useState(false);
 
     useEffect(() => {
 
@@ -49,6 +54,7 @@ const SurveyMapScreen = props => {
             // Gets coordinates
             let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest });
             const { latitude, longitude } = location.coords;
+            //if (cancel === false) setLocation({ latitude, longitude });
             if (cancel === false) setLocation({latitude: latitude, longitude: longitude});
         };
 
@@ -60,47 +66,34 @@ const SurveyMapScreen = props => {
     }, []);
 
     useEffect(() => {
+        if (mapHeight ==='0%') {
+            getHeight();
+            setAfterDetails(true);
+        }
+    }, [statusKey]);
+
+    useEffect(() => {
         (async () => {
-            
-            const resForm = await fetch(`${config.serverURL}/api/surveys/`,{
+            setLoaded(null);
+            const res = await fetch(`${config.serverURL}/api/surveys/`,{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     email:  props.navigation.state.params.email,
-                    type: 'map',
+                    status: status,
+                    type: 'form',
                     language: props.navigation.state.params.language
                 })
             });
     
-            if (resForm.status == 200) {
-                setForm(await resForm.json());
-                setKey(!key);
+            if (res.status == 200) {
+                setForm(await res.json());
+                setStatusKey(status);
+                setLoaded(true);
             }
-            else if (resForm.status === 403) {
-                Alert.alert('ERROR', 'Login Timeout.');
-                props.navigation.state.params.logout();
-                props.navigation.navigate({routeName: 'Main'});
-            }
-            else
-                Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
-            
-            const resMarkers = await fetch(`${config.serverURL}/api/surveys/getMarkers/`,{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email:  props.navigation.state.params.email
-                })
-            });
-    
-            if (resMarkers.status == 200) {
-                const markers = await resMarkers.json();
-                setMarkers(markers.markers);
-            }
-            else if (resMarkers.status === 403) {
+            else if (res.status === 403) {
                 Alert.alert('ERROR', 'Login Timeout.');
                 props.navigation.state.params.logout();
                 props.navigation.navigate({routeName: 'Main'});
@@ -109,9 +102,49 @@ const SurveyMapScreen = props => {
                 Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
 
         })();
-    }, [submitted]);
+    }, [status]);
+
+    const submitPhoto = async (data) => {
+        let index;
+        let base64 = null;
+
+        data.map((d, i) => {
+            if (d.type === 'camera' && d.value !== '') {
+                index = i;
+                base64 = data[i].value;
+                base64.append('email', props.navigation.state.params.email);
+                data[index].value = '';
+            }
+        });
+        
+        if (base64 !== null) {
+            const res = await fetch(`${config.serverURL}/api/surveys/answerImage`,{
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'multipart/form-data',
+                },
+                body: base64
+            });
+            
+            if (res.status == 200) {
+                data[index].value = await res.json();
+            }
+            else if (res.status === 403) {
+                Alert.alert('ERROR', 'Login Timeout.');
+                props.navigation.state.params.logout();
+                props.navigation.navigate({routeName: 'Main'});
+            }
+            else
+                Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
+        }
+        return data;
+    };
 
     const onSubmit = async (data) => {
+
+        data = await submitPhoto(data);
+
         const res = await fetch(`${config.serverURL}/api/surveys/answer`,{
             method: 'POST',
             headers: {
@@ -120,12 +153,18 @@ const SurveyMapScreen = props => {
             body: JSON.stringify({
                 email:  props.navigation.state.params.email,
                 answer: data,
-                type: form.type
+                type: form.type,
+                language: props.navigation.state.params.language
             })
         });
         
         if (res.status == 200) {
-            setSubmitted(!submitted);
+            // Send image
+            const newStatus = await res.json();
+            setStatus(newStatus.status);
+            // Change this
+            if (parseInt(newStatus.status) != 15 && parseInt(newStatus.status) != 1)
+                setLoaded(null);
         }
         else if (res.status === 403) {
             Alert.alert('ERROR', 'Login Timeout.');
@@ -134,51 +173,49 @@ const SurveyMapScreen = props => {
         }
         else
             Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
+        //FeedbackHandler();
     };
 
     let formContent = <View />;
-    if (form !== null)
-        formContent = (
-            <ScrollView style={styles.formContainer}>
-                <Form key={key} json={form.form} extension={FormExtension} onSubmit={onSubmit} showSubmitButton={false} />
-            </ScrollView>
-        );
-    
-    let markersContent = <View/>;
-    if (markers != null)
-        markersContent = (
-            markers.map(marker => {
-                return (
-                    <Marker
-                        key={`${props.navigation.state.params.email}${marker.marker}${marker.lat}${marker.long}`}
-                        coordinate={{latitude: marker.lat, longitude: marker.long}}
-                    >
-                        <View style={styles.markerContainer}>
-                            <Image
-                                source={{uri:`${config.serverURL}/public/marker1.png`}}
-                                style={{flex:1, tintColor: 'white', position: 'absolute', width: Dimensions.get('window').width*0.11,
-                                height: Dimensions.get('window').width*0.11}}
-                            />
-                            <Image
-                                source={{uri:marker.imageLink}}
-                                style={styles.markerIcon}
-                            />
-                            <Image
-                                source={{uri:`${config.serverURL}/public/marker.png`}}
-                                style={{flex:1, tintColor: marker.color}}
-                            />
-                        </View>
-                    </Marker>
-                );
-            })
-        );
-        
-    const onRegionChangeComplete = (region) => {
-        setLocationDelta({latitudeDelta: region.latitudeDelta, longitudeDelta: region.longitudeDelta});
-        setLocation({latitude: Math.round(region.latitude*1000000)/1000000, longitude: Math.round(region.longitude*1000000)/1000000});
-        setMapHeight('60%');
+    if (loaded === null)
+        formContent = <View style={styles.fallbackTextContainer}><Text style={styles.text}>Loading survey...</Text></View>
+    else if (loaded === false)
+        formContent = <View style={styles.fallbackTextContainer}><Text style={styles.text}>Unable to load survey. Please go back.</Text></View>
+    else if (loaded === true) {
+        if (statusKey === 15) {
+            formContent = (
+                <SensorsData form={form} />
+            );
+        }
+        else 
+            formContent = (
+                <ScrollView style={styles.formContainer}>
+                    <Form key={statusKey} json={form.form} extension={FormExtension} onSubmit={onSubmit} showSubmitButton={false} />
+                </ScrollView>
+            );
+    }
+
+    const getHeight = () => {
+        if (form === null) setMapHeight('100%');
+        else if (form.type === 'details') setMapHeight('0%');
+        else if (form.type === 'base') setMapHeight('60%');
+        else setMapHeight('60%');
     };
 
+    const onRegionChangeComplete = (region) => {
+        
+        if (afterDetails === true) {
+            setLocationDelta(({latitudeDelta: 0.000922, longitudeDelta: 0.000421}));
+            setAfterDetails(false);
+        }
+        else setLocationDelta({latitudeDelta: region.latitudeDelta, longitudeDelta: region.longitudeDelta});
+        
+        setLocation({latitude: Math.round(region.latitude*1000000)/1000000, longitude: Math.round(region.longitude*1000000)/1000000});
+
+        getHeight();
+    };
+
+    
     return (
         <View style={styles.container}>
             <View style={{width: '100%', height: mapHeight}}>
@@ -195,7 +232,6 @@ const SurveyMapScreen = props => {
                     showsMyLocationButton={true}
                     onRegionChangeComplete={onRegionChangeComplete}
                 >
-                {markersContent}
                 </MapView>
             </View>
             {formContent}
@@ -217,19 +253,14 @@ const styles = StyleSheet.create({
     formContainer: {
         width: '100%'
     },
-    markerContainer: {
-        width: Dimensions.get('window').width*0.11,
-        height: Dimensions.get('window').width*0.11
+    text: {
+        fontSize: Dimensions.get('window').width*0.05
     },
-    markerIcon: {
-        backgroundColor: 'white',
-        overflow: 'hidden',
-        width: Dimensions.get('window').width*0.03, 
-        height: Dimensions.get('window').width*0.03,
-        position: 'absolute',
-        top:Dimensions.get('window').width*0.025,
-        left:Dimensions.get('window').width*0.04
-    }
+    fallbackTextContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
 });
 
-export default SurveyMapScreen;
+export default SurveyFormScreen;
