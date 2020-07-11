@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     View,
     StyleSheet,
@@ -15,7 +15,6 @@ import { Ionicons } from '@expo/vector-icons';
 
 import ResultsFormScreen from './results/ResultsFormScreen';
 import ResultsMapScreen from './results/ResultsMapScreen';
-
 
 const SurveyScreenExtension = props => {
 

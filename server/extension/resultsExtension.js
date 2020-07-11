@@ -6,6 +6,8 @@ var cache = require('../modules/cache');
 
 var config = require('./config');
 
+var auxFunctions = require('./auxFunctions');
+
 const getResults = (req, res) => {
     cache.get(req.body.email)
     .then(async result => {
@@ -49,23 +51,10 @@ const getResults = (req, res) => {
 const getUGS = (location, ugs) => {
     let inUgs = [];
     ugs.map(u => {
-        if (calcDistance(u.lat, u.long, location.lat, location.long) < Math.round(Math.sqrt(parseFloat(u.area)/Math.PI)) + config.inUgsOffset)
+        if (auxFunctions.calcDistance(u.lat, u.long, location.lat, location.long) < Math.round(Math.sqrt(parseFloat(u.area)/Math.PI)) + config.inUgsOffset)
             inUgs.push(u.name);
     });
     return inUgs;
-};
-
-const calcDistance = (lat1, lon1, lat2, lon2) => {
-    const R = 6371e3; // metres
-    const Q1 = lat1 * Math.PI/180; // φ, λ in radians
-    const Q2 = lat2 * Math.PI/180;
-    const deltaQ = (lat2-lat1) * Math.PI/180;
-    const deltaL = (lon2-lon1) * Math.PI/180;
-
-    const a = Math.sin(deltaQ/2) * Math.sin(deltaQ/2) +  Math.cos(Q1) * Math.cos(Q2) * Math.sin(deltaL/2) * Math.sin(deltaL/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-    return R * c; // in metres
 };
 
 exports.getResults = getResults;
