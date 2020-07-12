@@ -54,7 +54,7 @@ const ResultsFormScreen = props => {
     let content = <View><Text>Loading Results...</Text></View>;
     if (results !== null)
         content = (
-            <View>
+            <View style={styles.container}>
                 <View style={styles.textContainer}>
                     <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_ANSWERS_TITLE}</Text>
                 </View>
