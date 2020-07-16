@@ -9,14 +9,67 @@ var strings = require('./strings').strings;
 const getData = async (req, res) => {
     cache.get(req.body.email)
     .then(async result => {
+        let data;
+        let finalData = [];
         // If user not in cache
         if (typeof result === 'undefined') res.status(403).send();
         else {
-            const ugs = await db.getDocument('newugs', {});
-            res.status(200).send({ugs});
+            if (req.body.data === 'newugs') {
+                data = await db.getDocument(req.body.data, {});
+                res.status(200).send({data});
+            }
+            else if (req.body.data === 'answers') {
+                data = await db.getDocument(req.body.data, {});
+                let inArray = false;
+
+                console.log(req.body.filters);
+                
+                data.map(d => {
+                    if (d.done) {
+                        if (typeof finalData.find(fd => d._id === fd._id) === 'undefined') finalData.push(d);
+                        console.log('---------------');
+                        d.data.map(q => {
+                            req.body.filters.map(f => {
+                                if (q.id === f.filter) {
+                                    if(f.values.length > 0) {
+                                        if (typeof q.value === 'object') {
+                                            if (q.value.length === 0)
+                                                if (typeof finalData.find(fd => d._id === fd._id) !== 'undefined'){
+                                                    finalData.pop();
+                                                    console.log('REMOVED BECAUSE');
+                                                    console.log(`${q.id} = ${q.value}`);
+                                                }
+                                            f.values.map(fv => {
+                                                if (q.value.includes(fv) === false){
+                                                    if (typeof finalData.find(fd => d._id === fd._id) !== 'undefined'){
+                                                        finalData.pop();
+                                                        console.log('REMOVED BECAUSE');
+                                                        console.log(`${q.id} = ${q.value}`);
+                                                    }
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            if (f.values.includes(q.value) === false){ 
+                                                if (typeof finalData.find(fd => d._id === fd._id) !== 'undefined'){
+                                                    finalData.pop();
+                                                    console.log('REMOVED BECAUSE');
+                                                    console.log(`${q.id} = ${q.value}`);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        });
+                    }
+                });
+                console.log(finalData.length);
+                data = finalData;
+                res.status(200).send({data});
+            }
         }
     });
-
 };
 
 const editData = async (req, res) => {
@@ -53,9 +106,13 @@ const removeData = async (req, res) => {
         // If user not in cache
         if (typeof result === 'undefined') res.status(403).send();
         else {
-            await db.deleteDocument('answers', {_id: new mongodb.ObjectID(req.body.answer)});
-            await db.deleteDocument('newugs', {_id: new mongodb.ObjectID(req.body.ugs)});
-            await db.deleteDocument('photos', {_id: req.body.photo !== '' ? new mongodb.ObjectID(req.body.photo) : req.body.photo});
+            if (req.body.data === 'newugs') {
+                await db.deleteDocument('answers', {_id: new mongodb.ObjectID(req.body.answer)});
+                await db.deleteDocument('newugs', {_id: new mongodb.ObjectID(req.body.ugs)});
+                await db.deleteDocument('photos', {_id: req.body.photo !== '' ? new mongodb.ObjectID(req.body.photo) : req.body.photo});
+            } else if (req.body.data === 'answers') {
+                await db.deleteDocument('answers', {_id: new mongodb.ObjectID(req.body.answer)});
+            }
             res.status(200).send();
         }
     });

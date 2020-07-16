@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 
 import CustomButton from '../../components/CustomButton';
 import MarkerDetailsItem from './MarkerDetailsItem';
 
 const MarkerDetails = props => {
     return (
-        <View>
+        <ScrollView>
             {props.data.map(d => {
                 return (
                     <MarkerDetailsItem key={`${d.lat}${d.long}`} marker={d}/>
@@ -20,7 +20,7 @@ const MarkerDetails = props => {
                     textColor={Colors.secondary}
                 />
             </View>
-        </View>
+        </ScrollView>
     );
 };
 

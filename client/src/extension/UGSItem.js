@@ -6,15 +6,15 @@ import axios from 'axios';
 const UGSItem = props => {
 
     const [editing, setEditing] = useState(false);
-    const [editValue, setEditValue] = useState(`{"name": "${props.ugs.name}", "area": "${props.ugs.area}"}`);
+    const [editValue, setEditValue] = useState(`{"name": "${props.item.name}", "area": "${props.item.area}"}`);
     const [newugsPhoto, setNewugsPhoto] = useState(null);
 
     useEffect(() => {
         (async () => {
-            if (props.ugs.photo !== '') {
+            if (props.item.photo !== '') {
                 const params = {
                     email: props.email,
-                    photo: props.ugs.photo,
+                    photo: props.item.photo,
                     type: 'image'
                 };
                 axios.post(`${config.serverURL}/api/results/`, params)
@@ -27,7 +27,7 @@ const UGSItem = props => {
                 .catch(error => {
                     if (error.response.status === 403) {
                         console.log(error.response.status);
-                        props.onLogout(false, '', '');
+                        props.props.onLogout(false, '', '');
                     }
                 });
             };
@@ -35,13 +35,13 @@ const UGSItem = props => {
     }, []);
     
     const edit = () => {
-        props.editUGS(props.ugs._id, props.ugs.answer, editValue);
+        props.props.editUGS(props.item._id, props.item.answer, editValue);
         setEditing(!editing);
     };
 
     const changeEditValue = newValue => {
         setEditValue(newValue.target.value);
-    }
+    };
 
     let editBox = <div></div>;
     if (editing === true) {
@@ -62,13 +62,13 @@ const UGSItem = props => {
         <React.Fragment>
             <div style={styles.itemContainer}>
                 <p style={{display: 'flex', alignItems: 'center'}}>
-                {props.ugs.name} - {props.ugs.area} - {props.ugs.geolocation.street}, {props.ugs.geolocation.postalCode}, {props.ugs.geolocation.city}, {props.ugs.geolocation.country} - (lat: {props.ugs.geolocation.latitude}, long: {props.ugs.geolocation.longitude})
+                {props.item.name} - {props.item.area} - {props.item.geolocation.street}, {props.item.geolocation.postalCode}, {props.item.geolocation.city}, {props.item.geolocation.country} - (lat: {props.item.geolocation.latitude}, long: {props.item.geolocation.longitude})
                 </p>
                 {imageContent}
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                     <IoMdCreate style={{color: '#333', fontSize: 36}} onClick={() => setEditing(!editing)} />
-                    <IoIosAddCircle style={{color: '#32cd32', fontSize: 36}} onClick={props.validateUGS.bind(this, props.ugs._id, props.ugs.answer, props.ugs.photo)} />
-                    <IoIosRemoveCircle style={{color: '#cc0000', fontSize: 36}} onClick={props.removeUGS.bind(this, props.ugs._id, props.ugs.answer, props.ugs.photo)} />
+                    <IoIosAddCircle style={{color: '#32cd32', fontSize: 36}} onClick={props.props.validateUGS.bind(this, props.item._id, props.item.answer, props.item.photo)} />
+                    <IoIosRemoveCircle style={{color: '#cc0000', fontSize: 36}} onClick={props.props.removeUGS.bind(this, props.item._id, props.item.answer, props.item.photo)} />
                 </div>
             </div>
             {editBox}
