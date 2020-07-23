@@ -23,6 +23,8 @@ import SensorsData from '../components/SensorsData';
 
 import config from '../config';
 
+import { Feather } from '@expo/vector-icons'; 
+
 const SurveyFormScreen = props => {
 
     // Stat e to store location
@@ -39,6 +41,8 @@ const SurveyFormScreen = props => {
 
     const [mapHeight, setMapHeight] = useState('100%');
     const [afterDetails, setAfterDetails] = useState(false);
+
+    const [mapType, setMapType] = useState('standard');
 
     useEffect(() => {
 
@@ -215,11 +219,16 @@ const SurveyFormScreen = props => {
         getHeight();
     };
 
+    const changeMapType = () => {
+        if (mapType === 'satellite') setMapType('standard');
+        else if (mapType === 'standard') setMapType('satellite');
+    };
     
     return (
         <View style={styles.container}>
             <View style={{width: '100%', height: mapHeight}}>
                 <MapView
+                    mapType={mapType}
                     provider={PROVIDER_GOOGLE}
                     style={styles.map}
                     region={{
@@ -234,6 +243,9 @@ const SurveyFormScreen = props => {
                 >
                 </MapView>
             </View>
+            <TouchableOpacity style={styles.mapTypeBtn} onPress={changeMapType}>
+                <Feather name="layers" size={24} color="#333333" />
+            </TouchableOpacity>
             {formContent}
         </View>
     );
@@ -261,6 +273,23 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    mapTypeBtn: {
+        position: 'absolute', 
+        top: Dimensions.get('window').height*0.45,
+        right: Dimensions.get('window').width*0.03,
+        backgroundColor: 'white',
+        opacity: 0.7,
+        padding: Dimensions.get('window').width*0.02,
+        borderRadius: Dimensions.get('window').height,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3,
+        elevation: 3,
+    }
 });
 
 export default SurveyFormScreen;

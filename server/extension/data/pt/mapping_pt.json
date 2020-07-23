@@ -10,49 +10,49 @@
 						{
 							"value": "like",
 							"label": "Gosto deste sítio.",
-							"imageLink": "http://192.168.1.78:3000/public/like.png",
+							"imageLink": "http://192.168.1.111:3000/public/like.png",
 							"color": "#1BA261"
 						},
 						{
 							"value": "dislike",
 							"label": "Não gosto deste sítio.",
-							"imageLink": "http://192.168.1.78:3000/public/dislike.png",
+							"imageLink": "http://192.168.1.111:3000/public/dislike.png",
 							"color": "#EA4335"
 						},
 						{
 							"value": "sun",
 							"label": "Aqui está sol.",
-							"imageLink": "http://192.168.1.78:3000/public/sun.png",
+							"imageLink": "http://192.168.1.111:3000/public/sun.png",
 							"color": "#EB8F00"
 						},
 						{
 							"value": "wind",
 							"label": "Aqui está vento.",
-							"imageLink": "http://192.168.1.78:3000/public/wind.png",
+							"imageLink": "http://192.168.1.111:3000/public/wind.png",
 							"color": "#477CE3"
 						},
 						{
 							"value": "shade",
 							"label": "Aqui está uma sombra.",
-							"imageLink": "http://192.168.1.78:3000/public/shade.png",
+							"imageLink": "http://192.168.1.111:3000/public/shade.png",
 							"color": "#D5D8DB"
 						},
 						{
 							"value": "animal",
 							"label": "Avistamento de animal.",
-							"imageLink": "http://192.168.1.78:3000/public/squirrel.png",
+							"imageLink": "http://192.168.1.111:3000/public/squirrel.png",
 							"color": "#8C5F3D"
 						},
 						{
 							"value": "vegetation",
 							"label": "Gosto da vegetação aqui.",
-							"imageLink": "http://192.168.1.78:3000/public/tree.png",
+							"imageLink": "http://192.168.1.111:3000/public/tree.png",
 							"color": "#8DC44F"
 						},
 						{
 							"value": "manmade",
 							"label": "Peça de mobiliário urbano interessante.",
-							"imageLink": "http://192.168.1.78:3000/public/gazebo.png",
+							"imageLink": "http://192.168.1.111:3000/public/gazebo.png",
 							"color": "#737373"
 						}
 					],

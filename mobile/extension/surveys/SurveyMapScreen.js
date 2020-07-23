@@ -19,6 +19,7 @@ import { Form } from 'react-native-json-forms';
 import FormExtension from '../FormExtension';
 
 import config from '../config';
+import { Feather } from '@expo/vector-icons'; 
 
 const SurveyMapScreen = props => {
 
@@ -34,6 +35,7 @@ const SurveyMapScreen = props => {
     const [markers, setMarkers] = useState(null);
 
     const [mapHeight, setMapHeight] = useState('100%');
+    const [mapType, setMapType] = useState('standard');
 
     useEffect(() => {
 
@@ -179,10 +181,16 @@ const SurveyMapScreen = props => {
         setMapHeight('60%');
     };
 
+    const changeMapType = () => {
+        if (mapType === 'satellite') setMapType('standard');
+        else if (mapType === 'standard') setMapType('satellite');
+    };
+
     return (
         <View style={styles.container}>
             <View style={{width: '100%', height: mapHeight}}>
                 <MapView
+                    mapType={mapType}
                     provider={PROVIDER_GOOGLE}
                     style={styles.map}
                     region={{
@@ -198,6 +206,9 @@ const SurveyMapScreen = props => {
                 {markersContent}
                 </MapView>
             </View>
+            <TouchableOpacity style={styles.mapTypeBtn} onPress={changeMapType}>
+                <Feather name="layers" size={24} color="#333333" />
+            </TouchableOpacity>
             {formContent}
         </View>
     );
@@ -229,6 +240,23 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top:Dimensions.get('window').width*0.025,
         left:Dimensions.get('window').width*0.04
+    },
+    mapTypeBtn: {
+        position: 'absolute', 
+        top: Dimensions.get('window').height*0.45,
+        right: Dimensions.get('window').width*0.03,
+        backgroundColor: 'white',
+        opacity: 0.7,
+        padding: Dimensions.get('window').width*0.02,
+        borderRadius: Dimensions.get('window').height,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3,
+        elevation: 3,
     }
 });
 

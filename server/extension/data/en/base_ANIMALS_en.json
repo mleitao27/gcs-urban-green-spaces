@@ -9,23 +9,23 @@
 					"choices": [
 						{
 							"value": "bird",
-							"imageLink": "http://192.168.1.78:3000/public/bird.png"
+							"imageLink": "http://192.168.1.111:3000/public/bird.png"
 						},
 						{
 							"value": "insect",
-							"imageLink": "http://192.168.1.78:3000/public/insect.png"
+							"imageLink": "http://192.168.1.111:3000/public/insect.png"
 						},
 						{
 							"value": "squirrel",
-							"imageLink": "http://192.168.1.78:3000/public/squirrel.png"
+							"imageLink": "http://192.168.1.111:3000/public/squirrel.png"
 						},
 						{
 							"value": "lizard",
-							"imageLink": "http://192.168.1.78:3000/public/lizard.png"
+							"imageLink": "http://192.168.1.111:3000/public/lizard.png"
 						},
 						{
 							"value": "other",
-							"imageLink": "http://192.168.1.78:3000/public/other.png"
+							"imageLink": "http://192.168.1.111:3000/public/other.png"
 						}
 					],
 					"id": "BASE_ANIMAL"
