@@ -45,7 +45,7 @@ const ProfileScreenExtension = props => {
     }, [edited]);
 
     const editProfile = async () => {
-        const res = await fetch(`${config.serverURL}/api/profile/requestEdit`,{
+        const res = await fetch(`${config.serverURL}/api/profile/editRequest`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

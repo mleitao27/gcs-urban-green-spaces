@@ -21,13 +21,10 @@ const getData = async (req, res) => {
             else if (req.body.data === 'answers') {
                 data = await db.getDocument(req.body.data, {});
                 let inArray = false;
-
-                console.log(req.body.filters);
                 
                 data.map(d => {
                     if (d.done) {
                         if (typeof finalData.find(fd => d._id === fd._id) === 'undefined') finalData.push(d);
-                        console.log('---------------');
                         d.data.map(q => {
                             req.body.filters.map(f => {
                                 if (q.id === f.filter) {
@@ -36,15 +33,11 @@ const getData = async (req, res) => {
                                             if (q.value.length === 0)
                                                 if (typeof finalData.find(fd => d._id === fd._id) !== 'undefined'){
                                                     finalData.pop();
-                                                    console.log('REMOVED BECAUSE');
-                                                    console.log(`${q.id} = ${q.value}`);
                                                 }
                                             f.values.map(fv => {
                                                 if (q.value.includes(fv) === false){
                                                     if (typeof finalData.find(fd => d._id === fd._id) !== 'undefined'){
                                                         finalData.pop();
-                                                        console.log('REMOVED BECAUSE');
-                                                        console.log(`${q.id} = ${q.value}`);
                                                     }
                                                 }
                                             });
@@ -53,8 +46,6 @@ const getData = async (req, res) => {
                                             if (f.values.includes(q.value) === false){ 
                                                 if (typeof finalData.find(fd => d._id === fd._id) !== 'undefined'){
                                                     finalData.pop();
-                                                    console.log('REMOVED BECAUSE');
-                                                    console.log(`${q.id} = ${q.value}`);
                                                 }
                                             }
                                         }
@@ -64,7 +55,6 @@ const getData = async (req, res) => {
                         });
                     }
                 });
-                console.log(finalData.length);
                 data = finalData;
                 res.status(200).send({data});
             }

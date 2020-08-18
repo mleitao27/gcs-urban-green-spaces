@@ -24,7 +24,10 @@
         "RESULTS_MARKERS_TITLE": "Markers",
         "OAUTH_LOGIN": "Login with",
         "OAUTH_REGISTER": "Register w/",
-        "OTHER": "other"
+        "LOGIN_ERROR": "Something went wrong with the login.",
+        "REGISTER_ERROR": "Something went wrong with the registration.",
+        "OTHER": "other",
+        "WELCOME": "Welcome!"
     },
     "pt": {
         "PROFILE_BIRTH": "Data de Nascimento",
@@ -51,6 +54,9 @@
         "RESULTS_MARKERS_TITLE": "Pontos de Interesse",
         "OAUTH_LOGIN": "Entrar com",
         "OAUTH_REGISTER": "Registar c/",
-        "OTHER": "outro"
+        "LOGIN_ERROR": "Algo correu mal com o login.",
+        "REGISTER_ERROR": "Algo correu mal com o registo.",
+        "OTHER": "outro",
+        "WELCOME": "Bem-vindo(a)!"
     }
 }

@@ -88,7 +88,7 @@ const SurveyMapScreen = props => {
             else
                 Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
             
-            const resMarkers = await fetch(`${config.serverURL}/api/surveys/getMarkers/`,{
+            const resMarkers = await fetch(`${config.serverURL}/api/surveys/getInfo/`,{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

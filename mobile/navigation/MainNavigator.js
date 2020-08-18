@@ -1,4 +1,11 @@
-import { createStackNavigator, TransitionSpecs } from 'react-navigation-stack';
+/* 
+ * MainNavigator (Object)
+ * Description : Navigator used to navigate between the
+ * different app screens
+ */
+
+// Imports
+import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 
 import MainScreen from '../screens/MainScreen';
@@ -9,6 +16,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 
 import Colors from '../constants/colors';
 
+// Object used to define the stack navigation options
 const defaultStackNavOptions = {
     headerStyle: {
         backgroundColor: Colors.primary
@@ -18,6 +26,11 @@ const defaultStackNavOptions = {
     headerBackTitle: 'Back'
 };
 
+/************************************************
+ * 
+ * OBJECT - Navigator
+ * 
+ ************************************************/
 const MainNavigator = createStackNavigator({
     Main: {
         screen: MainScreen
@@ -38,4 +51,5 @@ const MainNavigator = createStackNavigator({
     defaultNavigationOptions: defaultStackNavOptions
 });
 
+// Export navigator
 export default createAppContainer(MainNavigator);

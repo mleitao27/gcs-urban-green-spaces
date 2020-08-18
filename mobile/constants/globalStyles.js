@@ -1,10 +1,22 @@
-import { StyleSheet, Dimensions } from 'react-native';
+/* 
+ * globalStyles (Object)
+ * Description : Object containing some styles used repeatedly
+ * throughout the application
+ */
 
+ // Imports
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from './colors';
 
+// Window width and height used for styling purposes
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+/************************************************
+ * 
+ * OBJECT
+ * 
+ ************************************************/
 const globalStyles = StyleSheet.create({
     screen: {
         flex: 1,
@@ -37,4 +49,5 @@ const globalStyles = StyleSheet.create({
     }
 });
 
+// Export Object
 export default globalStyles;

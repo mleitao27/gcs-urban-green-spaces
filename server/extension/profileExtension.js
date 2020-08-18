@@ -51,7 +51,7 @@ const getProfile = (req, res) => {
     });
 };
 
-const requestEditProfile = (req, res) => {
+const editProfileRequest = (req, res) => {
     cache.get(req.body.email)
     .then(async result => {
         if (typeof result === 'undefined') res.status(403).send();
@@ -79,5 +79,5 @@ const editProfile = (req, res) => {
 };
 
 exports.getProfile = getProfile;
-exports.requestEditProfile = requestEditProfile;
+exports.editProfileRequest = editProfileRequest;
 exports.editProfile = editProfile;

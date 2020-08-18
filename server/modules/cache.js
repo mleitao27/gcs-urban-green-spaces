@@ -1,3 +1,10 @@
+/* 
+ * cache (Module)
+ * Description : Cache handling module, contains get(), set() and del() methods.
+ * Allows to manage the cache built using memcached-promisify.
+ */
+
+// Imports
 const Memcached = require('memcached-promisify');
 
 // Initialize cache
@@ -17,7 +24,7 @@ const set = (key, timeout) => {
     .then(result => {});
 };
 
-// Delete 'key' in cache 
+// Delete 'key' from cache 
 const del = (key) => {
     return memcached.del(key)
     .then(result => {
@@ -25,7 +32,7 @@ const del = (key) => {
     });
 };
 
-
+// Export methods
 exports.get = get;
 exports.set = set;
 exports.del = del;

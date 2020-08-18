@@ -1,34 +1,50 @@
+/* 
+ * surveys (Router)
+ * Description : Contains all the endpoints that handle requests
+ * related to the surveys. Allows to get surveys, answer them,
+ * get feedback, submit new surveys and get additional info from
+ * the system.
+ */
+
 // Imports
 var express = require('express');
 var router = express.Router();
 
+// Import survey extension functions
 const surveyExtension = require('../extension/surveysExtension');
 
+// Used to allow multipart request used to send images between app/client and server
 var multer  = require('multer')
 var upload = multer({ limits: { fieldSize: 25 * 1024 * 1024 } })
 
+// Get a survey
 router.post('/', async (req, res) => {
-    surveyExtension.getForm(req, res);
+    surveyExtension.getSurvey(req, res);
 });
 
+// Submit a new survey to the server
 router.post('/submit', async (req, res) => {
-    surveyExtension.submitForm(req, res);
+    surveyExtension.submitSurvey(req, res);
 });
 
+// Submit survey answer
 router.post('/answer', async (req, res) => {
     surveyExtension.processAnswer(req, res);
 });
 
+// Submit image as (part of) survey answer
 router.post('/answerImage', upload.single(), async (req, res) => {
     surveyExtension.processImage(req, res);
 });
 
+// Get feedback of an answer
 router.post('/feedback', async (req, res) => {
     surveyExtension.returnFeedback(req, res);
 });
 
-router.post('/getMarkers', async (req, res) => {
-    surveyExtension.getMarkers(req, res);
+// Get info to help answer survey
+router.post('/getInfo', async (req, res) => {
+    surveyExtension.getInfo(req, res);
 });
 
 // Export router

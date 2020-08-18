@@ -8,7 +8,7 @@ const List = props => {
                 <props.item
                     key={item._id}
                     email={props.email}
-                    onLogout={props.onLogout}props
+                    onLogout={props.onLogout}
                     item={item}
                     props={props}
                 />

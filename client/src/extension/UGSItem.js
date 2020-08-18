@@ -32,7 +32,7 @@ const UGSItem = props => {
                 });
             };
         })();
-    }, []);
+    });
     
     const edit = () => {
         props.props.editUGS(props.item._id, props.item.answer, editValue);
@@ -56,7 +56,7 @@ const UGSItem = props => {
     //<img src="" alt="UGS photo">
     let imageContent = <React.Fragment/>;
     if (newugsPhoto !== null) {
-        imageContent = <div style={styles.cropImage}><img style={styles.image} src={newugsPhoto} alt="UGS photo"/></div>;
+        imageContent = <div style={styles.cropImage}><img style={styles.image} src={newugsPhoto} alt="UGS"/></div>;
     }
     return (
         <React.Fragment>

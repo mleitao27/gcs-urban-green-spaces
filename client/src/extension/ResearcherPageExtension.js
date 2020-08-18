@@ -80,9 +80,9 @@ const ResearcherPageExtension = props => {
         const categ = ['BASE_ABOUT_UGS', 'BASE_ANIMAL', 'BASE_VEGETATION', 'BASE_MANMADE', 'BASE_MOTIVATION', 'BASE_FEELING'];
         let finalFilters = [];
 
-        categ.map(c => {
+        categ.forEach(c => {
             let temp = [];
-            filters[c].map(f => {
+            filters[c].forEach(f => {
                 if (f.selected) temp.push(f.value);
             });
             finalFilters.push({filter: c, values: temp});
@@ -246,7 +246,7 @@ const ResearcherPageExtension = props => {
 
     const changeFilter = (value, filter) => {
         var temp = filters;
-        temp[filter].map(t => {
+        temp[filter].forEach(t => {
             if (t.value === value) t.selected = !t.selected;
         });
         setFilters(temp);
@@ -255,7 +255,7 @@ const ResearcherPageExtension = props => {
 
     const toggleFilter = (value, filter) => {
         var temp = filters;
-        temp[filter].map(t => {
+        temp[filter].forEach(t => {
             t.selected = value;
         });
         setFilters(temp);

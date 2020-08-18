@@ -4,10 +4,10 @@ var db = require('../modules/db');
 var cache = require('../modules/cache');
 var config = require('./config');
 
-var surveysArray = require('./surveysArray').surveysArray;
+var surveysArray = require('./surveys/surveysArray').surveysArray;
 const errorJSON = require('./data/error.json');
 
-var feedback = require('./feedbackExtension');
+var feedback = require('../modules/feedback');
 var dbStorage = require('./dbExtension');
 
 var strings = require('./strings').strings;
@@ -37,7 +37,7 @@ const YN_GOOGLE = 17;
 const SKIP_SURVEY = 18;
 const SENSORS = 19;
 
-const getForm = (req, res) => {
+const getSurvey = (req, res) => {
     cache.get(req.body.email)
     .then(async result => {
         // If user not in cache
@@ -130,7 +130,7 @@ const getDetailsSurvey = (req, res) => {
     res.status(200).send({form: surveysArray.detailsSurvey[req.body.language], type: 'details'});
 };
 
-const getMarkers = async (req, res) => {
+const getInfo = async (req, res) => {
     cache.get(req.body.email)
     .then(async result => {
         // If user not in cache
@@ -152,9 +152,9 @@ const processAnswer = async (req, res) => {
             console.log(req.body);
             
             // Immediate Feedback
-            feedback.immediateFeedback();
+            feedback.immediate();
             // Differenciated Feedback
-            feedback.diffFeedback();
+            feedback.differenciated();
             // Database storage
             const status = await db.getDocument('status', {user: req.body.email});
             dbStorage.storeAnswer(req.body.email, req.body.answer, req.body.type);
@@ -325,7 +325,7 @@ const returnFeedback = (req, res) => {
     
 };
 
-const submitForm = (req, res) => {
+const submitSurvey = (req, res) => {
     
 };
 
@@ -340,9 +340,9 @@ const resetAnswer = (email) => {
     return db.insertDocument('answers', newAnswer);
 };
 
-exports.getForm = getForm;
-exports.submitForm = submitForm;
+exports.getSurvey = getSurvey;
+exports.submitSurvey = submitSurvey;
 exports.processAnswer = processAnswer;
 exports.processImage = processImage;
 exports.returnFeedback = returnFeedback;
-exports.getMarkers = getMarkers;
+exports.getInfo = getInfo;

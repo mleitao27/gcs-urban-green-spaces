@@ -1,3 +1,11 @@
+/* 
+ * users (Router)
+ * Description : Contains all tht endpoints that handle requests
+ * related to the users. Handles user authentication and registration
+ * but also admin features such as change user type or remove them
+ * from the system.
+ */
+
 // Imports
 var express = require('express');
 var router = express.Router();
