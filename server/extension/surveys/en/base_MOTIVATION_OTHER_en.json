@@ -1,0 +1,14 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+					"type": "text",
+					"name": "What was your motivation to come here?",
+					"id": "BASE_MOTIVATION_OTHER"
+				}		
+			]
+		}
+	]
+}

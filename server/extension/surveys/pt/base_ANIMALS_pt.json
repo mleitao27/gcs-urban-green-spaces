@@ -1,0 +1,36 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+					"type": "imagepicker",
+					"name": "Que tipo de animais pode ser encontrado neste espaço verde?",
+					"choices": [
+						{
+							"value": "bird",
+							"imageLink": "http://192.168.1.78:3000/public/bird.png"
+						},
+						{
+							"value": "insect",
+							"imageLink": "http://192.168.1.78:3000/public/insect.png"
+						},
+						{
+							"value": "squirrel",
+							"imageLink": "http://192.168.1.78:3000/public/squirrel.png"
+						},
+						{
+							"value": "lizard",
+							"imageLink": "http://192.168.1.78:3000/public/lizard.png"
+						},
+						{
+							"value": "other",
+							"imageLink": "http://192.168.1.78:3000/public/outro.png"
+						}
+					],
+					"id": "BASE_ANIMAL"
+				}		
+			]
+		}
+	]
+}

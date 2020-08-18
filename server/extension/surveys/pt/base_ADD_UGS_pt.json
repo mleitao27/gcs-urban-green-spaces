@@ -1,0 +1,14 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+					"type": "ext:yn",
+					"name": "Quer adicionar um novo espaço verde à base de dados?",
+					"id": "BASE_ADD_UGS"
+				}				
+			]
+		}
+	]
+}

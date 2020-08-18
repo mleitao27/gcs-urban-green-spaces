@@ -1,0 +1,19 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+					"type": "radiogroup",
+					"name": "Acerca deste espaço verde...",
+					"choices": [
+						"Um dos meus favoritos",
+						"Meh",
+						"Evito"
+					],
+					"id": "BASE_ABOUT_UGS"
+				}				
+			]
+		}
+	]
+}

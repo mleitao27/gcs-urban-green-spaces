@@ -1,0 +1,76 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+					"type": "ext:geomarker",
+					"name": "Mark your favourite elements.",
+					"markers": [
+						{
+							"value": "like",
+							"label": "I like this place.",
+							"imageLink": "http://192.168.1.78:3000/public/like.png",
+							"color": "#1BA261"
+						},
+						{
+							"value": "dislike",
+							"label": "I do not like this place.",
+							"imageLink": "http://192.168.1.78:3000/public/dislike.png",
+							"color": "#EA4335"
+						},
+						{
+							"value": "sun",
+							"label": "It is sunny here.",
+							"imageLink": "http://192.168.1.78:3000/public/sun.png",
+							"color": "#EB8F00"
+						},
+						{
+							"value": "wind",
+							"label": "It is windy here.",
+							"imageLink": "http://192.168.1.78:3000/public/wind.png",
+							"color": "#477CE3"
+						},
+						{
+							"value": "shade",
+							"label": "Here is a shade.",
+							"imageLink": "http://192.168.1.78:3000/public/shade.png",
+							"color": "#D5D8DB"
+						},
+						{
+							"value": "animal",
+							"label": "Spotted an aminal here.",
+							"imageLink": "http://192.168.1.78:3000/public/squirrel.png",
+							"color": "#8C5F3D"
+						},
+						{
+							"value": "vegetation",
+							"label": "I like the vegetation here.",
+							"imageLink": "http://192.168.1.78:3000/public/tree.png",
+							"color": "#8DC44F"
+						},
+						{
+							"value": "manmade",
+							"label": "Interesting man made structure.",
+							"imageLink": "http://192.168.1.78:3000/public/gazebo.png",
+							"color": "#737373"
+						}
+					],
+					"id": "MAPPING_MARKER"
+				},
+				{
+					"type": "datepicker",
+					"name": "date",
+					"mode": "auto",
+					"id": "MAPPING_DATE"
+				},
+				{
+					"type": "timepicker",
+					"name": "time",
+					"mode": "auto",
+					"id": "MAPPING_TIME"
+				}	
+			]
+		}
+	]
+}

@@ -1,0 +1,15 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+                    "type": "expression",
+                    "name": "Thank you!",
+                    "commentText": "Thanks for answering.",
+					"id": "BASE_THANK_YOU"
+                }
+			]
+		}
+	]
+}

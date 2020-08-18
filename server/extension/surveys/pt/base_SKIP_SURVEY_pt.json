@@ -1,0 +1,14 @@
+{
+	"pages": [
+		{
+			"name": "page1",			
+			"elements": [
+				{
+					"type": "ext:yn",
+					"name": "Respondeu a um questionário recentemente, pretende saltar este?",
+					"id": "BASE_SKIP_SURVEY"
+				}
+			]
+		}
+	]
+}
