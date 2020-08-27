@@ -45,6 +45,8 @@ const OAuthButtons = props => {
             if(response.error === 'popup_closed_by_user')
                 return;
 
+        console.log(response);
+
         // Get user info from google response
         const params = {
             'platform': 'google',

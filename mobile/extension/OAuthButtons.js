@@ -29,6 +29,8 @@ import config from './config';
 import dictionaryExtension from './dictionaryExtension.json';
 import dictionary from '../data/dictionary.json';
 
+import globalStyles from '../constants/globalStyles';
+
 // Window width and height used for styling purposes
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -161,23 +163,28 @@ const OAuthButtons = props => {
    ************************************************/
   return (
     <View>
-      <View style={styles.buttonContainer}>
-        <ButtonComponent activeOpacity={0.6} onPress={googleResponse}>
-          <View style={[styles.button, styles.googleButton]}>
-            <Image style={styles.icon} source={require('../assets/google.jpeg')} />
-            <Text style={styles.googleButtonText}>{method} Google</Text>
-          </View>
-        </ButtonComponent>
+      <View style={globalStyles.shadow}>
+        <View style={{...styles.buttonContainer, borderColor: '#E5E5E5'}}>
+          <ButtonComponent activeOpacity={0.6} onPress={googleResponse}>
+            <View style={[styles.button, styles.googleButton]}>
+              <Image style={styles.icon} source={require('../assets/google.jpeg')} />
+              <Text style={styles.googleButtonText}>{props.method === 'register' ? method : ''} Google</Text>
+            </View>
+          </ButtonComponent>
+        </View>
       </View>
 
-      <View style={styles.buttonContainer}>
-        <ButtonComponent activeOpacity={0.6} onPress={facebookResponse}>
-          <View style={[styles.button, styles.facebookButton]}>
-            <Image style={styles.icon} source={require('../assets/facebook.svg')} />
-            <Text style={styles.facebookButtonText}>{method} Facebook</Text>
-          </View>
-        </ButtonComponent>
+      <View style={globalStyles.shadow}>
+        <View style={{...styles.buttonContainer, borderColor: '#3b5998'}}>
+          <ButtonComponent activeOpacity={0.6} onPress={facebookResponse}>
+            <View style={[styles.button, styles.facebookButton]}>
+              <Image style={styles.icon} source={require('../assets/facebook.svg')} />
+              <Text style={styles.facebookButtonText}>{props.method === 'register' ? method : ''} Facebook</Text>
+            </View>
+          </ButtonComponent>
+        </View>
       </View>
+
     </View>
   );
 };
@@ -186,9 +193,9 @@ const OAuthButtons = props => {
 const styles = StyleSheet.create({
   button: {
     flexDirection:'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center',
-    width: windowWidth * 0.55,
+    width: '100%',
     height: windowHeight * 0.06,
     paddingRight: windowHeight * 0.02,
     paddingLeft: windowHeight * 0.01
@@ -198,8 +205,7 @@ const styles = StyleSheet.create({
   },
   googleButtonText: {
     fontSize: windowWidth * 0.04,
-    color: 'black',
-    width: windowWidth * 0.4
+    color: 'black'
   },
   icon: {
     height: windowHeight * 0.04,
@@ -208,17 +214,18 @@ const styles = StyleSheet.create({
   },
   facebookButton: {
     backgroundColor: '#3b5998',
-    paddingLeft: 0
+    paddingLeft: 0,
   },
   facebookButtonText: {
     fontSize: windowWidth * 0.04,
-    color: 'white',
-    width: windowWidth * 0.4
+    color: 'white'
   },
   buttonContainer: {
-    borderRadius: 20,
+    borderWidth: 1,
+    borderRadius: 15,
     overflow: 'hidden',
-    marginVertical: '2%'
+    marginVertical: '2%',
+    elevation: 3
   }
 });
 
