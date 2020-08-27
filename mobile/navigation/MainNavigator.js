@@ -23,7 +23,8 @@ const defaultStackNavOptions = {
     },
     headerTitleAlign: 'center',
     headerTintColor: 'white',
-    headerBackTitle: 'Back'
+    headerBackTitle: 'Back',
+    cardStyle: { backgroundColor: 'white' }
 };
 
 /************************************************

@@ -9,6 +9,6 @@
  * 
  ************************************************/
 export default Colors = {
-    primary: '#333', // Dark grey
+    primary: '#444', // Dark grey
     secondary: '#ccc' // Light grey
 }

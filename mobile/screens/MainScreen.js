@@ -17,8 +17,9 @@ import {
     Dimensions,
     StyleSheet,
     TouchableWithoutFeedback,
-    Keyboard
-
+    Keyboard,
+    Image,
+    SafeAreaView
 } from 'react-native';
 
 import globalStyles from '../constants/globalStyles';
@@ -109,48 +110,76 @@ const MainScreen = props => {
     // Check if welcome text is provided
     let welcomeContent = <View/>;
     if (typeof dictionaryExtension[language].WELCOME !== 'undefined')
-        welcomeContent = <Text style={globalStyles.title}>{dictionaryExtension[language].WELCOME}</Text>
+        welcomeContent = <Text style={styles.text}>{dictionaryExtension[language].WELCOME}</Text>
 
     // Initial screen content is login form
     let content = (
-        <View style={globalStyles.screen} >
-            {welcomeContent}
-            <View style={globalStyles.formContainer}>
-                <TextInput
-                    style={globalStyles.formElement}
-                    placeholder={dictionary[language].EMAIL}
-                    placeholderTextColor={Colors.secondary}
-                    value={email}
-                    onChangeText={emailInputHandler}
-                    />
-                <TextInput
-                    style={globalStyles.formElement}
-                    placeholder={dictionary[language].PASSWORD}
-                    placeholderTextColor={Colors.secondary}
-                    value={password}
-                    onChangeText={passwordInputHandler}
-                    secureTextEntry={true}
-                    />
-                <CustomButton
-                    title={dictionary[language].LOGIN}
-                    onPress={login}
-                    backgroundColor={Colors.secondary}
-                    textColor={Colors.primary}
-                    />
-                <OAuthButtons method={'login'} onLogin={changeLoggedState} language={language} />
+        <SafeAreaView style={globalStyles.androidSafeArea}>
+            <View style={styles.container} >
+
+                <View style={styles.imageContainer}>
+                    <Image style={styles.image} source={require('../assets/landing_logo.png')} />
+                </View>
+
+                <View style={{...styles.textContainer, ...styles.welcomeTextContainer}}>
+                    {welcomeContent}
+                </View>
+
+                <View style={styles.formContainer}>
+
+                    <View style={styles.inputContainer}>
+                        <TextInput
+                            style={styles.input}
+                            placeholder={dictionary[language].EMAIL}
+                            placeholderTextColor={Colors.secondary}
+                            value={email}
+                            onChangeText={emailInputHandler}
+                            />
+                        <TextInput
+                            style={styles.input}
+                            placeholder={dictionary[language].PASSWORD}
+                            placeholderTextColor={Colors.secondary}
+                            value={password}
+                            onChangeText={passwordInputHandler}
+                            secureTextEntry={true}
+                            />
+                    </View>
+
+                    <CustomButton
+                        title={dictionary[language].LOGIN}
+                        onPress={login}
+                        backgroundColor={Colors.primary}
+                        textColor={'white'}
+                        width={windowWidth*0.60}
+                        height={windowHeight*0.045}
+                        borderRadius={10}
+                        />
+                </View> 
+
+                <View style={styles.loginTextContainer}>
+                    <Text style={styles.text}>{dictionary[language].OR_LOGIN}</Text>
+                </View>
+                
+                <View style={{width:windowWidth * 0.35, marginBottom: windowHeight * 0.05,}}>
+                    <OAuthButtons method={'login'} onLogin={changeLoggedState} language={language} />
+                </View>
 
                 <View style={styles.textContainer}>
                     <Text style={styles.text}>{dictionary[language].NOT_REGISTERED} </Text>
                     <TouchableOpacity onPress={() => props.navigation.navigate({routeName: 'Register', params: {language: language}})}>
-                        <Text style={[styles.text, styles.textUnderline]}>{dictionary[language].CLICK_HERE}</Text>
+                        <Text style={{...styles.text, ...styles.textUnderline}}>{dictionary[language].CLICK_HERE}</Text>
                     </TouchableOpacity>
                 </View>
+
+                <View style={styles.languagePicker}>
+                    <LanguagePicker
+                        language={language}
+                        setLanguage={newLanguage => setLanguage(newLanguage)}
+                    />
+                </View>
+
             </View>
-            <LanguagePicker
-                language={language}
-                setLanguage={newLanguage => setLanguage(newLanguage)}
-            />
-        </View>
+        </SafeAreaView>
     );
 
     // If user is logged render the menu screen
@@ -171,19 +200,58 @@ const MainScreen = props => {
 
 // Styles
 const styles = StyleSheet.create({
-    textContainer: {
-        flexDirection: 'column',
+    container: {
+        ...globalStyles.screen,
+        justifyContent: 'flex-start'
+    },
+    imageContainer: {
+        width: (windowHeight + windowWidth) * 0.25,
+        height: (windowHeight + windowWidth) * 0.15,
+        marginVertical: windowHeight * 0.03
+    },
+    image: {
         width: '100%',
+        height: '100%',
+        resizeMode: 'contain'
+    },
+    welcomeTextContainer: {
+        marginBottom: windowHeight * 0.03,
+        width: '85%'
+    },
+    formContainer: {
+        marginBottom: windowHeight * 0.02,
+        alignItems: 'center'
+    },
+    inputContainer: {
+        marginBottom: windowHeight * 0.02
+    },
+    input: {
+        ...globalStyles.formElement, 
+        ...globalStyles.shadow, 
+        marginBottom: windowHeight * 0.01,
+        fontSize: (windowWidth + windowHeight) * 0.012,
+    },
+    loginTextContainer: {
+        marginVertical: windowHeight * 0.01
+    },
+    textContainer: {
+        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
     },
     text: {
-        color: Colors.secondary,
-        fontSize: windowWidth * 0.04
+        color: 'black',
+        fontSize: (windowWidth + windowHeight) * 0.012,
+        textAlign: 'center'
     },
     textUnderline: {
         textDecorationLine: 'underline'
-    }
+    },
+    languagePicker: {
+        position: 'absolute', 
+        right: 0, 
+        top: windowHeight * 0.01
+    },
 });
 
 // Change in navigation options
@@ -191,7 +259,7 @@ const styles = StyleSheet.create({
 MainScreen.navigationOptions = (navData) => {
     return (
         {
-            headerTitle: 'Crowdsourcing'
+            headerShown: false
         }
     );
 };

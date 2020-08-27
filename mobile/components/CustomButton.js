@@ -20,6 +20,8 @@ import {
     Dimensions
 } from 'react-native';
 
+import globalStyles from '../constants/globalStyles';
+
 // Window width and height used for styling purposes
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -46,7 +48,17 @@ const CustomButton = props => {
     // Allows for btn content to be an image or icon
     let buttonContent = <View/>;
     if (typeof props.title === 'string')
-        buttonContent = <Text style={{...styles.buttonText, color: props.textColor}}>{props.title}</Text>;
+        buttonContent = (
+            <Text
+                style={{
+                    ...styles.buttonText,
+                    color: props.textColor,
+                    textDecorationLine: typeof props.underline !== 'undefined' && props.underline=== true ? 'underline' : 'none',
+                    fontWeight: typeof props.bold !== 'undefined' && props.bold=== true ? 'bold' : 'normal'
+                }}
+            >
+                {props.title}
+            </Text>);
     else if (typeof props.title === 'object')
         buttonContent = <View style={{...styles.buttonText, color: props.textColor}}>{props.title}</View>;
 
@@ -54,12 +66,22 @@ const CustomButton = props => {
      * RENDER
      ************************************************/
     return(
-        <View style={styles.buttonContainer}>
-            <ButtonComponent activeOpacity={0.6} onPress={props.onPress}>
-                <View style={{...styles.button, backgroundColor: props.backgroundColor}}>
-                    {buttonContent}
-                </View>
-            </ButtonComponent>
+        <View style={typeof props.shadow !== 'undefined' && props.shadow === true ? globalStyles.shadow : {}}>
+            <View style={{...styles.buttonContainer, ...typeof props.shadow !== 'undefined' && props.shadow === true && Platform.OS === 'android' ? {...globalStyles.shadow, borderWidth:1, borderColor:'#E5E5E5', borderRadius:15} : {}}}>
+                <ButtonComponent activeOpacity={0.6} onPress={props.onPress}>
+                    <View 
+                        style={{
+                            ...styles.button, 
+                            backgroundColor: props.backgroundColor, 
+                            width: typeof props.width !== 'undefined' ? props.width : windowWidth * 0.3, 
+                            height: typeof props.height !== 'undefined' ? props.height : windowHeight * 0.06,
+                            borderRadius: typeof props.borderRadius !== 'undefined' ? props.borderRadius : 15,
+                        }}
+                    >
+                        {buttonContent}
+                    </View>
+                </ButtonComponent>
+            </View>
         </View>
     );
 };
@@ -67,14 +89,12 @@ const CustomButton = props => {
 // Styles
 const styles = StyleSheet.create({
     button: {
-        width: windowWidth * 0.3,
-        height: windowHeight * 0.06,
         justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 20
+        alignItems: 'center'
     },
     buttonText: {
-        fontSize: windowWidth * 0.05
+        fontSize: (windowWidth + windowHeight) * 0.015,
+
     },
     buttonContainer: {
         borderRadius: 10,

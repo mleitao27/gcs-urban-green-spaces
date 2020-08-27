@@ -135,10 +135,11 @@ const LanguagePicker = props => {
 // Styles
 const styles = StyleSheet.create({
     image: {
-        width: windowWidth * 0.15,
-        height: windowWidth * 0.15,
+        width: windowWidth * 0.11,
+        height: windowWidth * 0.11,
         borderWidth: 1,
-        borderRadius: windowHeight
+        borderColor: 'white',
+        borderRadius: (windowHeight + windowWidth)
     }
 });
 

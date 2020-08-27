@@ -5,7 +5,13 @@ import {
     Alert,
     TextInput,
     TouchableWithoutFeedback,
-    Keyboard
+    Keyboard,
+    StyleSheet,
+    Dimensions,
+    Image,
+    Text,
+    SafeAreaView,
+    TouchableOpacity
 } from 'react-native';
 
 import globalStyles from '../constants/globalStyles';
@@ -17,6 +23,10 @@ import CustomButton from '../components/CustomButton';
 import dictionary from '../data/dictionary.json';
 
 import config from '../extension/config';
+
+// Window width and height used for styling purposes
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 /************************************************
  * 
@@ -79,55 +89,145 @@ const RegisterScreen = props => {
             Alert.alert(dictionary[props.navigation.state.params.language].ERROR, dictionary[props.navigation.state.params.language].FIELDS_NOT_FILLED);
         }
     };
-
+    
     /************************************************
      * RENDER
      ************************************************/
     return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-            <View style={globalStyles.screen}>
-                <View style={globalStyles.formContainer}>
-                    <TextInput
-                        style={globalStyles.formElement}
-                        placeholder={dictionary[props.navigation.state.params.language].NAME}
-                        placeholderTextColor={Colors.secondary}
-                        value={name}
-                        onChangeText={nameInputHandler}
-                    />
-                    <TextInput
-                        style={globalStyles.formElement}
-                        placeholder={dictionary[props.navigation.state.params.language].EMAIL}
-                        placeholderTextColor={Colors.secondary}
-                        value={email}
-                        onChangeText={emailInputHandler}
-                    />
-                    <TextInput
-                        style={globalStyles.formElement}
-                        placeholder={dictionary[props.navigation.state.params.language].PASSWORD}
-                        placeholderTextColor={Colors.secondary}
-                        value={password}
-                        onChangeText={passwordInputHandler}
-                        secureTextEntry={true}
-                    />
-                    <CustomButton
-                        title={dictionary[props.navigation.state.params.language].REGISTER}
-                        onPress={register}
-                        backgroundColor={Colors.secondary}
-                        textColor={Colors.primary}    
-                    />
-                    <OAuthButtons method={'register'} navigation={props.navigation} language={props.navigation.state.params.language}/>
+        <SafeAreaView style={globalStyles.androidSafeArea}>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <View style={styles.container}>
+                    
+                    <TouchableOpacity onPress={() => props.navigation.pop()} style={globalStyles.backButton}>
+                        <Image style={styles.image} source={require('../assets/back_btn.png')} />
+                    </TouchableOpacity>
+
+                    <View style={styles.imageContainer}>
+                        <Image style={styles.image} source={require('../assets/landing_logo.png')} />
+                    </View>
+
+                    <View style={styles.oauthContainer}>
+                        <OAuthButtons method={'register'} navigation={props.navigation} language={props.navigation.state.params.language}/>
+                    </View>
+
+                    <View style={styles.lineContainer}>
+                        <Image style={styles.image} source={require('../assets/register_line.png')} />
+                        <Text style={{...styles.text, ...styles.orText}}>{dictionary[props.navigation.state.params.language].OR}</Text>
+                    </View>
+
+                    <View style={styles.textContainer}>
+                        <Text style={styles.text}>{dictionary[props.navigation.state.params.language].SIGN_UP}</Text>
+                    </View>
+
+                    <View style={styles.formContainer}>
+                        <View>
+                            <TextInput
+                                style={styles.input}
+                                placeholder={dictionary[props.navigation.state.params.language].NAME}
+                                placeholderTextColor={Colors.secondary}
+                                value={name}
+                                onChangeText={nameInputHandler}
+                            />
+                            <TextInput
+                                style={styles.input}
+                                placeholder={dictionary[props.navigation.state.params.language].EMAIL}
+                                placeholderTextColor={Colors.secondary}
+                                value={email}
+                                onChangeText={emailInputHandler}
+                            />
+                            <TextInput
+                                style={styles.input}
+                                placeholder={dictionary[props.navigation.state.params.language].PASSWORD}
+                                placeholderTextColor={Colors.secondary}
+                                value={password}
+                                onChangeText={passwordInputHandler}
+                                secureTextEntry={true}
+                            />
+                        </View>
+
+                        <View style={styles.registerButtonContainer}>
+                            <CustomButton
+                                title={dictionary[props.navigation.state.params.language].REGISTER}
+                                onPress={register}
+                                backgroundColor={Colors.primary}
+                                textColor={'white'}
+                                borderRadius={10}    
+                            />
+                        </View>
+
+                    </View>
                 </View>
-            </View>
-        </TouchableWithoutFeedback>
+
+            </TouchableWithoutFeedback>
+        </SafeAreaView>
     );
 };
+
+const styles= StyleSheet.create({
+    container: {
+        ...globalStyles.screen,
+        justifyContent: 'flex-start'
+    },
+    input: {
+        ...globalStyles.formElement, 
+        ...globalStyles.shadow, 
+        marginBottom: windowHeight * 0.03,
+        fontSize: (windowWidth + windowHeight) * 0.012,
+    },
+    imageContainer: {
+        width: (windowHeight + windowWidth) * 0.20,
+        height: (windowHeight + windowWidth) * 0.10,
+        marginVertical: windowHeight * 0.03
+    },
+    lineContainer: {
+        width: windowWidth * 0.85,
+        height: (windowHeight + windowWidth) * 0.01,
+        marginVertical: windowHeight * 0.03,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'contain'
+    },
+    textContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: windowHeight * 0.02,
+    },
+    text: {
+        color: 'black',
+        fontSize: (windowWidth + windowHeight) * 0.012,
+        textAlign: 'center',
+        fontWeight: 'bold'
+    },
+    oauthContainer: {
+        width:windowWidth * 0.85, 
+        marginBottom: windowHeight * 0.01
+    },
+    orText: {
+        position: 'absolute', 
+        fontWeight: 'normal'
+    },
+    formContainer: {
+        flex:1,
+        justifyContent: 'space-between', 
+        alignItems: 'center'
+    },
+    registerButtonContainer: {
+        flex: 1, 
+        justifyContent: 'center'
+    }
+});
 
 // Change in navigation options
 // To change the screen's header title
 RegisterScreen.navigationOptions = (navData) => {
     return (
         {
-            headerTitle: dictionary[navData.navigation.state.params.language].REGISTER
+            headerShown: false
         }
     );
 };

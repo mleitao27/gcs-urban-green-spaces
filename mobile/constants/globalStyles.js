@@ -21,31 +21,44 @@ const globalStyles = StyleSheet.create({
     screen: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
-    },
-    formContainer: {
-        marginVertical: windowHeight * 0.05,
-        paddingVertical: windowHeight * 0.05,
-        justifyContent: 'space-between',
         alignItems: 'center',
-        width: windowWidth * 0.7,
-        height: windowHeight * 0.6,
-        borderRadius: 20,
-        backgroundColor: Colors.primary,
-        alignItems: "center"
+        width: '100%',
+        height: '100%',
     },
     formElement: {
-        borderWidth: 1,
-        borderRadius: 25,
-        borderColor: Colors.secondary,
-        width: windowWidth * 0.55,
-        height: windowHeight * 0.06,
         padding: 10,
-        color: 'white'
+        color: Colors.primary,
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: 'white',
+        width: windowWidth * 0.85,
+        height: windowHeight * 0.06,
+        backgroundColor: 'white',
     },
     title: {
         color: Colors.primary,
         fontSize: windowWidth * 0.1
+    },
+    androidSafeArea: {
+        flex: 1,
+        paddingTop: Platform.OS === 'android' ? windowHeight*0.05 : 0
+    },
+    shadow: { 
+        shadowColor: '#E5E5E5',
+        shadowOffset: {
+            width: -5,
+            height: 10,
+        },
+        shadowRadius: 3,
+        shadowOpacity: 0.5,
+        elevation: 3,
+    },
+    backButton: {
+        width: (windowHeight + windowWidth) * 0.02,
+        height: (windowHeight + windowWidth) * 0.02,
+        position: 'absolute', 
+        left: (windowHeight + windowWidth) * 0.015, 
+        top: (windowHeight + windowWidth) * 0.01
     }
 });
 
