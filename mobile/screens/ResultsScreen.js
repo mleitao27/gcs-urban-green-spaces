@@ -10,6 +10,13 @@
 import React from 'react';
 import dictionary from '../data/dictionary.json';
 import ResultsScreenExtension from '../extension/ResultsScreenExtension';
+import { SafeAreaView, Dimensions, View, StyleSheet } from 'react-native';
+import globalStyles from '../constants/globalStyles';
+import BackButton from '../components/BackButton.js';
+
+// Window width and height used for styling purposes
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 /************************************************
  * 
@@ -21,17 +28,38 @@ const ResultsScreen = props => {
      * RENDER
     ************************************************/
     // Renders the results screen component from the extension
+   /*return (
+        <SafeAreaView style={globalStyles.androidSafeArea}>
+            <View style={styles.container}>
+                <BackButton onPress={() => props.navigation.pop()}/>
+                <ResultsScreenExtension navigation={props.navigation} />
+            </View>
+        </SafeAreaView>
+    );*/
+
     return (
-        <ResultsScreenExtension navigation={props.navigation} />
+        <SafeAreaView style={globalStyles.androidSafeArea}>
+            <View style={styles.container}>
+                <ResultsScreenExtension navigation={props.navigation} />
+            </View>
+        </SafeAreaView>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        ...globalStyles.screen,
+        justifyContent: 'flex-start'
+    },
+});
 
 // Change in navigation options
 // To change the screen's header title
 ResultsScreen.navigationOptions = (navData) => {
     return (
         {
-            headerTitle: dictionary[navData.navigation.state.params.language].RESULTS
+            headerTitle: dictionary[navData.navigation.state.params.language].RESULTS,
+            headerShown: false
         }
     );
 };
