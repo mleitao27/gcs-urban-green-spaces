@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { View, ScrollView, Text, StyleSheet, Dimensions, TouchableOpacity, Image, SafeAreaView } from 'react-native';
 
 import CustomImage from '../components/CustomImage';
-import CustomButton from '../../components/CustomButton';
 
 import IconFA5 from 'react-native-vector-icons/FontAwesome5';
 import config from '../config';
 
 import strings from '../strings.json';
 import dictionary from '../dictionaryExtension.json';
+import BackButton from '../../components/BackButton';
+
+// Window width and height used for styling purposes
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const ResultsDetails = props => {
 
@@ -98,80 +102,74 @@ const ResultsDetails = props => {
     let feelingContent = getFeelingIcon(feeling);
 
     return (
-            <ScrollView style={styles.container}>
-            <View style={styles.marginBottom}>
-                <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_ABOUT_UGS}:</Text>
-                {aboutUGSContent}
-            </View>
+        <ScrollView style={styles.container}>
+            <BackButton onPress={props.onExit} />
+            <View style={{paddingTop: Dimensions.get('window').height*0.07, paddingHorizontal:(windowHeight + windowWidth) * 0.015, }}>
+                    <View style={styles.marginBottom}>
+                        <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_ABOUT_UGS}:</Text>
+                        {aboutUGSContent}
+                    </View>
 
-            <View style={styles.marginBottom}>
-                <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_ANIMAL}:</Text>
-                <View style={styles.imageContainer}>
-                    {animal.filter(value => value !== 'other').map(d => {
-                        return <CustomImage key={d} imageLink={d} style={styles.image}/>;
-                    })}
-                </View>
-                {otherAnimalContent}
-            </View>
+                    <View style={styles.marginBottom}>
+                        <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_ANIMAL}:</Text>
+                        <View style={styles.imageContainer}>
+                            {animal.filter(value => value !== 'other').map(d => {
+                                return <CustomImage key={d} imageLink={d} style={styles.image}/>;
+                            })}
+                        </View>
+                        {otherAnimalContent}
+                    </View>
 
-            <View style={styles.marginBottom}>
-                <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_VEGETATION}:</Text>
-                <View style={styles.imageContainer}>
-                    {vegetation.filter(value => value !== 'other').map(d => {
-                        return <CustomImage key={d} imageLink={d} style={styles.image}/>;
-                    })}
-                </View>
-                {otherVegetationContent}
-            </View>
+                    <View style={styles.marginBottom}>
+                        <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_VEGETATION}:</Text>
+                        <View style={styles.imageContainer}>
+                            {vegetation.filter(value => value !== 'other').map(d => {
+                                return <CustomImage key={d} imageLink={d} style={styles.image}/>;
+                            })}
+                        </View>
+                        {otherVegetationContent}
+                    </View>
 
-            <View style={styles.marginBottom}>
-                <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_MANMADE}:</Text>
-                <View style={styles.imageContainer}>
-                    {manmade.filter(value => value !== 'other').map(d => {
-                        return <CustomImage key={d} imageLink={d} style={styles.image}/>;
-                    })}
-                </View>
-                {otherManmadeContent}
-            </View>
-            
-            <View style={styles.marginBottom}>
-                {otherMotivationContent}
-            </View>
+                    <View style={styles.marginBottom}>
+                        <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_MANMADE}:</Text>
+                        <View style={styles.imageContainer}>
+                            {manmade.filter(value => value !== 'other').map(d => {
+                                return <CustomImage key={d} imageLink={d} style={styles.image}/>;
+                            })}
+                        </View>
+                        {otherManmadeContent}
+                    </View>
+                    
+                    <View style={styles.marginBottom}>
+                        {otherMotivationContent}
+                    </View>
 
-            <View style={styles.marginBottom}>
-                <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_FEELING}:</Text>
-                {feelingContent}
+                    <View style={styles.marginBottom}>
+                        <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_FEELING}:</Text>
+                        {feelingContent}
+                    </View>
             </View>
-           
-           <View style={styles.btnContainer}>
-                <CustomButton
-                    title='Back'
-                    onPress={props.onExit}
-                    backgroundColor={Colors.primary}
-                    textColor={Colors.secondary}
-                />
-           </View>
-           </ScrollView>
+        </ScrollView>
     );
 };
 
 const styles= StyleSheet.create({
     container: {
         flex:1,
-        paddingHorizontal: Dimensions.get('window').width*0.02
+        width: '100%'
     },
     image: {
-        height: Dimensions.get('window').width*0.15,
-        width: Dimensions.get('window').width*0.15,
-        marginRight: Dimensions.get('window').width*0.05
+        height: windowWidth*0.15,
+        width: windowWidth*0.15,
+        marginRight: windowWidth*0.05
     },
     imageContainer: {
         flexDirection: 'row'
     },
     iconContainer: {
-        borderRadius: Dimensions.get('window').height,
+        borderRadius: windowHeight,
         overflow: 'hidden',
-        width: Dimensions.get('window').width*0.15
+        width: windowWidth*0.15
     },
     laughContainer: {
         backgroundColor: '#55d006'
@@ -190,17 +188,13 @@ const styles= StyleSheet.create({
     },
     title: {
         fontSize: 18,
-        marginBottom: Dimensions.get('window').height*0.01
+        marginBottom: windowHeight*0.01
     },
     text: {
         fontSize: 16
     },
-    btnContainer: {
-        alignItems: 'center',
-        marginBottom: Dimensions.get('window').height*0.02
-    },
     marginBottom: {
-        marginBottom: Dimensions.get('window').height*0.02
+        marginBottom: windowHeight*0.02,
     }
 });
 

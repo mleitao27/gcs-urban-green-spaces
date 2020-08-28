@@ -4,6 +4,11 @@ import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Image } from 'rea
 import config from '../config';
 
 import strings from '../strings.json';
+import globalStyles from '../../constants/globalStyles';
+
+// Window width and height used for styling purposes
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const MarkerItem = props => {
 
@@ -56,7 +61,7 @@ const MarkerItem = props => {
     
     return (
         <View style={styles.center}>
-            <TouchableOpacity style={styles.container} onPress={props.onPress.bind(this, props.data[1])}>
+            <TouchableOpacity style={{...globalStyles.shadow, ...styles.container}} onPress={props.onPress.bind(this, props.data[1])}>
                 {BackgroundComponent}
                 <View style={styles.contentContainer}>
                     <Text style={styles.title}>{props.data[0]}</Text>
@@ -68,21 +73,17 @@ const MarkerItem = props => {
 
 const styles = StyleSheet.create({
     container: {
-        borderWidth: 1,
-        borderColor: Colors.secondary,
-        borderRadius: 20,
         flex: 1,
-        width: '75%',
-        height: Dimensions.get('window').height * 0.2,
-        backgroundColor: Colors.secondary,
-        marginVertical: Dimensions.get('window').height * 0.03,
-        overflow: 'hidden',
+        width: '85%',
+        height: windowHeight * 0.2,
+        backgroundColor: 'white',
+        marginVertical: windowHeight * 0.02,
         alignItems: 'center',
         justifyContent: 'center'
     },
     contentContainer: {
-        paddingHorizontal: Dimensions.get('window').width * 0.05,
-        paddingVertical: Dimensions.get('window').height * 0.02,
+        paddingHorizontal: windowWidth * 0.05,
+        paddingVertical: windowHeight * 0.02,
     },
     backgroundImage: {
         width: '100%',

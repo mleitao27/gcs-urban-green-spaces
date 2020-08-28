@@ -8,6 +8,10 @@ import MarkerDetails from './MarkerDetails';
 
 import dictionary from '../dictionaryExtension.json';
 
+// Window width and height used for styling purposes
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
 const ResultsMapScreen = props => {
 
     const [markers, setMarkers] = useState(null);
@@ -45,10 +49,12 @@ const ResultsMapScreen = props => {
     const showDetailedMarkers = (data) => {
         setDetailsData(data);
         setDetails(true);
+        props.onDetail(true);
     };
 
     const exitDetailedMarkers = () => {
         setDetails(false);
+        props.onDetail(false);
     };
 
     let content = <View><Text>Loading Results...</Text></View>;
@@ -85,11 +91,11 @@ const styles = StyleSheet.create({
         flex: 1
     },
     textContainer: {
-        alignItems: 'center',
-        marginTop: Dimensions.get('window').height * 0.03
+        marginTop: windowHeight * 0.01,
+        marginLeft: windowWidth * 0.03,
     },
     title: {
-        fontSize: 36
+        fontSize: 24
     }
 });
 

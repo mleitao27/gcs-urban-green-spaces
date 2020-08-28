@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, Dimensions } from 'react-native';
 
 import CustomImage from './CustomImage';
 
+import weatherDictionary from '../weatherDictionary.json';
+
 const SensorsData = props => {
 
     const metricName = (metric) => {
@@ -50,7 +52,7 @@ const SensorsData = props => {
             {googleContent}
 
             <View style={styles.weatherContainer}>
-                <CustomImage imageLink={props.form.form.weather.description.replace(' ', '')} style={styles.weatherIcon} />
+                <CustomImage imageLink={weatherDictionary[props.form.form.weather.description]} style={styles.weatherIcon} />
                 <Text style={styles.title}>{Math.round(props.form.form.weather.temp-273)}ºC</Text>
             </View>
 

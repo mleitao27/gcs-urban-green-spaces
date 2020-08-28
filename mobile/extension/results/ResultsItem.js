@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, Dimensions, TouchableOpacity, ImageBackground, Image } from 'react-native';
 
-import Colors from '../../constants/colors';
-
 import CustomImage from '../components/CustomImage';
 
 import config from '../config';
 
 import strings from '../strings.json';
 import dictionary from '../dictionaryExtension.json';
+import globalStyles from '../../constants/globalStyles';
+
+import weatherDictionary from '../weatherDictionary.json';
+
+// Window width and height used for styling purposes
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const ResultsItem = props => {
 
@@ -79,7 +84,7 @@ const ResultsItem = props => {
             );
 
         content = (
-            <TouchableOpacity style={styles.container} onPress={props.onPress.bind(this, props.data.data)}>
+            <TouchableOpacity style={{...globalStyles.shadow, ...styles.container}} onPress={props.onPress.bind(this, props.data.data)}>
                 {BackgroundComponent}
                 <View style={styles.contentContainer}>
                     <View style={styles.timePlaceAndWeather}>
@@ -89,7 +94,7 @@ const ResultsItem = props => {
                             <Text>{hours}h{minutes}m</Text>
                         </View>
                         <View>
-                            <CustomImage imageLink={weather.replace(' ', '')} style={styles.motivationIcon} />
+                            <CustomImage imageLink={weatherDictionary[weather]} style={styles.motivationIcon} />
                             <Text>{Math.round(temp-273)}ºC</Text>
                         </View>
                     </View>
@@ -113,20 +118,16 @@ const ResultsItem = props => {
 
 const styles = StyleSheet.create({
     container: {
-        borderWidth: 1,
-        borderColor: Colors.secondary,
-        borderRadius: 20,
         flex: 1,
-        width: '75%',
-        height: Dimensions.get('window').height * 0.2,
-        backgroundColor: Colors.secondary,
-        marginVertical: Dimensions.get('window').height * 0.03,
+        width: '85%',
+        height: windowHeight * 0.2,
+        backgroundColor: 'white',
+        marginVertical: windowHeight * 0.02,
         justifyContent: 'space-between',
-        overflow: 'hidden'
     },
     contentContainer: {
-        paddingHorizontal: Dimensions.get('window').width * 0.05,
-        paddingVertical: Dimensions.get('window').height * 0.02,
+        paddingHorizontal: windowWidth * 0.05,
+        paddingVertical: windowHeight * 0.02,
     },
     backgroundImage: {
         width: '100%',
@@ -138,16 +139,16 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: Dimensions.get('window').height*0.02
+        marginBottom: windowHeight * 0.02
     },
     motivation: {
         flexDirection: 'row',
         width: '100%'
     },
     motivationIcon: {
-        height: Dimensions.get('window').width*0.07,
-        width: Dimensions.get('window').width*0.07,
-        marginRight: Dimensions.get('window').width*0.04
+        height: windowWidth * 0.07,
+        width: windowWidth * 0.07,
+        marginRight: windowWidth * 0.04
     },
     title: {
         fontSize: 16,
