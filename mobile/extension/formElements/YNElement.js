@@ -9,7 +9,11 @@ import {
 import Colors from '../../constants/colors';
 import CustomButton from '../../components/CustomButton';
 
-import IconAD from 'react-native-vector-icons/AntDesign';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+// Window width and height used for styling purposes
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const YNElement = props => {
     
@@ -22,16 +26,22 @@ const YNElement = props => {
             <Text style={styles.title}>{props.props.name}</Text>
             <View style={styles.btnContainer}>
                 <CustomButton
-                    title={<IconAD name={'like2'} size={Dimensions.get('window').width*0.1} color={Colors.primary}/>}
+                    title={<MaterialCommunityIcons name={'heart-outline'} size={Dimensions.get('window').width*0.1} color={Colors.primary}/>}
                     onPress={answer.bind(this, true)}
-                    backgroundColor={'#0F9D58'}
+                    backgroundColor={'#81BD8F'}
                     textColor={Colors.secondary}
+                    borderRadius={(windowHeight + windowWidth)}
+                    width={windowWidth*0.4}
+                    height={windowHeight*0.05}
                 />
                 <CustomButton
-                    title={<IconAD name={'dislike2'} size={Dimensions.get('window').width*0.1} color={Colors.primary}/>}
+                    title={<MaterialCommunityIcons name={'heart-broken-outline'} size={Dimensions.get('window').width*0.1} color={Colors.primary}/>}
                     onPress={answer.bind(this, false)}
-                    backgroundColor={'#DB4437'}
+                    backgroundColor={'#E84857'}
                     textColor={Colors.secondary}
+                    borderRadius={(windowHeight + windowWidth)}
+                    width={windowWidth*0.4}
+                    height={windowHeight*0.05}
                 />
             </View>
         </View>

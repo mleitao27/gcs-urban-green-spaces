@@ -157,17 +157,12 @@ const SurveyMapScreen = props => {
                     >
                         <View style={styles.markerContainer}>
                             <Image
-                                source={{uri:`${config.serverURL}/public/marker1.png`}}
-                                style={{flex:1, tintColor: 'white', position: 'absolute', width: Dimensions.get('window').width*0.11,
-                                height: Dimensions.get('window').width*0.11}}
+                                source={{uri:`${config.serverURL}/public/marker.png`}}
+                                style={{width: '77%', height: '100%', tintColor: marker.color}}
                             />
                             <Image
                                 source={{uri:marker.imageLink}}
                                 style={styles.markerIcon}
-                            />
-                            <Image
-                                source={{uri:`${config.serverURL}/public/marker.png`}}
-                                style={{flex:1, tintColor: marker.color}}
                             />
                         </View>
                     </Marker>
@@ -233,13 +228,13 @@ const styles = StyleSheet.create({
         height: Dimensions.get('window').width*0.11
     },
     markerIcon: {
-        backgroundColor: 'white',
         overflow: 'hidden',
-        width: Dimensions.get('window').width*0.03, 
-        height: Dimensions.get('window').width*0.03,
+        width: Dimensions.get('window').width*0.04, 
+        height: Dimensions.get('window').width*0.04,
         position: 'absolute',
-        top:Dimensions.get('window').width*0.025,
-        left:Dimensions.get('window').width*0.04
+        top:Dimensions.get('window').width*0.02,
+        left:Dimensions.get('window').width*0.025,
+        tintColor: 'white'
     },
     mapTypeBtn: {
         position: 'absolute', 

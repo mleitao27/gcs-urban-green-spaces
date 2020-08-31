@@ -38,11 +38,7 @@ const ResultsScreen = props => {
     );*/
 
     return (
-        <SafeAreaView style={globalStyles.androidSafeArea}>
-            <View style={styles.container}>
-                <ResultsScreenExtension navigation={props.navigation} />
-            </View>
-        </SafeAreaView>
+        <ResultsScreenExtension navigation={props.navigation} />
     );
 };
 
@@ -59,7 +55,6 @@ ResultsScreen.navigationOptions = (navData) => {
     return (
         {
             headerTitle: dictionary[navData.navigation.state.params.language].RESULTS,
-            headerShown: false
         }
     );
 };

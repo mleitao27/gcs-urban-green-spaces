@@ -31,19 +31,17 @@ const ResultsScreenExtension = props => {
     if (mode === 'form') content = <ResultsFormScreen onDetail={onDetail} navigation={props.navigation} />;
     else if (mode === 'map') content = <ResultsMapScreen onDetail={onDetail} navigation={props.navigation} />;
 
-    let buttonContent = <View/>;
-    if (detail === false)
-        buttonContent = (
-            <View style={styles.btnContainer}>
-                <TouchableOpacity style={{...styles.iconContainer, ...{backgroundColor: mode === 'form' ? 'black' : Colors.primary}}} onPress={() => setMode('form')}>
-                    <Ionicons name="md-paper" size={24} color={'white'} />
-                </TouchableOpacity>
-                <TouchableOpacity style={{...styles.iconContainer, ...{backgroundColor: mode === 'map' ? 'black' : Colors.primary}}} onPress={() => setMode('map')}>
-                    <FontAwesome5 name="map-marked-alt" size={24} color={'white'} />
-                </TouchableOpacity>
-            </View>
-        );
-    
+    let buttonContent = (
+        <View style={styles.btnContainer}>
+            <TouchableOpacity style={{...styles.iconContainer, ...{backgroundColor: mode === 'form' ? 'black' : Colors.primary}}} onPress={() => setMode('form')}>
+                <Ionicons name="md-paper" size={24} color={'white'} />
+            </TouchableOpacity>
+            <TouchableOpacity style={{...styles.iconContainer, ...{backgroundColor: mode === 'map' ? 'black' : Colors.primary}}} onPress={() => setMode('map')}>
+                <FontAwesome5 name="map-marked-alt" size={24} color={'white'} />
+            </TouchableOpacity>
+        </View>
+    );
+
     return (
         <View style={styles.container}>
             {buttonContent}

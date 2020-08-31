@@ -28,11 +28,11 @@ const SurveyScreenExtension = props => {
     return (
         <View style={styles.container}>
             <View style={styles.btnContainer}>
-                <TouchableOpacity style={{...styles.iconContainer, ...{backgroundColor: mode === 'form' ? Colors.primary : Colors.secondary}}} onPress={() => setMode('form')}>
-                    <Ionicons name="md-paper" size={24} color={mode === 'form' ? Colors.secondary : Colors.primary} />
+                <TouchableOpacity style={{...styles.iconContainer, ...{backgroundColor: mode === 'form' ? 'black' : Colors.primary}}} onPress={() => setMode('form')}>
+                    <Ionicons name="md-paper" size={24} color={'white'} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{...styles.iconContainer, ...{backgroundColor: mode === 'map' ? Colors.primary : Colors.secondary}}} onPress={() => setMode('map')}>
-                    <Ionicons name="md-map" size={24} color={mode === 'map' ? Colors.secondary : Colors.primary} />
+                <TouchableOpacity style={{...styles.iconContainer, ...{backgroundColor: mode === 'map' ? 'black' : Colors.primary}}} onPress={() => setMode('map')}>
+                    <Ionicons name="md-map" size={24} color={'white'} />
                 </TouchableOpacity>
             </View>
             {content}

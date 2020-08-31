@@ -6,7 +6,7 @@ var cache = require('../modules/cache');
 var config = require('./config');
 var strings = require('./strings').strings;
 
-var surveysArray = require('./surveysArray').surveysArray;
+var surveysArray = require('./surveys/surveysArray').surveysArray;
 
 const getProfile = (req, res) => {
     cache.get(req.body.email)

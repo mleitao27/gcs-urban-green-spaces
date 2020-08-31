@@ -40,9 +40,9 @@ const PickerElement = props => {
             {
                 props.props.markers.map(marker => {
                     return (
-                        <TouchableOpacity key={marker.value} style={styles.item} onPress={pick.bind(this, marker.value, marker.imageLink, marker.color)}>
+                        <TouchableOpacity key={marker.value} style={{...styles.item, backgroundColor: marker.color}} onPress={pick.bind(this, marker.value, marker.imageLink, marker.color)}>
                             <Text style={styles.text}>{marker.label}</Text>
-                            <Image style={{...styles.image, ...{tintColor:marker.color}}} source={{uri: marker.imageLink}} />
+                            <Image style={styles.image} source={{uri: marker.imageLink}} />
                         </TouchableOpacity>
                     )
                 })
@@ -56,25 +56,30 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        paddingHorizontal: Dimensions.get('window').width * 0.02
+        paddingHorizontal: Dimensions.get('window').width * 0.02,
     },
     title: {
         fontSize: 18,
         marginBottom: Dimensions.get('window').height * 0.02
     },
     item: {
-        height: Dimensions.get('window').height * 0.05,
+        height: Dimensions.get('window').height * 0.066,
         justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        borderRadius: Dimensions.get('window').height,
+        paddingHorizontal: Dimensions.get('window').width*0.02,
+        marginVertical: Dimensions.get('window').height*0.01
     },
     image: {
         width: Dimensions.get('window').width*0.08,
         height: Dimensions.get('window').width*0.08,
         margin: Dimensions.get('window').width*0.01,
+        tintColor:'white'
     },
     text: {
-        fontSize: 16
+        fontSize: 16,
+        color: 'white'
     }
 });
 

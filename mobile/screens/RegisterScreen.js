@@ -97,10 +97,6 @@ const RegisterScreen = props => {
         <SafeAreaView style={globalStyles.androidSafeArea}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                 <View style={styles.container}>
-                    
-                    <TouchableOpacity onPress={() => props.navigation.pop()} style={globalStyles.backButton}>
-                        <Image style={styles.image} source={require('../assets/back_btn.png')} />
-                    </TouchableOpacity>
 
                     <View style={styles.imageContainer}>
                         <Image style={styles.image} source={require('../assets/landing_logo.png')} />
@@ -227,7 +223,7 @@ const styles= StyleSheet.create({
 RegisterScreen.navigationOptions = (navData) => {
     return (
         {
-            headerShown: false
+            //headerShown: false
         }
     );
 };

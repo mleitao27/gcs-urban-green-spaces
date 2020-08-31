@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, Alert, Dimensions } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Alert, Dimensions, Modal } from 'react-native';
 
 import config from '../config';
 
@@ -7,6 +7,7 @@ import ResultsItem from './ResultsItem';
 import ResultsDetails from './ResultsDetails';
 
 import dictionary from '../dictionaryExtension.json';
+import Colors from '../../constants/colors';
 
 // Window width and height used for styling purposes
 const windowWidth = Dimensions.get('window').width;
@@ -73,14 +74,17 @@ const ResultsFormScreen = props => {
                   />
             </View>
         );
-    if (details === true)
-    content = (
-        <ResultsDetails data={detailsData} onExit={exitDetailedResults} navigation={props.navigation}/>
-    );
 
     return (
         <View style={styles.container}>
             {content}
+            <Modal visible={details} transparent={true} animationType={'fade'}>
+                <View style={styles.modalBackground}>
+                    <View style={styles.modalContainer}>
+                        <ResultsDetails data={detailsData} onExit={exitDetailedResults} navigation={props.navigation}/>
+                    </View>
+                </View>
+            </Modal>
         </View>
     );
 };
@@ -96,7 +100,22 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 24
-    }
+    },
+    modalBackground: {
+        flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    modalContainer: {
+        backgroundColor: 'white',
+        width: Dimensions.get('window').width*0.8,
+        height: Dimensions.get('window').height*0.8,
+        borderRadius: Dimensions.get('window').width*0.05,
+        overflow: 'hidden',
+        borderWidth: 5,
+        borderColor: Colors.primary
+    },
 });
 
 export default ResultsFormScreen;
