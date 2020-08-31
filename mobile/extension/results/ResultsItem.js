@@ -123,11 +123,12 @@ const styles = StyleSheet.create({
         height: windowHeight * 0.2,
         backgroundColor: 'white',
         marginVertical: windowHeight * 0.02,
-        justifyContent: 'space-between',
     },
     contentContainer: {
+        height: windowHeight * 0.2,
         paddingHorizontal: windowWidth * 0.05,
-        paddingVertical: windowHeight * 0.02,
+        paddingVertical: windowHeight * 0.01,
+        justifyContent: 'space-between',
     },
     backgroundImage: {
         width: '100%',
@@ -139,7 +140,6 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: windowHeight * 0.02
     },
     motivation: {
         flexDirection: 'row',

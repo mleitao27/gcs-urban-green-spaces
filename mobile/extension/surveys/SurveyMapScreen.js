@@ -232,8 +232,8 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width*0.04, 
         height: Dimensions.get('window').width*0.04,
         position: 'absolute',
-        top:Dimensions.get('window').width*0.02,
-        left:Dimensions.get('window').width*0.025,
+        top:Dimensions.get('window').width*0.022,
+        left:Dimensions.get('window').width*0.022,
         tintColor: 'white'
     },
     mapTypeBtn: {
