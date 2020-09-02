@@ -102,61 +102,63 @@ const ResultsDetails = props => {
     let feelingContent = getFeelingIcon(feeling);
 
     return (
-        <ScrollView style={styles.container}>
-            <View style={styles.marginBottom}>
-                <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_ABOUT_UGS}:</Text>
-                {aboutUGSContent}
-            </View>
-
-            <View style={styles.marginBottom}>
-                <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_ANIMAL}:</Text>
-                <View style={styles.imageContainer}>
-                    {animal.filter(value => value !== 'other').map(d => {
-                        return <CustomImage key={d} imageLink={d} style={styles.image}/>;
-                    })}
+        <View style={{height: '100%'}}>
+            <ScrollView style={styles.container}>
+                <View style={{...styles.marginBottom, ...styles.marginTop}}>
+                    <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_ABOUT_UGS}:</Text>
+                    {aboutUGSContent}
                 </View>
-                {otherAnimalContent}
-            </View>
 
-            <View style={styles.marginBottom}>
-                <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_VEGETATION}:</Text>
-                <View style={styles.imageContainer}>
-                    {vegetation.filter(value => value !== 'other').map(d => {
-                        return <CustomImage key={d} imageLink={d} style={styles.image}/>;
-                    })}
+                <View style={styles.marginBottom}>
+                    <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_ANIMAL}:</Text>
+                    <View style={styles.imageContainer}>
+                        {animal.filter(value => value !== 'other').map(d => {
+                            return <CustomImage key={d} imageLink={d} style={styles.image}/>;
+                        })}
+                    </View>
+                    {otherAnimalContent}
                 </View>
-                {otherVegetationContent}
-            </View>
 
-            <View style={styles.marginBottom}>
-                <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_MANMADE}:</Text>
-                <View style={styles.imageContainer}>
-                    {manmade.filter(value => value !== 'other').map(d => {
-                        return <CustomImage key={d} imageLink={d} style={styles.image}/>;
-                    })}
+                <View style={styles.marginBottom}>
+                    <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_VEGETATION}:</Text>
+                    <View style={styles.imageContainer}>
+                        {vegetation.filter(value => value !== 'other').map(d => {
+                            return <CustomImage key={d} imageLink={d} style={styles.image}/>;
+                        })}
+                    </View>
+                    {otherVegetationContent}
                 </View>
-                {otherManmadeContent}
-            </View>
+
+                <View style={styles.marginBottom}>
+                    <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_MANMADE}:</Text>
+                    <View style={styles.imageContainer}>
+                        {manmade.filter(value => value !== 'other').map(d => {
+                            return <CustomImage key={d} imageLink={d} style={styles.image}/>;
+                        })}
+                    </View>
+                    {otherManmadeContent}
+                </View>
+                
+                <View style={styles.marginBottom}>
+                    {otherMotivationContent}
+                </View>
+
+                <View style={styles.marginBottom}>
+                    <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_FEELING}:</Text>
+                    {feelingContent}
+                </View>
             
-            <View style={styles.marginBottom}>
-                {otherMotivationContent}
-            </View>
-
-            <View style={styles.marginBottom}>
-                <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_FEELING}:</Text>
-                {feelingContent}
-            </View>
-           
-           <View style={styles.btnContainer}>
-                <CustomButton
-                    title={dictionary[props.navigation.state.params.language].BACK}
-                    onPress={props.onExit}
-                    backgroundColor={'white'}
-                    textColor={'black'}
-                    shadow={true}
-                />
-            </View>
-        </ScrollView>
+            </ScrollView>
+            <View style={styles.btnContainer}>
+                    <CustomButton
+                        title={dictionary[props.navigation.state.params.language].BACK}
+                        onPress={props.onExit}
+                        backgroundColor={'white'}
+                        textColor={'black'}
+                        shadow={true}
+                    />
+                </View>
+        </View>
     );
 };
 
@@ -195,17 +197,21 @@ const styles= StyleSheet.create({
     },
     title: {
         fontSize: 18,
-        marginBottom: Dimensions.get('window').height*0.01
+        marginBottom: Dimensions.get('window').height*0.01,
+        fontWeight: 'bold'
     },
     text: {
         fontSize: 16
     },
     btnContainer: {
         alignItems: 'center',
-        marginBottom: Dimensions.get('window').height*0.02
+        marginVertical: Dimensions.get('window').height*0.01
     },
     marginBottom: {
-        marginBottom: Dimensions.get('window').height*0.02
+        marginBottom: Dimensions.get('window').height*0.04
+    },
+    marginTop: {
+        marginTop: Dimensions.get('window').height*0.05
     },
 });
 

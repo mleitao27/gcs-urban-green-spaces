@@ -77,12 +77,8 @@ const ResultsMapScreen = props => {
     return (
         <View style={styles.container}>
             {content}
-            <Modal visible={details} transparent={true} animationType={'fade'}>
-                <View style={styles.modalBackground}>
-                    <View style={styles.modalContainer}>
-                    <MarkerDetails data={detailsData} onExit={exitDetailedMarkers} navigation={props.navigation}/>
-                    </View>
-                </View>
+            <Modal visible={details} animationType={'fade'}>
+                <MarkerDetails data={detailsData} onExit={exitDetailedMarkers} navigation={props.navigation}/>
             </Modal>
         </View>
     );

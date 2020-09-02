@@ -78,12 +78,8 @@ const ResultsFormScreen = props => {
     return (
         <View style={styles.container}>
             {content}
-            <Modal visible={details} transparent={true} animationType={'fade'}>
-                <View style={styles.modalBackground}>
-                    <View style={styles.modalContainer}>
-                        <ResultsDetails data={detailsData} onExit={exitDetailedResults} navigation={props.navigation}/>
-                    </View>
-                </View>
+            <Modal visible={details} animationType={'fade'}>
+                <ResultsDetails data={detailsData} onExit={exitDetailedResults} navigation={props.navigation}/>
             </Modal>
         </View>
     );

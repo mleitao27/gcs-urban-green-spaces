@@ -12,12 +12,14 @@ const windowHeight = Dimensions.get('window').height;
 
 const MarkerDetails = props => {
     return (
-        <ScrollView style={styles.container}>
-            {props.data.map(d => {
-                return (
-                    <MarkerDetailsItem key={`${d.lat}${d.long}`} marker={d}/>
-                );
-            })}
+        <View style={{height: '100%'}}>
+            <ScrollView style={styles.container}>
+                {props.data.map(d => {
+                    return (
+                        <MarkerDetailsItem key={`${d.lat}${d.long}`} marker={d}/>
+                    );
+                })}
+            </ScrollView>
             <View style={styles.btnContainer}>
                 <CustomButton
                     title={dictionary[props.navigation.state.params.language].BACK}
@@ -27,7 +29,7 @@ const MarkerDetails = props => {
                     shadow={true}
                 />
             </View>
-        </ScrollView>
+        </View>
     );
 };
 
@@ -38,7 +40,10 @@ const styles = StyleSheet.create({
     },
     btnContainer: {
         alignItems: 'center',
-        marginBottom: Dimensions.get('window').height*0.02
+        marginVertical: Dimensions.get('window').height*0.01,
+        position: 'absolute',
+        width: '100%',
+        bottom: 0
     }
 });
 

@@ -24,7 +24,10 @@ const defaultStackNavOptions = {
     headerTitleAlign: 'center',
     headerTintColor: 'black',
     headerBackTitle: 'Back',
-    cardStyle: { backgroundColor: 'white' }
+    cardStyle: { backgroundColor: 'white' },
+    headerTitleStyle: {
+        fontWeight: 'bold',
+      },
 };
 
 /************************************************
