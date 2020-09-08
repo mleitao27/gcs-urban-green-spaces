@@ -27,5 +27,9 @@ router.post('/edit', async (req, res) => {
     profileExtension.editProfile(req, res);
 });
 
+router.post('/editRanking', async (req, res) => {
+    profileExtension.editRanking(req, res);
+});
+
 // Export router
 module.exports = router;

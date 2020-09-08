@@ -1,3 +1,13 @@
+/* 
+ * AdminPage (Component)
+ * Description : Page presented to the administrator user type
+ * Props :
+ * - onLogout: function that changes the login flag 'isLogged' to false if the user is logged out
+ * - isLogged: boolean flag indicating if the user is logged in or not
+ * - adminEmail: email of the administrator logged
+ */
+
+ //Imports
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -5,14 +15,24 @@ import ExpiredSessionPage from './ExpiredSessionPage';
 import UserList from '../components/UserList';
 import config from '../extension/config';
 import MainButton from '../components/MainButton';
-
+/************************************************
+ * 
+ * COMPONENT - Screen
+ * 
+ ************************************************/
 const AdminPage = props => {
 
+    /************************************************
+     * STATES
+     ************************************************/
     // User list state
     const [userList, setUserList] = useState([]);
     // Dummy state to force render
     const [dummyState, setDummyState] = useState(true);
 
+    /************************************************
+     * FUNCTIONS
+    ************************************************/
     // Render user list when button clicked
     const renderUserList = () => {
         // Admin email to send to server
@@ -83,6 +103,10 @@ const AdminPage = props => {
         });
     };
 
+    /************************************************
+     * PRE-RENDER
+     ************************************************/
+
     // Get user list from server
     //after first render, each refresh and admin operation
     useEffect(() => {
@@ -115,7 +139,10 @@ const AdminPage = props => {
 
     if (!props.isLogged)
         content = <ExpiredSessionPage />;
-
+        
+    /************************************************
+     * RENDER
+     ************************************************/
     return (
         <React.Fragment>
             {content}

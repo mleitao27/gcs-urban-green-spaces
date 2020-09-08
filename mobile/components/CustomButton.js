@@ -67,7 +67,7 @@ const CustomButton = props => {
      ************************************************/
     return(
         <View style={typeof props.shadow !== 'undefined' && props.shadow === true ? globalStyles.shadow : {}}>
-            <View style={{backgroundColor: props.backgroundColor, ...styles.buttonContainer, ...typeof props.shadow !== 'undefined' && props.shadow === true && Platform.OS === 'android' ? {...globalStyles.shadow, borderRadius:15} : {}}}>
+            <View style={{...styles.buttonContainer, ...typeof props.shadow !== 'undefined' && props.shadow === true && Platform.OS === 'android' ? {...globalStyles.shadow, borderWidth:1, borderColor:'#E5E5E5', borderRadius:15} : {}}}>
                 <ButtonComponent activeOpacity={0.6} onPress={props.onPress}>
                     <View 
                         style={{

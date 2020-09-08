@@ -62,7 +62,7 @@ const App = props => {
         <Route path='/register' component={RegisterPage} />
         <Route path='/login' render={props => <LoginPage {...props} onLogin={changeLoggedState} isLogged={logged} />} />
         <Route path='/logout' render={props => <LogoutPage {...props} onLogout={changeLoggedState} isLogged={logged} userEmail={userEmail} />} />
-        <Route path='/admin' render={props => <AdminPage {...props} onLogout={changeLoggedState} isLogged={logged} userType={userType} adminEmail={userEmail} />} />
+        <Route path='/admin' render={props => <AdminPage {...props} onLogout={changeLoggedState} isLogged={logged} adminEmail={userEmail} />} />
         <Route path='/researcher' render={props => <ResearcherPage {...props} onLogout={changeLoggedState} isLogged={logged} userEmail={userEmail} />} />
       </div>
     </Router>

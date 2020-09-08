@@ -101,10 +101,6 @@ const ProfileScreenExtension = props => {
             content = (
                 <View style={styles.container}>
                     <View style={styles.textContainer}>
-                        <View style={styles.userContainer}>
-                            <Text style={styles.nameText}>{profile.name} ({profile.type})</Text>
-                            <Text style={styles.emailText}>{profile.email}</Text>
-                        </View>
 
                         <View style={styles.rowContainer}>
                             <Text style={styles.detailText}>{dictionary[props.navigation.state.params.language].PROFILE_BIRTH}: </Text>
@@ -131,22 +127,22 @@ const ProfileScreenExtension = props => {
                             <Text style={styles.text}>{profile.income}</Text>
                         </View>
 
-                        <View>    
+                        <View style={styles.columnContainer}>    
                             <Text style={styles.detailText}>{dictionary[props.navigation.state.params.language].PROFILE_FREQUENCY}: </Text>
                             <Text style={styles.text}>{profile.frequency}</Text>
                         </View>
 
-                        <View>    
+                        <View style={styles.columnContainer}>    
                             <Text style={styles.detailText}>{dictionary[props.navigation.state.params.language].PROFILE_TIMEOFDAY}: </Text>
                             <Text style={styles.text}>{profile.timeofday}</Text>
                         </View>
 
-                        <View>    
+                        <View style={styles.columnContainer}>    
                             <Text style={styles.detailText}>{dictionary[props.navigation.state.params.language].PROFILE_TIMEOFWEEK}: </Text>
                             <Text style={styles.text}>{profile.timeofweek}</Text>
                         </View>
 
-                        <View>    
+                        <View style={styles.columnContainer}>    
                             <Text style={styles.detailText}>{dictionary[props.navigation.state.params.language].PROFILE_TRANSPORTATION}: </Text>
                             <Text style={styles.text}>{profile.transportation}</Text>
                         </View>
@@ -173,7 +169,7 @@ const ProfileScreenExtension = props => {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={{flex: 1, width: '100%',}}>
             {content}
         </View>
     );
@@ -187,7 +183,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: Dimensions.get('window').height*0.01,
         paddingBottom: Dimensions.get('window').height*0.05,
-        paddingHorizontal: Dimensions.get('window').width * 0.02
+        paddingHorizontal: Dimensions.get('window').width * 0.075,
     },
     textContainer: {
         width: '100%'
@@ -198,7 +194,11 @@ const styles = StyleSheet.create({
     rowContainer: {
         flexDirection: 'row',
         alignItems: 'center', 
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        marginVertical: Dimensions.get('window').height*0.01
+    },
+    columnContainer: {
+        marginVertical: Dimensions.get('window').height*0.01
     },
     userContainer: {
         marginBottom: Dimensions.get('window').height*0.03

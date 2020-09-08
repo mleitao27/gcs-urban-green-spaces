@@ -78,6 +78,21 @@ const editProfile = (req, res) => {
     });
 };
 
+const editRanking = (req, res) => {
+    cache.get(req.body.email)
+    .then(async result => {
+
+        const user = await db.getDocument('users', {email: req.body.email});
+
+        let points = typeof user[0].ranking === 'undefined' ? 0 : user[0].ranking;
+        if (user.length > 0) 
+            await db.updateDocument('users', {email: req.body.email}, {ranking: req.body.points + points});
+
+        res.status(200).send();
+    });
+};
+
 exports.getProfile = getProfile;
 exports.editProfileRequest = editProfileRequest;
 exports.editProfile = editProfile;
+exports.editRanking = editRanking;

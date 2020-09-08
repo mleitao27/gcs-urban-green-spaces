@@ -1,12 +1,29 @@
+/* 
+ * LogoutPage (Component)
+ * Description : Page presented when the user logs out
+ * Props :
+ * - onLogout: function that changes the login flag 'isLogged' to false if the user is logged out
+ * - isLogged: boolean flag indicating if the user is logged in or not
+ * - userEmail: email of the user 
+ */
+
+ //Imports
 import React from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
 import config from '../extension/config';
 import MainButton from '../components/MainButton';
-
+/************************************************
+ * 
+ * COMPONENT - Screen
+ * 
+ ************************************************/
 const LogoutPage = props => {
-
+    
+    /************************************************
+     * FUNCTIONS
+    ************************************************/
     // When logout button click
     const logout = () => {
         // Reset session state parameters
@@ -23,6 +40,10 @@ const LogoutPage = props => {
             console.log(error);
         });
     };
+    
+    /************************************************
+     * PRE-RENDER
+     ************************************************/
 
     // Default content with logout button
     let content = <MainButton title='Logout' onClick={logout}/>;
@@ -30,6 +51,9 @@ const LogoutPage = props => {
     // If user not logged redirect to main page
     if (!props.isLogged) content = <Redirect to='/' />;
 
+    /************************************************
+     * RENDER
+     ************************************************/
     return (
         <React.Fragment>
             <div className='centerBox'>

@@ -27,7 +27,7 @@ const defaultStackNavOptions = {
     cardStyle: { backgroundColor: 'white' },
     headerTitleStyle: {
         fontWeight: 'bold',
-      },
+    },
 };
 
 /************************************************

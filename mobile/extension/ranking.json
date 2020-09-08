@@ -1,0 +1,34 @@
+{
+    "ranks": [
+            {
+                "id": "rank0",
+                "min": 0,
+                "max": 100,
+                "name": "Beginner Explorer"
+            },
+            {
+                "id": "rank1",
+                "min": 101,
+                "max": 200,
+                "name": "Amateur Explorer"
+            },
+            {
+                "id": "rank2",
+                "min": 201,
+                "max": 300,
+                "name": "Good Explorer"
+            },
+            {
+                "id": "rank3",
+                "min": 301,
+                "max": 400,
+                "name": "Very Good Explorer"
+            },
+            {
+                "id": "rank4",
+                "min": 401,
+                "max": 500,
+                "name": "Expert Explorer"
+            }
+    ]
+}

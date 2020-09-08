@@ -23,7 +23,7 @@ import SensorsData from '../components/SensorsData';
 
 import config from '../config';
 
-import { Feather } from '@expo/vector-icons'; 
+import { Feather } from '@expo/vector-icons';
 
 const SurveyFormScreen = props => {
 
@@ -108,6 +108,19 @@ const SurveyFormScreen = props => {
         })();
     }, [status]);
 
+    const updateRanking = async (email, points) => {
+        const res = await fetch(`${config.serverURL}/api/profile/editRanking`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                points,
+                email
+            })
+        });
+    };
+
     const submitPhoto = async (data) => {
         let index;
         let base64 = null;
@@ -169,6 +182,7 @@ const SurveyFormScreen = props => {
             // Change this
             if (parseInt(newStatus.status) != 15 && parseInt(newStatus.status) != 1)
                 setLoaded(null);
+            if (parseInt(newStatus.status) === 15) updateRanking(props.navigation.state.params.email, 100);
         }
         else if (res.status === 403) {
             Alert.alert('ERROR', 'Login Timeout.');

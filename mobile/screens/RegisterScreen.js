@@ -182,11 +182,6 @@ const styles= StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    image: {
-        width: '100%',
-        height: '100%',
-        resizeMode: 'contain'
-    },
     textContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
@@ -223,7 +218,7 @@ const styles= StyleSheet.create({
 RegisterScreen.navigationOptions = (navData) => {
     return (
         {
-            //headerShown: false
+            headerTitle: dictionary[navData.navigation.state.params.language].REGISTER
         }
     );
 };

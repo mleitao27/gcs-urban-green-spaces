@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, TextInput, Dimensions } from 'react-native';
 
+import globalStyles from '../../constants/globalStyles';
+
+// Window width and height used for styling purposes
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
 const ZipElement = props => {
 
     const [zip1, setZip1] = useState('');
@@ -36,7 +42,7 @@ const ZipElement = props => {
                 maxLength={4}
                 keyboardType={'numeric'}
             />
-            <Text> - </Text>
+            <Text style={{fontSize: 32,}}>-</Text>
             <TextInput
                 style={{...styles.input, ...styles.zip2}}
                 multiline={false}      // Allows to wrap content in multiple lines
@@ -52,31 +58,36 @@ const ZipElement = props => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingVertical: Dimensions.get('window').height * 0.045
+        paddingVertical: windowHeight * 0.045
     },
     title: {
         fontSize: 18,
-        marginBottom: Dimensions.get('window').height * 0.02
+        marginBottom: windowHeight * 0.02,
+        fontWeight: 'bold'
     },
     zipContainer: {
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        width: '40%',
+        justifyContent: 'space-between'
     },
     input: {
         backgroundColor: 'white',
         textAlignVertical: 'center',
         textAlign: 'center',
         fontSize: 16,
-        paddingVertical: Dimensions.get('window').height * 0.01,
-        paddingHorizontal: Dimensions.get('window').width * 0.02,
-        borderColor: Colors.secondary,
+        paddingVertical: windowHeight * 0.01,
+        paddingHorizontal: windowWidth * 0.02,
         borderWidth: 1,
+        borderColor: 'white',
+        borderRadius: (windowHeight+windowWidth) * 0.01,
+        ...globalStyles.shadow
     },
     zip1: {
-        width: Dimensions.get('window').height * 0.07
+        width: windowHeight * 0.07
     },
     zip2: {
-        width: Dimensions.get('window').height * 0.06
+        width: windowHeight * 0.06
     }
 });
 

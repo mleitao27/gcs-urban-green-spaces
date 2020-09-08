@@ -1,16 +1,33 @@
+/* 
+ * RegisterPage (Component)
+ * Description : Screen used to register a new user
+ */
+
+ //Imports
 import React, { useState } from 'react';
 import OAuthButtons from '../extension/OAuthButtons';
 import axios from 'axios';
 
 import config from '../extension/config';
 
+/************************************************
+ * 
+ * COMPONENT - Screen
+ * 
+ ************************************************/
 const Register = props => {
 
+    /************************************************
+     * STATES
+     ************************************************/
     // States that store user input credentials
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    /************************************************
+     * FUNCTIONS
+    ************************************************/
     // Update credential states
     const changeName = (enteredName) => {
         setName(enteredName.target.value);
@@ -54,6 +71,9 @@ const Register = props => {
 
     };
 
+    /************************************************
+     * RENDER
+     ************************************************/
     return (
         <React.Fragment >
             <div className='formContainer'>

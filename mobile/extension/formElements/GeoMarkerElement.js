@@ -60,7 +60,8 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 18,
-        marginBottom: Dimensions.get('window').height * 0.02
+        marginBottom: Dimensions.get('window').height * 0.02,
+        fontWeight: 'bold'
     },
     item: {
         height: Dimensions.get('window').height * 0.066,
