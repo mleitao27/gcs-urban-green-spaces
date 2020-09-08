@@ -8,8 +8,8 @@ const admin = [
 
 // Database credentials
 const db = {
-    url: 'mongodb://127.0.0.1:27017/crowdsourcing',
-    name: 'crowdsourcing'
+    url: 'mongodb://127.0.0.1:27017/gcs-ugs',
+    name: 'gcs-ugs'
 };
 
 // Set cache timeout in seconds
