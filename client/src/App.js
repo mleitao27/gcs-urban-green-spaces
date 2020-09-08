@@ -13,6 +13,8 @@ import LogoutPage from './pages/LogoutPage';
 import AdminPage from './pages/AdminPage';
 import ResearcherPage from './pages/ResearcherPage';
 
+import config from './extension/config';
+
 const App = props => {
 
   // User session states
@@ -35,7 +37,7 @@ const App = props => {
     const userEmail = localStorage.getItem('userEmail');
     if (userEmail) {
       // Get user session from the server cache
-      axios.get(`http://localhost:3000/${userEmail}`)
+      axios.get(`${serverURL}/${userEmail}`)
       .then(res => {
         // Set state if user in cache
         setLogged(true);

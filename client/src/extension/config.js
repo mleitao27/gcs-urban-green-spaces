@@ -7,7 +7,7 @@ const config = {
             appId: "534270243959641"
         }
     },
-    serverURL: 'http://localhost:3000'
+    serverURL: 'http://3.250.172.139/ugs/server'
 }
 
 export default config;
