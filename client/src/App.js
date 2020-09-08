@@ -37,7 +37,7 @@ const App = props => {
     const userEmail = localStorage.getItem('userEmail');
     if (userEmail) {
       // Get user session from the server cache
-      axios.get(`${serverURL}/${userEmail}`)
+      axios.get(`${config.serverURL}/${userEmail}`)
       .then(res => {
         // Set state if user in cache
         setLogged(true);
