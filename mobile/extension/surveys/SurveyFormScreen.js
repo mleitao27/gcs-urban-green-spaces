@@ -237,6 +237,14 @@ const SurveyFormScreen = props => {
         if (mapType === 'satellite') setMapType('standard');
         else if (mapType === 'standard') setMapType('satellite');
     };
+
+    let mapTypeBtn = <View/>;
+    if (form !== null && form.type === 'base')
+        mapTypeBtn = (
+            <TouchableOpacity style={styles.mapTypeBtn} onPress={changeMapType}>
+                <Feather name="layers" size={24} color="#333333" />
+            </TouchableOpacity>
+        );
     
     return (
         <View style={styles.container}>
@@ -257,9 +265,7 @@ const SurveyFormScreen = props => {
                 >
                 </MapView>
             </View>
-            <TouchableOpacity style={styles.mapTypeBtn} onPress={changeMapType}>
-                <Feather name="layers" size={24} color="#333333" />
-            </TouchableOpacity>
+            {mapTypeBtn}
             {formContent}
         </View>
     );

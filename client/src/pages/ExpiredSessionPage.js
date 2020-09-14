@@ -26,7 +26,7 @@ const ExpiredSessionPage = props => {
     return (           
             <div className='centerBox'>
                 <h1>Sorry, your session expired.</h1>
-                <Link to="/login"><MainButton title='Back to Login Page'/></Link>
+                <Link to="/ugs/client/login"><MainButton title='Back to Login Page'/></Link>
             </div>
     );
 };

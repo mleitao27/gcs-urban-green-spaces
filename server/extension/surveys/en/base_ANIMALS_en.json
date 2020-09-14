@@ -1,7 +1,7 @@
 {
 	"pages": [
 		{
-			"name": "page1",			
+			"name": "page1",
 			"elements": [
 				{
 					"type": "imagepicker",
@@ -9,27 +9,27 @@
 					"choices": [
 						{
 							"value": "bird",
-							"imageLink": "http://3.250.172.139/ugs/server/public/bird.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/bird.png"
 						},
 						{
 							"value": "insect",
-							"imageLink": "http://3.250.172.139/ugs/server/public/insect.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/insect.png"
 						},
 						{
 							"value": "squirrel",
-							"imageLink": "http://3.250.172.139/ugs/server/public/squirrel.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/squirrel.png"
 						},
 						{
 							"value": "lizard",
-							"imageLink": "http://3.250.172.139/ugs/server/public/lizard.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/lizard.png"
 						},
 						{
 							"value": "other",
-							"imageLink": "http://3.250.172.139/ugs/server/public/other.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/other.png"
 						}
 					],
 					"id": "BASE_ANIMAL"
-				}		
+				}
 			]
 		}
 	]

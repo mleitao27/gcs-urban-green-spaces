@@ -22,14 +22,14 @@ const Header = props => {
     // Default content (not logged)
     let content = (
         <React.Fragment>
-            <Link to="/register" style={styles.link}>Register</Link> | <Link to="/login" style={styles.link}>Login</Link>
+            <Link to="/ugs/client/register" style={styles.link}>Register</Link> | <Link to="/ugs/client/login" style={styles.link}>Login</Link>
         </React.Fragment>
     );
 
     // If user is logged
     if (props.isLogged) {
         content = (
-            <Link to="/logout" style={styles.link}>Logout</Link>
+            <Link to="/ugs/client/logout" style={styles.link}>Logout</Link>
         );
     }
     
@@ -39,7 +39,7 @@ const Header = props => {
     return (
         <header style={styles.header}>
             <h1>Crowdsourcing</h1>
-            <Link to="/" style={styles.link}>Home</Link> | {content}
+            <Link to="/ugs/client/" style={styles.link}>Home</Link> | {content}
         </header>
     );
 };

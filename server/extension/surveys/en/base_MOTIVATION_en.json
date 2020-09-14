@@ -9,27 +9,27 @@
 					"choices": [
 						{
 							"value": "meditation",
-							"imageLink": "http://3.250.172.139/ugs/server/public/meditation.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/meditation.png"
 						},
 						{
 							"value": "child",
-							"imageLink": "http://3.250.172.139/ugs/server/public/child.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/child.png"
 						},
 						{
 							"value": "jogging",
-							"imageLink": "http://3.250.172.139/ugs/server/public/jogging.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/jogging.png"
 						},
 						{
 							"value": "group",
-							"imageLink": "http://3.250.172.139/ugs/server/public/group.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/group.png"
 						},
 						{
 							"value": "dog",
-							"imageLink": "http://3.250.172.139/ugs/server/public/dog.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/dog.png"
 						},
 						{
 							"value": "other",
-							"imageLink": "http://3.250.172.139/ugs/server/public/other.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/other.png"
 						}
 					],
 					"id": "BASE_MOTIVATION"

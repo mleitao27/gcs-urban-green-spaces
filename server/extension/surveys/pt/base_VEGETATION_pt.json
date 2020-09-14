@@ -9,23 +9,23 @@
 					"choices": [
 						{
 							"value": "tree",
-							"imageLink": "http://3.250.172.139/ugs/server/public/tree.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/tree.png"
 						},
 						{
 							"value": "bush",
-							"imageLink": "http://3.250.172.139/ugs/server/public/bush.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/bush.png"
 						},
 						{
 							"value": "flower",
-							"imageLink": "http://3.250.172.139/ugs/server/public/flower.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/flower.png"
 						},
 						{
 							"value": "mushroom",
-							"imageLink": "http://3.250.172.139/ugs/server/public/mushroom.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/mushroom.png"
 						},
 						{
 							"value": "other",
-							"imageLink": "http://3.250.172.139/ugs/server/public/outro.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/outro.png"
 						}
 					],
 					"id": "BASE_VEGETATION"

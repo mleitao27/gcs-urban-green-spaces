@@ -9,7 +9,7 @@ const config = {
             appId: "534270243959641"
         }
     },
-    serverURL: 'http://3.250.172.139/ugs/server',
+    serverURL: 'http://146.193.41.162/ugs/server',
     OWMAPIKey: '890df5db881a1a76b5f7ccc04b1a5e0c',
     languages: ['en', 'pt']
 };

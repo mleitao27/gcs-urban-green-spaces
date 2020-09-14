@@ -9,23 +9,23 @@
 					"choices": [
 						{
 							"value": "bench",
-							"imageLink": "http://3.250.172.139/ugs/server/public/bench.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/bench.png"
 						},
 						{
 							"value": "gazebo",
-							"imageLink": "http://3.250.172.139/ugs/server/public/gazebo.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/gazebo.png"
 						},
 						{
 							"value": "swing",
-							"imageLink": "http://3.250.172.139/ugs/server/public/swing.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/swing.png"
 						},
 						{
 							"value": "kiosk",
-							"imageLink": "http://3.250.172.139/ugs/server/public/kiosk.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/kiosk.png"
 						},
 						{
 							"value": "other",
-							"imageLink": "http://3.250.172.139/ugs/server/public/outro.png"
+							"imageLink": "http://146.193.41.162/ugs/server/public/outro.png"
 						}
 					],
 					"id": "BASE_MANMADE"
