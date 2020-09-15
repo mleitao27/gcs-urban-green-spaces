@@ -23,8 +23,29 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "facebookAppId": "534270243959641",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "config": {
+        "googleMapsApiKey": "AIzaSyClOUq1p1IaXqa8ianFhILV6yn9Kwd3dFM"
+      },
+      "bundleIdentifier": "com.gcs.ugs",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.gcs.ugs",
+      "permissions": [
+        "CAMERA",
+        "ACCESS_FINE_LOCATION",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"        
+      ],
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyANE10F9HC3a6AP46bgUEwd1MCGEPObePE"
+        }
+      },  
+      "versionCode": 1
     }
   }
 }
