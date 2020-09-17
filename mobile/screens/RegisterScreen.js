@@ -175,6 +175,11 @@ const styles= StyleSheet.create({
         height: (windowHeight + windowWidth) * 0.10,
         marginVertical: windowHeight * 0.03
     },
+    image: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'contain'
+    },
     lineContainer: {
         width: windowWidth * 0.85,
         height: (windowHeight + windowWidth) * 0.01,
