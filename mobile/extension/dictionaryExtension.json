@@ -28,7 +28,8 @@
         "REGISTER_ERROR": "Something went wrong with the registration.",
         "OTHER": "other",
         "WELCOME": "Generic Crowdsourcing System for Dynamic Evironmental Surveys. To map Urban Green Spaces while assessing urban dewellers preferences within this spaces.",
-        "BACK": "Back"
+        "BACK": "Back",
+        "EDIT": "Edit"
     },
     "pt": {
         "PROFILE_BIRTH": "Data de Nascimento",
@@ -59,6 +60,7 @@
         "REGISTER_ERROR": "Algo correu mal com o registo.",
         "OTHER": "outro",
         "WELCOME": "Sistema Genérico de Crowdsourcing para a criação de Questionários Ambientais Dinâmicos. Para mapear Espaços Verdes Urbanos enquanto se aferem as preferências dos visitantes destes espaços.",
-        "BACK": "Voltar"
+        "BACK": "Voltar",
+        "EDIT": "Editar"
     }
 }

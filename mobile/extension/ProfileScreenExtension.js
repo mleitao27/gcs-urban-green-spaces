@@ -149,7 +149,7 @@ const ProfileScreenExtension = props => {
                     </View>
 
                     <CustomButton
-                        title='Edit'
+                        title={dictionary[props.navigation.state.params.language].EDIT}
                         onPress={editProfile}
                         backgroundColor={Colors.primary}
                         textColor={Colors.secondary}
