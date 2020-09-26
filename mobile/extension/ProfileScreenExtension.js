@@ -95,6 +95,24 @@ const ProfileScreenExtension = props => {
             Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
     };
 
+    let timeofday = '';
+    let transportation = '';
+    if (profile !== null) {
+        if (profile.timeofday.length > 0) {
+            timeofday = profile.timeofday[0];
+            profile.timeofday.map((data, index) => {
+                if(index !== 0) timeofday += `, ${data}`;
+            });
+        }
+
+        if (profile.transportation.length > 0) {
+            transportation = profile.transportation[0];
+            profile.transportation.map((data, index) => {
+                if(index !== 0) transportation += `, ${data}`;
+            });
+        }
+    }
+
     let content = <View style={styles.fallbackTextContainer}><Text style={styles.text}>{dictionary[props.navigation.state.params.language].PROFILE_LOADING}</Text></View>
     if (profile !== null) {
         if (!edit) {
@@ -134,7 +152,7 @@ const ProfileScreenExtension = props => {
 
                         <View style={styles.columnContainer}>    
                             <Text style={styles.detailText}>{dictionary[props.navigation.state.params.language].PROFILE_TIMEOFDAY}: </Text>
-                            <Text style={styles.text}>{profile.timeofday}</Text>
+                            <Text style={styles.text}>{timeofday}</Text>
                         </View>
 
                         <View style={styles.columnContainer}>    
@@ -144,7 +162,7 @@ const ProfileScreenExtension = props => {
 
                         <View style={styles.columnContainer}>    
                             <Text style={styles.detailText}>{dictionary[props.navigation.state.params.language].PROFILE_TRANSPORTATION}: </Text>
-                            <Text style={styles.text}>{profile.transportation}</Text>
+                            <Text style={styles.text}>{transportation}</Text>
                         </View>
                     </View>
 
