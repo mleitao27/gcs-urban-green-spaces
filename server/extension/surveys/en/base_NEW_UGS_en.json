@@ -10,7 +10,7 @@
 				},
 				{
                     "type": "text",
-                    "name": "What is its area?",
+                    "name": "What is its area (in square meters)?",
 					"id": "BASE_NEW_UGS_AREA"
                 },
 				{

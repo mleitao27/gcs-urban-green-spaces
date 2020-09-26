@@ -10,7 +10,7 @@
 				},
 				{
                     "type": "text",
-                    "name": "Qual a sua área?",
+                    "name": "Qual a sua área (em metros quadrados)?",
 					"id": "BASE_NEW_UGS_AREA"
                 },
 				{
