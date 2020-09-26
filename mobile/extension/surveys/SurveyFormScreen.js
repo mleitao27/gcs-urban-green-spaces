@@ -25,6 +25,8 @@ import config from '../config';
 
 import { Feather } from '@expo/vector-icons';
 
+import dictionary from '../dictionaryExtension.json';
+
 const SurveyFormScreen = props => {
 
     // Stat e to store location
@@ -208,7 +210,7 @@ const SurveyFormScreen = props => {
         else 
             formContent = (
                 <ScrollView style={styles.formContainer}>
-                    <Form key={statusKey} json={form.form} extension={FormExtension} onSubmit={onSubmit} showSubmitButton={false} />
+                    <Form key={statusKey} json={form.form} extension={FormExtension} onSubmit={onSubmit} showSubmitButton={false} submitText={dictionary[props.navigation.state.params.language].SUBMIT} />
                 </ScrollView>
             );
     }

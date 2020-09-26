@@ -29,7 +29,8 @@
         "OTHER": "other",
         "WELCOME": "Generic Crowdsourcing System for Dynamic Evironmental Surveys. To map Urban Green Spaces while assessing urban dewellers preferences within this spaces.",
         "BACK": "Back",
-        "EDIT": "Edit"
+        "EDIT": "Edit",
+        "SUBMIT": "Submit"
     },
     "pt": {
         "PROFILE_BIRTH": "Data de Nascimento",
@@ -61,6 +62,7 @@
         "OTHER": "outro",
         "WELCOME": "Sistema Genérico de Crowdsourcing para a criação de Questionários Ambientais Dinâmicos. Para mapear Espaços Verdes Urbanos enquanto se aferem as preferências dos visitantes destes espaços.",
         "BACK": "Voltar",
-        "EDIT": "Editar"
+        "EDIT": "Editar",
+        "SUBMIT": "Submeter"
     }
 }
