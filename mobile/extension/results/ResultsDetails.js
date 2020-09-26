@@ -27,53 +27,53 @@ const ResultsDetails = props => {
 
     let otherAnimalContent = <View/>;
     if (typeof otherAnimal !== 'undefined') {
-        otherAnimal = props.data.find(d => d.id === strings.BASE_ANIMAL_OTHER).value;
+        otherAnimal = props.data.find(d => d.id === strings.BASE_ANIMAL_OTHER);
         otherAnimalContent = (
             <View>
                 <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_ANIMAL_OTHER}:</Text>
-                <Text style={styles.text}>{otherAnimal}</Text>
+                <Text style={styles.text}>{typeof otherAnimal !== 'undefined' ? otherAnimal.value : ''}</Text>
             </View>
         );
     }
     
     let otherVegetationContent = <View />;
     if (typeof otherVegetation !== 'undefined') {
-        otherVegetation = props.data.find(d => d.id === strings.BASE_VEGETATION_OTHER).value;
+        otherVegetation = props.data.find(d => d.id === strings.BASE_VEGETATION_OTHER);
         otherVegetationContent = (
             <View>
                 <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_VEGETATION_OTHER}:</Text>
-                <Text style={styles.text}>{otherVegetation}</Text>
+                <Text style={styles.text}>{typeof otherVegetation !== 'undefined' ? otherVegetation.value : ''}</Text>
             </View>
         );
     }
 
     let otherManmadeContent = <View />;
     if (typeof otherManmade !== 'undefined') {
-        otherManmade = props.data.find(d => d.id === strings.BASE_MANMADE_OTHER).value;
+        otherManmade = props.data.find(d => d.id === strings.BASE_MANMADE_OTHER);
         otherManmadeContent = (
             <View>
                 <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_MANMADE_OTHER}:</Text>
-                <Text style={styles.text}>{otherManmade}</Text>
+                <Text style={styles.text}>{typeof otherManmade !== 'undefined' ? otherManmade.value : ''}</Text>
             </View>
         );
     }
 
     let otherMotivationContent = <View />;
     if (typeof otherMotivation !== 'undefined') {
-        otherMotivation = props.data.find(d => d.id === strings.BASE_MOTIVATION_OTHER).value;
+        otherMotivation = props.data.find(d => d.id === strings.BASE_MOTIVATION_OTHER);
         otherMotivationContent = (
             <View>
                 <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_MOTIVATION_OTHER}:</Text>
-                <Text style={styles.text}>{otherMotivation}</Text>
+                <Text style={styles.text}>{typeof otherMotivation !== 'undefined' ? otherMotivation.value : ''}</Text>
             </View>
         );
     }
 
-    const aboutUGS = props.data.find(d => d.id === strings.BASE_ABOUT_UGS).value;
+    const aboutUGS = props.data.find(d => d.id === strings.BASE_ABOUT_UGS);
     let aboutUGSContent = <View />;
     if (aboutUGS !== '')
         aboutUGSContent = (
-            <Text style={styles.text}>{props.data.find(d => d.id === strings.BASE_ABOUT_UGS).value}</Text>
+            <Text style={styles.text}>{typeof aboutUGS !== 'undefined' ? aboutUGS.value : ''}</Text>
         );
     
     const getFeelingIcon = value => {
@@ -96,7 +96,7 @@ const ResultsDetails = props => {
             </TouchableOpacity>),
         ];
 
-        return feelings[value-1];
+        return typeof value !== 'undefined' ? feelings[value-1] : (<View/>);
     };
     const feeling = props.data.find(d => d.id === strings.BASE_FEELING).value;
     let feelingContent = getFeelingIcon(feeling);
