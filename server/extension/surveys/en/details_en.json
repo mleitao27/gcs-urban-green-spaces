@@ -69,7 +69,7 @@
 					"id": "DETAILS_FREQUENCY"
 				},
 				{
-					"type": "radiogroup",
+					"type": "checkbox",
 					"name": "In which time of the day do you usually visit UGS?",
 					"choices": [
 						"In the morning",
@@ -81,7 +81,7 @@
 				},
 				{
 					"type": "radiogroup",
-					"name": "In which time of the week do you usually visit UGS?",
+					"name": "In which part of the week do you usually visit UGS?",
 					"choices": [
 						"In week days",
 						"In the weekend",
@@ -91,7 +91,7 @@
 					"id": "DETAILS_TIMEOFWEEK"
 				},
 				{
-					"type": "radiogroup",
+					"type": "checkbox",
 					"name": "Which mean of transportation do you use to visit UGS?",
 					"choices": [
 						"On foot",

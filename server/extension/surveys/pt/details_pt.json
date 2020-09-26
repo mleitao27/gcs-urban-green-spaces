@@ -69,7 +69,7 @@
 					"id": "DETAILS_FREQUENCY"
 				},
 				{
-					"type": "radiogroup",
+					"type": "checkbox",
 					"name": "Em que parte do dia normalmente frequenta espaços verdes?",
 					"choices": [
 						"De manhã",
@@ -91,7 +91,7 @@
 					"id": "DETAILS_TIMEOFWEEK"
 				},
 				{
-					"type": "radiogroup",
+					"type": "checkbox",
 					"name": "Que meios de transporte utiliza para chegar aos espaços verdes que visita?",
 					"choices": [
 						"A pé",
