@@ -96,10 +96,11 @@ const ResultsDetails = props => {
             </TouchableOpacity>),
         ];
 
-        return typeof value !== 'undefined' ? feelings[value-1] : (<View/>);
+        return feelings[value-1];
     };
-    const feeling = props.data.find(d => d.id === strings.BASE_FEELING).value;
-    let feelingContent = getFeelingIcon(feeling);
+
+    const feeling = props.data.find(d => d.id === strings.BASE_FEELING);
+    let feelingContent = typeof feeling !== 'undefined' ? getFeelingIcon(feeling) : (<View/>);
 
     return (
         <View style={{height: '100%'}}>
