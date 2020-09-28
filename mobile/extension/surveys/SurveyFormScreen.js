@@ -29,6 +29,10 @@ import dictionary from '../dictionaryExtension.json';
 
 const SurveyFormScreen = props => {
 
+    const [cameraPermission, setCameraPermission] = useState(null);
+    const [cameraRollPermission, setCameraRollPermission] = useState(null);
+    const [locationPermission, setLocationPermission] = useState(null);
+
     // Stat e to store location
     const [location, setLocation] = useState({latitude: 38.726608, longitude: -9.1405415});
     const [locationDelta, setLocationDelta] = useState({latitudeDelta: 0.000922, longitudeDelta: 0.000421});
@@ -50,20 +54,31 @@ const SurveyFormScreen = props => {
 
         let cancel = false;
 
+        // Get all permissions when entering surveys to avoid errors (geocoder not running)
+        const getPermissions = async () => {
+            const permissions = await Permissions.askAsync(Permissions.CAMERA, Permissions.CAMERA_ROLL, Permissions.LOCATION);
+            if (cancel === false) {
+                setCameraPermission(permissions.permissions.camera.status === 'granted');
+                setCameraRollPermission(permissions.permissions.cameraRoll.status === 'granted');
+                setLocationPermission(permissions.permissions.location.status === 'granted');
+            }
+        };
+  
         const getLocationAsync = async () => {
             // Gets permissions
-            let { status } = await Permissions.askAsync(Permissions.LOCATION);
-            if (status !== 'granted') {
+            //let { status } = await Permissions.askAsync(Permissions.LOCATION);
+            if (locationPermission !== 'granted') {
                 setErrorMessage('Permission to access location was denied');
             }
-    
+            
             // Gets coordinates
             let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest });
             const { latitude, longitude } = location.coords;
             //if (cancel === false) setLocation({ latitude, longitude });
             if (cancel === false) setLocation({latitude: latitude, longitude: longitude});
         };
-
+        
+        getPermissions();
         getLocationAsync();
 
         return () => {

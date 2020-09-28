@@ -32,7 +32,7 @@ const GeolocationSensor = props => {
             await getGeocodeAsync({ latitude, longitude });
             if (cancel === false) setLocation({ latitude, longitude });
         };
-    
+        
         // Get geocode
         const getGeocodeAsync = async (location) => {
             let geocode = await Location.reverseGeocodeAsync(location);
