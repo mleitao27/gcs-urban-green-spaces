@@ -60,7 +60,7 @@ const App = props => {
     <Router>
       <div>
         <Header isLogged={logged} />
-        <Route exact path='/ugs/client/' render={props => <LandingPage {...props} isLogged={logged} userType={userType} />} />
+        <Route exact path='/' render={props => <LandingPage {...props} isLogged={logged} userType={userType} />} />
         <Route path='/ugs/client/register' component={RegisterPage} />
         <Route path='/ugs/client/login' render={props => <LoginPage {...props} onLogin={changeLoggedState} isLogged={logged} />} />
         <Route path='/ugs/client/logout' render={props => <LogoutPage {...props} onLogout={changeLoggedState} isLogged={logged} userEmail={userEmail} />} />

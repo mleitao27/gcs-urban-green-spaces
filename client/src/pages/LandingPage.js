@@ -27,13 +27,13 @@ const LandingPage = props => {
      * REDIRECT - ADMINPAGE
      ************************************************/
     // If admin is logged
-    if (props.isLogged && props.userType === 'admin') content = <Redirect to='/admin' />;
+    if (props.isLogged && props.userType === 'admin') content = <Redirect to='/ugs/client/admin' />;
 
     /************************************************
      * REDIRECT - RESEARCHERPAGE
      ************************************************/
     // If researcher is logged
-    if (props.isLogged && props.userType === 'researcher') content = <Redirect to='/researcher' />;
+    if (props.isLogged && props.userType === 'researcher') content = <Redirect to='/ugs/client/researcher' />;
 
     /************************************************
      * RENDER

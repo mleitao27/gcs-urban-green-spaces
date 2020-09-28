@@ -6,7 +6,7 @@ const Filter = props => {
     let ToggleIcon = props.toggle ? IoIosCheckbox : IoIosSquareOutline;
     return(
         <div>
-            <p style={styles.field}><ToggleIcon style={styles.icon} onClick={props.toggleFilter.bind(this, !props.toggle, props.filter)}/>{props.title}</p>
+            <p style={{...styles.field, ...styles.title}}><ToggleIcon style={styles.icon} onClick={props.toggleFilter.bind(this, !props.toggle, props.filter)}/>{props.title}</p>
         {
             props.fields.map(f => {
                 let Icon = f.selected ? IoIosCheckboxOutline : IoIosSquareOutline;
@@ -18,6 +18,10 @@ const Filter = props => {
 };
 
 const styles = {
+    title: {
+        fontWeight: 'bold',
+        fontSize: 18
+    },
     field: {
         display: 'flex',
         alignItems: 'center'
