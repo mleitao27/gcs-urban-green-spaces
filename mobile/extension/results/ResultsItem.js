@@ -88,7 +88,7 @@ const ResultsItem = props => {
                 {BackgroundComponent}
                 <View style={styles.contentContainer}>
                     <View style={styles.timePlaceAndWeather}>
-                        <View>
+                        <View style={{flex:1}}>
                             <Text style={styles.title}>{ugs}</Text>
                             <Text>{day}/{month}/{year}</Text>
                             <Text>{hours}h{minutes}m</Text>
@@ -148,7 +148,8 @@ const styles = StyleSheet.create({
     motivationIcon: {
         height: windowWidth * 0.07,
         width: windowWidth * 0.07,
-        marginRight: windowWidth * 0.04
+        marginRight: windowWidth * 0.02,
+        marginTop: windowHeight * 0.01
     },
     title: {
         fontSize: 16,

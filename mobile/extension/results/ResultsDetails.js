@@ -100,7 +100,7 @@ const ResultsDetails = props => {
     };
 
     const feeling = props.data.find(d => d.id === strings.BASE_FEELING);
-    let feelingContent = typeof feeling !== 'undefined' ? getFeelingIcon(feeling) : (<View/>);
+    let feelingContent = typeof feeling !== 'undefined' ? getFeelingIcon(feeling.value) : (<View/>);
 
     return (
         <View style={{height: '100%'}}>
