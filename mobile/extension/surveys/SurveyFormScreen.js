@@ -12,7 +12,7 @@ import {
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
-import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Marker, Circle } from 'react-native-maps';
 
 import { Form } from 'react-native-json-forms';
 import FormExtension from '../FormExtension';
@@ -26,6 +26,8 @@ import config from '../config';
 import { Feather } from '@expo/vector-icons';
 
 import dictionary from '../dictionaryExtension.json';
+
+import activationJSON from '../activationJSON.json';
 
 const SurveyFormScreen = props => {
 
@@ -263,6 +265,22 @@ const SurveyFormScreen = props => {
             </TouchableOpacity>
         );
     
+    let areasContent = <View/>;
+    const areas = activationJSON.ActivationModes.find(element => element.mode === 'area');
+    areasContent = (
+        areas.areas.map(area => {
+            return(
+                <Circle
+                    key={`${area.lat}${area.long}`}
+                    center={{latitude: parseFloat(area.lat), longitude: parseFloat(area.long)}}
+                    radius={Math.round(Math.sqrt(parseFloat(area.area)/Math.PI))}
+                    strokeColor={'rgba(182, 210, 110, 1)'}
+                    fillColor={'rgba(182, 210, 110, 0.5)'}
+                />
+            );
+        })
+    );
+    
     return (
         <View style={styles.container}>
             <View style={{width: '100%', height: mapHeight}}>
@@ -280,6 +298,7 @@ const SurveyFormScreen = props => {
                     showsMyLocationButton={true}
                     onRegionChangeComplete={onRegionChangeComplete}
                 >
+                    {areasContent}
                 </MapView>
             </View>
             {mapTypeBtn}
