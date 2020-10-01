@@ -51,7 +51,7 @@ const getResults = (req, res) => {
 const getUGS = (location, ugs) => {
     let inUgs = [];
     ugs.map(u => {
-        if (auxFunctions.calcDistance(u.lat, u.long, location.lat, location.long) < Math.round(Math.sqrt(parseFloat(u.area)/Math.PI)) + config.inUgsOffset)
+        if (auxFunctions.calcDistance(u.lat, u.long, location.lat, location.long) < Math.round(Math.sqrt(parseFloat(u.area)/Math.PI)))
             inUgs.push(u.name);
     });
     return inUgs;
