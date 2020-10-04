@@ -275,7 +275,7 @@ const SurveyFormScreen = props => {
                     center={{latitude: parseFloat(area.lat), longitude: parseFloat(area.long)}}
                     radius={Math.round(Math.sqrt(parseFloat(area.area)/Math.PI))}
                     strokeColor={'rgba(182, 210, 110, 1)'}
-                    fillColor={'rgba(182, 210, 110, 0.5)'}
+                    fillColor={'rgba(182, 210, 110, 0)'}
                 />
             );
         })
