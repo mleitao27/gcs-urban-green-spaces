@@ -167,7 +167,7 @@ const ProfileScreenExtension = props => {
 
     return (
         <KeyboardAvoidingView 
-            behavior={Platform.OS == "ios" ? "padding" : "height"} 
+            behavior={Platform.OS == "ios" ? "padding" : "default"} 
             style={globalStyles.screen}
         >      
             <StatusBar barStyle={Platform.OS == "ios" ? "dark-content" : "default"}/>
