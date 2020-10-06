@@ -17,7 +17,8 @@
         "EMAIL": "E-mail",
         "PASSWORD": "Password",
         "ALREADY_USER": "User already registered with that e-mail.",
-        "LOGOUT": "Logout"
+        "LOGOUT": "Logout",
+        "NO_PRESENTATION": "No tutorial presentation provided"
     },
     "pt": {
         "PROFILE": "Perfil",
@@ -37,7 +38,8 @@
         "EMAIL": "Email",
         "PASSWORD": "Senha",
         "ALREADY_USER": "Já se encontra registado um utilizador com esse email.",
-        "LOGOUT": "Sair"
+        "LOGOUT": "Sair",
+        "NO_PRESENTATION": "Nenhuma apresentação de tutorial fornecida"
     },
     "ru": {
         "PROFILE": "Профиль",
@@ -57,7 +59,8 @@
         "EMAIL": "Эл. почта",
         "PASSWORD": "пароль",
         "ALREADY_USER": "Пользователь уже зарегистрирован на этот адрес электронной почты.",
-        "LOGOUT": "выйти"
+        "LOGOUT": "выйти",
+        "NO_PRESENTATION": "Учебная презентация не предусмотрена"
     },
     "fr": {
         "PROFILE": "Profil",
@@ -77,7 +80,8 @@
         "EMAIL": "Email",
         "PASSWORD": "Mot de passe",
         "ALREADY_USER": "Utilisateur déjà enregistré avec cet e-mail.",
-        "LOGOUT": "Se déconnecter"
+        "LOGOUT": "Se déconnecter",
+        "NO_PRESENTATION": "Aucune présentation de tutoriel fournie"
     },
     "it": {
         "PROFILE": "Profilo",
@@ -97,7 +101,8 @@
         "EMAIL": "E-mail",
         "PASSWORD": "Parola d'ordine",
         "ALREADY_USER": "Utente già registrato con quell'e-mail.",
-        "LOGOUT": "Disconnettersi"
+        "LOGOUT": "Disconnettersi",
+        "NO_PRESENTATION": "Nessuna presentazione tutorial fornita"
     },
     "de": {
         "PROFILE": "Profil",
@@ -117,7 +122,8 @@
         "EMAIL": "Email",
         "PASSWORD": "Passwort",
         "ALREADY_USER": "Benutzer bereits mit dieser E-Mail registriert.",
-        "LOGOUT": "Ausloggen"
+        "LOGOUT": "Ausloggen",
+        "NO_PRESENTATION": "Keine Tutorial-Präsentation bereitgestellt"
     },
     "es": {
         "PROFILE": "Perfil",
@@ -137,6 +143,7 @@
         "EMAIL": "Email",
         "PASSWORD": "Contraseña",
         "ALREADY_USER": "Usuario ya registrado con ese correo electrónico.",
-        "LOGOUT": "Cerrar sesión"
+        "LOGOUT": "Cerrar sesión",
+        "NO_PRESENTATION": "No se proporciona una presentación tutorial"
     }
 }

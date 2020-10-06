@@ -25,6 +25,8 @@ import Colors from '../constants/colors';
 
 import CustomButton from '../components/CustomButton';
 
+import Presentation from '../components/Presentation';
+
 import dictionary from '../data/dictionary.json';
 
 import config from '../extension/config';
@@ -39,8 +41,6 @@ import { Ionicons, FontAwesome } from '@expo/vector-icons';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-var dots = 0;
-
 /************************************************
  * 
  * COMPONENT - Screen
@@ -48,19 +48,7 @@ var dots = 0;
  ************************************************/
 const MenuScreen = props => {
 
-    const [infoModalShow, setInfoModalShow] = useState(false);
-    const [interval, setInterval] = useState(0);
-    const [finalPresentation, setFinalPresentation] = useState(<View/>);
-
-    useEffect(() => {
-        let PresentationElement = <View/>;
-        setFinalPresentation(
-            config.presentation.map((value, index) => {
-                PresentationElement = config.presentation[index];
-                return <PresentationElement key={index} />;
-            })
-        );
-    }, []);
+    const [infoShow, setInfoShow] = useState(false);
 
     /************************************************
      * FUNCTIONS
@@ -96,53 +84,9 @@ const MenuScreen = props => {
     ************************************************/
     return (
         <SafeAreaView style={globalStyles.androidSafeArea}>
-            <TouchableOpacity onPress={() => setInfoModalShow(true)}>
+            <TouchableOpacity onPress={() => setInfoShow(true)}>
                 <Ionicons name="ios-information-circle-outline" size={24} color={Colors.primary} />
-                <Modal transparent={true} visible={infoModalShow}>
-                    <View style={styles.modalBackground}>
-                        <View style={styles.modalContainer}>
-                            <View style={styles.modalHeader}>
-                                <TouchableOpacity onPress={() => setInfoModalShow(false)}>
-                                    <Ionicons name="ios-close" size={32} color={Colors.primary} />
-                                </TouchableOpacity>
-                            </View>
-                                <View style={{ flex: 1, alignItems: 'center' }}>
-                                    <ScrollView
-                                        horizontal={true}
-                                        onScroll={data => {
-                                            if (data.nativeEvent.contentOffset.x / (windowWidth*0.9) > interval + 0.5)
-                                                setInterval(interval + 1);
-                                            else if (data.nativeEvent.contentOffset.x / (windowWidth*0.9) < interval -0.5)
-                                                setInterval(interval - 1);
-                                        }}
-                                        contentContainerStyle={{
-                                            width: windowWidth*0.9 * 3,
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-
-                                        }}
-                                        showsHorizontalScrollIndicator={false}
-                                        scrollEventThrottle={20}
-                                        decelerationRate="fast"
-                                        pagingEnabled={true}>
-                                            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                                {finalPresentation}
-                                            </View>
-                                    </ScrollView>
-
-                                    <View style={styles.Dotsview}>
-                                        {config.presentation.map((value, index) => {
-                                            return (
-                                                <View key={index}>
-                                                    <FontAwesome key={index} name={index == interval ? "circle" : "circle-o"} size={windowWidth * 0.03} color="grey" />
-                                                </View>
-                                            );
-                                        })}
-                                    </View>
-                                </View>
-                        </View>
-                    </View>
-                </Modal>
+                <Presentation language={props.language} infoShow={infoShow} close={() => setInfoShow(false)} />
             </TouchableOpacity>
             <View style={styles.container}>
                 <View style={styles.imageContainer}>
@@ -227,36 +171,10 @@ const styles = StyleSheet.create({
         fontSize: (windowWidth + windowHeight) * 0.012,
         textAlign: 'center'
     },
-    modalBackground: {
-        flex: 1,
-        backgroundColor: 'rgba(0,0,0,0.7)',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    modalContainer: {
-        backgroundColor: 'white',
-        width: windowWidth * 0.9,
-        height: windowHeight * 0.9,
-        borderRadius: windowWidth * 0.02,
-        overflow: 'hidden'
-    },
-    modalHeader: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        paddingHorizontal: windowWidth * 0.05,
-        paddingVertical: windowWidth * 0.02
-    },
     view: {
-        width: windowWidth*0.9,
+        width: windowWidth * 0.9,
         alignItems: 'center',
     },
-    Dotsview: {
-        marginBottom: 150,
-        width: windowWidth * 0.1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    }
 });
 
 // Export component
