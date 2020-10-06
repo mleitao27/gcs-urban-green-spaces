@@ -99,7 +99,7 @@ const RegisterScreen = props => {
                 <View style={styles.container}>
 
                     <View style={styles.imageContainer}>
-                        <Image style={styles.image} source={require('../assets/landing_logo.png')} />
+                        <Image style={styles.image} source={require('../extension/assets/landing_logo.png')} />
                     </View>
 
                     <View style={styles.oauthContainer}>

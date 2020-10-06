@@ -111,14 +111,14 @@ const MainScreen = props => {
     let welcomeContent = <View/>;
     if (typeof dictionaryExtension[language].WELCOME !== 'undefined')
         welcomeContent = <Text style={styles.text}>{dictionaryExtension[language].WELCOME}</Text>
-
+        
     // Initial screen content is login form
     let content = (
         <SafeAreaView style={globalStyles.androidSafeArea}>
             <View style={styles.container} >
 
                 <View style={styles.imageContainer}>
-                    <Image style={styles.image} source={require('../assets/landing_logo.png')} />
+                    <Image style={styles.image} source={require('../extension/assets/landing_logo.png')} />
                 </View>
 
                 <View style={{...styles.textContainer, ...styles.welcomeTextContainer}}>

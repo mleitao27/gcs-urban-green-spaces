@@ -10,7 +10,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/ugs-icon.png",
+    "icon": "./extension/assets/icon.png",
     "facebookScheme": "fb534270243959641",
     "splash": {
       "image": "./assets/splash.png",
