@@ -1,3 +1,7 @@
+import presentation1 from './presentation/presentation1';
+import presentation2 from './presentation/presentation2';
+import presentation3 from './presentation/presentation3';
+
 const config = {
     credentials: {
         google: {
@@ -11,7 +15,8 @@ const config = {
     },
     serverURL: 'http://146.193.41.162/ugs/server',
     OWMAPIKey: '890df5db881a1a76b5f7ccc04b1a5e0c',
-    languages: ['en', 'pt']
+    languages: ['en', 'pt'],
+    presentation: [presentation1, presentation2, presentation3]
 };
 
 export default config;
