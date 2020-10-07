@@ -7,7 +7,8 @@ const config = {
             appId: "534270243959641"
         }
     },
-    serverURL: 'http://146.193.41.162/ugs/server'
+    serverURL: 'http://146.193.41.162/ugs/server',
+    homepage: '/ugs/client'
 }
 
 export default config;

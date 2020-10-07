@@ -10,6 +10,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
+import config from '../extension/config';
+
 /************************************************
  * 
  * COMPONENT - Screen
@@ -27,13 +29,13 @@ const LandingPage = props => {
      * REDIRECT - ADMINPAGE
      ************************************************/
     // If admin is logged
-    if (props.isLogged && props.userType === 'admin') content = <Redirect to='/ugs/client/admin' />;
+    if (props.isLogged && props.userType === 'admin') content = <Redirect to={`${config.homepage}/admin`} />;
 
     /************************************************
      * REDIRECT - RESEARCHERPAGE
      ************************************************/
     // If researcher is logged
-    if (props.isLogged && props.userType === 'researcher') content = <Redirect to='/ugs/client/researcher' />;
+    if (props.isLogged && props.userType === 'researcher') content = <Redirect to={`${config.homepage}/researcher`} />;
 
     /************************************************
      * RENDER

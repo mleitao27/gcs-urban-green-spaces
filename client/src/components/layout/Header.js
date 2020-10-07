@@ -9,6 +9,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import config from '../../extension/config';
+
+
 /************************************************
  * 
  * COMPONENT - Header
@@ -22,14 +25,14 @@ const Header = props => {
     // Default content (not logged)
     let content = (
         <React.Fragment>
-            <Link to="/ugs/client/register" style={styles.link}>Register</Link> | <Link to="/ugs/client/login" style={styles.link}>Login</Link>
+            <Link to={`${config.homepage}/register`} style={styles.link}>Register</Link> | <Link to={`${config.homepage}/login`} style={styles.link}>Login</Link>
         </React.Fragment>
     );
 
     // If user is logged
     if (props.isLogged) {
         content = (
-            <Link to="/ugs/client/logout" style={styles.link}>Logout</Link>
+            <Link to={`${config.homepage}/logout`} style={styles.link}>Logout</Link>
         );
     }
     
@@ -39,7 +42,7 @@ const Header = props => {
     return (
         <header style={styles.header}>
             <h1>Crowdsourcing</h1>
-            <Link to="/ugs/client/" style={styles.link}>Home</Link> | {content}
+            <Link to={`${config.homepage}`} style={styles.link}>Home</Link> | {content}
         </header>
     );
 };

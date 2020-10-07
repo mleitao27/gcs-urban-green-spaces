@@ -13,6 +13,8 @@ import { Link } from 'react-router-dom';
 
 import MainButton from '../components/MainButton';
 
+import config from '../extension/config';
+
 /************************************************
  * 
  * COMPONENT - Screen
@@ -26,7 +28,7 @@ const ExpiredSessionPage = props => {
     return (           
             <div className='centerBox'>
                 <h1>Sorry, your session expired.</h1>
-                <Link to="/ugs/client/login"><MainButton title='Back to Login Page'/></Link>
+                <Link to={`${config.homepage}/login`}><MainButton title='Back to Login Page'/></Link>
             </div>
     );
 };

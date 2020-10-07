@@ -49,7 +49,7 @@ const LogoutPage = props => {
     let content = <MainButton title='Logout' onClick={logout}/>;
 
     // If user not logged redirect to main page
-    if (!props.isLogged) content = <Redirect to='/' />;
+    if (!props.isLogged) content = <Redirect to={`${config.homepage}`} />;
 
     /************************************************
      * RENDER

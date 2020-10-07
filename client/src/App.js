@@ -60,12 +60,12 @@ const App = props => {
     <Router>
       <div>
         <Header isLogged={logged} />
-        <Route exact path='/' render={props => <LandingPage {...props} isLogged={logged} userType={userType} />} />
-        <Route path='/ugs/client/register' component={RegisterPage} />
-        <Route path='/ugs/client/login' render={props => <LoginPage {...props} onLogin={changeLoggedState} isLogged={logged} />} />
-        <Route path='/ugs/client/logout' render={props => <LogoutPage {...props} onLogout={changeLoggedState} isLogged={logged} userEmail={userEmail} />} />
-        <Route path='/ugs/client/admin' render={props => <AdminPage {...props} onLogout={changeLoggedState} isLogged={logged} adminEmail={userEmail} />} />
-        <Route path='/ugs/client/researcher' render={props => <ResearcherPage {...props} onLogout={changeLoggedState} isLogged={logged} userEmail={userEmail} />} />
+        <Route exact path={`${config.homepage}`} render={props => <LandingPage {...props} isLogged={logged} userType={userType} />} />
+        <Route path={`${config.homepage}/register`} component={RegisterPage} />
+        <Route path={`${config.homepage}/login`} render={props => <LoginPage {...props} onLogin={changeLoggedState} isLogged={logged} />} />
+        <Route path={`${config.homepage}/logout`} render={props => <LogoutPage {...props} onLogout={changeLoggedState} isLogged={logged} userEmail={userEmail} />} />
+        <Route path={`${config.homepage}/admin`} render={props => <AdminPage {...props} onLogout={changeLoggedState} isLogged={logged} adminEmail={userEmail} />} />
+        <Route path={`${config.homepage}/researcher`} render={props => <ResearcherPage {...props} onLogout={changeLoggedState} isLogged={logged} userEmail={userEmail} />} />
       </div>
     </Router>
   );

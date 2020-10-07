@@ -108,7 +108,7 @@ const LoginPage = props => {
      * REDIRECT - LANDINGPAGE
      ************************************************/
     // If user logged go to landing page
-    if (props.isLogged) content = <Redirect to='/' />;
+    if (props.isLogged) content = <Redirect to={`${config.homepage}`} />;
 
     /************************************************
      * RENDER
