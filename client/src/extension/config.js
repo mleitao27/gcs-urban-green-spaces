@@ -8,7 +8,7 @@ const config = {
         }
     },
     serverURL: 'http://146.193.41.162/ugs/server',
-    homepage: ''
+    homepage: '/ugs/client'
 }
 
 export default config;
