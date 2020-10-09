@@ -34,22 +34,25 @@ const PickerElement = props => {
         return { latitude, longitude };
     };
 
+    let content = [];
+    props.props.categories.map((cat) => {
+        content.push(<Text style={styles.title}>{cat.name}</Text>);
+        cat.markers.map(marker => {
+            content.push(
+                <TouchableOpacity key={marker.value} style={{...styles.item, backgroundColor: marker.color}} onPress={pick.bind(this, marker.value, marker.imageLink, marker.color)}>
+                    <Text style={styles.text}>{marker.label}</Text>
+                    <Image style={styles.image} source={{uri: marker.imageLink}} />
+                </TouchableOpacity>
+            );
+        })
+    });
+
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{props.props.name}</Text>
-            {
-                props.props.markers.map(marker => {
-                    return (
-                        <TouchableOpacity key={marker.value} style={{...styles.item, backgroundColor: marker.color}} onPress={pick.bind(this, marker.value, marker.imageLink, marker.color)}>
-                            <Text style={styles.text}>{marker.label}</Text>
-                            <Image style={styles.image} source={{uri: marker.imageLink}} />
-                        </TouchableOpacity>
-                    )
-                })
-            }
+            {content.map((c) => {return c})}
         </View>
     );
-
+    
 };
 
 const styles = StyleSheet.create({

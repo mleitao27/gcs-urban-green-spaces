@@ -30,7 +30,7 @@ const Presentation = props => {
     if (typeof config.presentation !== 'undefined')
         content = (
             <View style={{flex:1}}>
-                <View style={{ flex: 1, alignItems: 'center' }}>
+                <View style={{ flex: 1, alignItems: 'center', flex:1 }}>
                         <ScrollView
                             horizontal={true}
                             onScroll={data => {
@@ -48,12 +48,13 @@ const Presentation = props => {
                             showsHorizontalScrollIndicator={false}
                             scrollEventThrottle={20}
                             decelerationRate="fast"
-                            pagingEnabled={true}>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex:1 }}>
+                            pagingEnabled={true}
+                            >
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex:1, height:'100%' }}>
                                 {
                                     config.presentation.map((value, index) => {
                                         PresentationElement = config.presentation[index];
-                                        return <PresentationElement key={index} />;
+                                        return <PresentationElement key={index} language={props.language} />;
                                     })
                                 }
                             </View>

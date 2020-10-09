@@ -9,7 +9,7 @@ const presentation3 = props => {
     return (
         <View style={styles.container}>
             <Text style={{...styles.text, ...styles.title}}>
-                Survey
+                Results
             </Text>
         </View>
     );
