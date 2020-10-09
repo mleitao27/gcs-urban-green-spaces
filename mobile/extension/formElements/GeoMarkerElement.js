@@ -36,7 +36,7 @@ const PickerElement = props => {
 
     let content = [];
     props.props.categories.map((cat) => {
-        content.push(<Text style={styles.title}>{cat.name}</Text>);
+        content.push(<Text key={cat.name} style={styles.title}>{cat.name}</Text>);
         cat.markers.map(marker => {
             content.push(
                 <TouchableOpacity key={marker.value} style={{...styles.item, backgroundColor: marker.color}} onPress={pick.bind(this, marker.value, marker.imageLink, marker.color)}>
