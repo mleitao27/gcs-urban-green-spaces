@@ -51,7 +51,7 @@
 								},
 								{
 									"value": "animal",
-									"label": "Spotted an aminal here",
+									"label": "Spotted an animal here",
 									"imageLink": "http://146.193.41.162/ugs/server/public/animal.png",
 									"color": "#8C5F3D"
 								},
@@ -63,7 +63,7 @@
 								},
 								{
 									"value": "manmade",
-									"label": "Interesting man made structure",
+									"label": "Interesting man-made structure",
 									"imageLink": "http://146.193.41.162/ugs/server/public/manmade.png",
 									"color": "#737373"
 								}

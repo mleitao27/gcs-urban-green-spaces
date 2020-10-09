@@ -11,13 +11,13 @@
 							"markers": [
 								{
 									"value": "like",
-									"label": "I like this place",
+									"label": "Gosto deste sítio",
 									"imageLink": "http://146.193.41.162/ugs/server/public/like.png",
 									"color": "#81BD8F"
 								},
 								{
 									"value": "dislike",
-									"label": "I do not like this place",
+									"label": "Não gosto deste sítio",
 									"imageLink": "http://146.193.41.162/ugs/server/public/dislike.png",
 									"color": "#E84857"
 								}
@@ -28,13 +28,13 @@
 							"markers": [
 								{
 									"value": "sun",
-									"label": "It is sunny here",
+									"label": "Aqui está sol",
 									"imageLink": "http://146.193.41.162/ugs/server/public/sun.png",
 									"color": "#FBBD00"
 								},
 								{
 									"value": "wind",
-									"label": "It is windy here",
+									"label": "Aqui está vento",
 									"imageLink": "http://146.193.41.162/ugs/server/public/wind.png",
 									"color": "#3C79E6"
 								}
@@ -45,25 +45,25 @@
 							"markers": [
 								{
 									"value": "shade",
-									"label": "Here is a shade",
+									"label": "Aqui está uma sombra",
 									"imageLink": "http://146.193.41.162/ugs/server/public/shade.png",
 									"color": "#D5D8DB"
 								},
 								{
 									"value": "animal",
-									"label": "Spotted an aminal here",
+									"label": "Avistamento de animal",
 									"imageLink": "http://146.193.41.162/ugs/server/public/animal.png",
 									"color": "#8C5F3D"
 								},
 								{
 									"value": "vegetation",
-									"label": "I like the vegetation here",
+									"label": "Gosto da vegetação aqui",
 									"imageLink": "http://146.193.41.162/ugs/server/public/vegetation.png",
 									"color": "#8DC44F"
 								},
 								{
 									"value": "manmade",
-									"label": "Interesting man made structure",
+									"label": "Peça de mobiliário urbano interessante",
 									"imageLink": "http://146.193.41.162/ugs/server/public/manmade.png",
 									"color": "#737373"
 								}

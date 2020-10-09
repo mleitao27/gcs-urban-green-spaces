@@ -5,7 +5,7 @@
 			"elements": [
 				{
 					"type": "imagepicker",
-					"name": "What man made elements can be found in this UGS?",
+					"name": "What man-made elements can be found in this UGS?",
 					"choices": [
 						{
 							"value": "bench",
