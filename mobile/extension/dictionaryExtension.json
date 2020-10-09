@@ -32,7 +32,8 @@
         "EDIT": "Edit",
         "SUBMIT": "Submit",
         "WARNING": "WARNING",
-        "MARKERS_WARNING": "Your markers list is empty this may happen if you placed marker outside UGS or in newly added UGS."
+        "MARKERS_WARNING": "Your markers list is empty this may happen if you placed marker outside UGS or in newly added UGS.",
+        "POINTS": "Points"
     },
     "pt": {
         "PROFILE_BIRTH": "Data de Nascimento",
@@ -67,6 +68,7 @@
         "EDIT": "Editar",
         "SUBMIT": "Submeter",
         "WARNING": "AVISO",
-        "MARKERS_WARNING": "A sua lista de pontos de interesse está vazia isto pode acontecer se identificou pontos fora de espaços verdes ou em espaços verdes recentemente adicionados."
+        "MARKERS_WARNING": "A sua lista de pontos de interesse está vazia isto pode acontecer se identificou pontos fora de espaços verdes ou em espaços verdes recentemente adicionados.",
+        "POINTS": "Pontos"
     }
 }

@@ -129,23 +129,25 @@ const ProfileScreenExtension = props => {
         content = (
             <View style={styles.editContainer}>
                 <View style={styles.uploadPhotoContainer}>
-                    <Text style={styles.uploadPhoto} onPress={_pickImage}>Update Photo</Text>
+                    <Text style={styles.uploadPhoto} onPress={_pickImage}>{dictionary[props.navigation.state.params.language].UPDATE_PHOTO}</Text>
                 </View>
-                <Text style={styles.editFieldTitle}>Name</Text>
-                <TextInput
-                    style={styles.textinput}
-                    placeholder={name}
-                    placeholderTextColor={Colors.secondary}
-                    value={name}
-                    onChangeText={nameInputHandler}
-                />
+                <View style={{paddingHorizontal: windowWidth*0.05}}>
+                    <Text style={styles.editFieldTitle}>{dictionary[props.navigation.state.params.language].NAME}</Text>
+                    <TextInput
+                        style={styles.textinput}
+                        placeholder={name}
+                        placeholderTextColor={Colors.secondary}
+                        value={name}
+                        onChangeText={nameInputHandler}
+                    />
+                </View>
                 <View style={styles.saveButtonContainer}>
                     <CustomButton
                         title={'Save'}
                         onPress={update}
                         backgroundColor={Colors.primary}
                         textColor={'white'}
-                        width={windowWidth*0.60}
+                        width={windowWidth*0.75}
                         height={windowHeight*0.045}
                         borderRadius={10}
                     />
@@ -175,7 +177,7 @@ const ProfileScreenExtension = props => {
 
                 <View style={styles.container}>
 
-                    <RankingHandler ranking={ranking} />
+                    <RankingHandler ranking={ranking} language={props.navigation.state.params.language}/>
 
                     <View style={{width: '100%', alignItems: 'center', marginTop: -windowHeight*0.15}}>
                         {photo}

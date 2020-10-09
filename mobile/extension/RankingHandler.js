@@ -3,6 +3,8 @@ import { View, Text, ImageBackground, StyleSheet, Dimensions } from 'react-nativ
 import config from './config';
 import ranking from './ranking.json';
 
+import dictionary from './dictionaryExtension.json';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -29,7 +31,7 @@ const RankingHandler = props => {
                 <View style={styles.textRow}>
                     <View style={styles.textColumn}>
                         <Text style={styles.rankingText}>{rankingName}</Text> 
-                        <Text style={styles.pointsText}>Points : {props.ranking} </Text>
+                        <Text style={styles.pointsText}>{dictionary[props.language].POINTS} : {props.ranking} </Text>
                     </View>
                 </View>
             </View>
