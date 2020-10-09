@@ -30,7 +30,9 @@
         "WELCOME": "Generic Crowdsourcing System for Dynamic Evironmental Surveys. To map Urban Green Spaces while assessing urban dewellers preferences within these spaces.",
         "BACK": "Back",
         "EDIT": "Edit",
-        "SUBMIT": "Submit"
+        "SUBMIT": "Submit",
+        "WARNING": "WARNING",
+        "MARKERS_WARNING": "Your markers list is empty this may happen if you placed marker outside UGS or in newly added UGS."
     },
     "pt": {
         "PROFILE_BIRTH": "Data de Nascimento",
@@ -63,6 +65,8 @@
         "WELCOME": "Sistema Genérico de Crowdsourcing para a criação de Questionários Ambientais Dinâmicos. Para mapear Espaços Verdes Urbanos enquanto se aferem as preferências dos visitantes destes espaços.",
         "BACK": "Voltar",
         "EDIT": "Editar",
-        "SUBMIT": "Submeter"
+        "SUBMIT": "Submeter",
+        "WARNING": "AVISO",
+        "MARKERS_WARNING": "A sua lista de pontos de interesse está vazia isto pode acontecer se identificou pontos fora de espaços verdes ou em espaços verdes recentemente adicionados."
     }
 }

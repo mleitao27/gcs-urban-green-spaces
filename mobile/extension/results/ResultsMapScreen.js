@@ -6,7 +6,8 @@ import config from '../config';
 import MarkerItem from './MarkerItem';
 import MarkerDetails from './MarkerDetails';
 
-import dictionary from '../dictionaryExtension.json';
+import dictionaryExtension from '../dictionaryExtension.json';
+import dictionary from '../../data/dictionary.json';
 
 // Window width and height used for styling purposes
 const windowWidth = Dimensions.get('window').width;
@@ -36,12 +37,12 @@ const ResultsMapScreen = props => {
                 setMarkers(Object.entries(await res.json()));
             }
             else if (res.status === 403) {
-                Alert.alert('ERROR', 'Login Timeout.');
+                Alert.alert(dictionary[props.navigation.state.params.language].ERROR, dictionary[props.navigation.state.params.language].LOGIN_TIMEOUT);
                 props.navigation.state.params.logout();
                 props.navigation.navigate({routeName: 'Main'});
             }
             else
-                Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
+                Alert.alert(dictionary[props.navigation.state.params.language].ERROR, dictionary[props.navigation.state.params.language].UNEXPEDTED_ERROR);
 
         })();        
     }, []);
@@ -58,11 +59,12 @@ const ResultsMapScreen = props => {
     };
 
     let content = <View><Text>Loading Results...</Text></View>;
-    if (markers !== null)
+    if (markers !== null) {
+        if (markers.length === 0) Alert.alert(dictionaryExtension[props.navigation.state.params.language].WARNING, dictionaryExtension[props.navigation.state.params.language].MARKERS_WARNING);
         content = (
             <View style={styles.container}>
                 <View style={styles.textContainer}>
-                    <Text style={styles.title}>{dictionary[props.navigation.state.params.language].RESULTS_MARKERS_TITLE}</Text>
+                    <Text style={styles.title}>{dictionaryExtension[props.navigation.state.params.language].RESULTS_MARKERS_TITLE}</Text>
                 </View>
                 <FlatList
                     keyExtractor={item => item[0]}
@@ -73,6 +75,7 @@ const ResultsMapScreen = props => {
                 />
             </View>
         );
+    }
 
     return (
         <View style={styles.container}>

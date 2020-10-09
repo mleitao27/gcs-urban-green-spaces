@@ -18,7 +18,9 @@
         "PASSWORD": "Password",
         "ALREADY_USER": "User already registered with that e-mail.",
         "LOGOUT": "Logout",
-        "NO_PRESENTATION": "No tutorial presentation provided"
+        "NO_PRESENTATION": "No tutorial presentation provided",
+        "UNEXPEDTED_ERROR": "Unexpected error. Contact system admin.",
+        "LOGIN_TIMEOUT": "Login Timeout."
     },
     "pt": {
         "PROFILE": "Perfil",
@@ -39,7 +41,9 @@
         "PASSWORD": "Senha",
         "ALREADY_USER": "Já se encontra registado um utilizador com esse email.",
         "LOGOUT": "Sair",
-        "NO_PRESENTATION": "Nenhuma apresentação de tutorial fornecida"
+        "NO_PRESENTATION": "Nenhuma apresentação de tutorial fornecida",
+        "UNEXPEDTED_ERROR": "Erro inesperado. Contate o administrador do sistema.",
+        "LOGIN_TIMEOUT": "Tempo limite de login."
     },
     "ru": {
         "PROFILE": "Профиль",
@@ -60,7 +64,9 @@
         "PASSWORD": "пароль",
         "ALREADY_USER": "Пользователь уже зарегистрирован на этот адрес электронной почты.",
         "LOGOUT": "выйти",
-        "NO_PRESENTATION": "Учебная презентация не предусмотрена"
+        "NO_PRESENTATION": "Учебная презентация не предусмотрена",
+        "UNEXPEDTED_ERROR": "Неожиданная ошибка. Свяжитесь с системным администратором.",
+        "LOGIN_TIMEOUT": "Таймаут входа."
     },
     "fr": {
         "PROFILE": "Profil",
@@ -81,7 +87,9 @@
         "PASSWORD": "Mot de passe",
         "ALREADY_USER": "Utilisateur déjà enregistré avec cet e-mail.",
         "LOGOUT": "Se déconnecter",
-        "NO_PRESENTATION": "Aucune présentation de tutoriel fournie"
+        "NO_PRESENTATION": "Aucune présentation de tutoriel fournie",
+        "UNEXPEDTED_ERROR": "Erreur inattendue. Contactez l'administrateur système.",
+        "LOGIN_TIMEOUT": "Délai de connexion."
     },
     "it": {
         "PROFILE": "Profilo",
@@ -102,7 +110,9 @@
         "PASSWORD": "Parola d'ordine",
         "ALREADY_USER": "Utente già registrato con quell'e-mail.",
         "LOGOUT": "Disconnettersi",
-        "NO_PRESENTATION": "Nessuna presentazione tutorial fornita"
+        "NO_PRESENTATION": "Nessuna presentazione tutorial fornita",
+        "UNEXPEDTED_ERROR": "Errore inaspettato. Contatta l'amministratore di sistema.",
+        "LOGIN_TIMEOUT": "Timeout di accesso."
     },
     "de": {
         "PROFILE": "Profil",
@@ -123,7 +133,9 @@
         "PASSWORD": "Passwort",
         "ALREADY_USER": "Benutzer bereits mit dieser E-Mail registriert.",
         "LOGOUT": "Ausloggen",
-        "NO_PRESENTATION": "Keine Tutorial-Präsentation bereitgestellt"
+        "NO_PRESENTATION": "Keine Tutorial-Präsentation bereitgestellt",
+        "UNEXPEDTED_ERROR": "Unerwarteter Fehler. Wenden Sie sich an den Systemadministrator.",
+        "LOGIN_TIMEOUT": "Zeitüberschreitung beim Anmelden."
     },
     "es": {
         "PROFILE": "Perfil",
@@ -144,6 +156,8 @@
         "PASSWORD": "Contraseña",
         "ALREADY_USER": "Usuario ya registrado con ese correo electrónico.",
         "LOGOUT": "Cerrar sesión",
-        "NO_PRESENTATION": "No se proporciona una presentación tutorial"
+        "NO_PRESENTATION": "No se proporciona una presentación tutorial",
+        "UNEXPEDTED_ERROR": "Error inesperado. Comuníquese con el administrador del sistema.",
+        "LOGIN_TIMEOUT": "Se terminó el tiempo para la autenticación."
     }
 }
