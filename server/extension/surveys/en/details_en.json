@@ -13,11 +13,13 @@
 					"type": "datepicker",
 					"name": "Date of Birth",
 					"mode": "manual",
+					"required": true,
 					"id": "DETAILS_BIRTH"
                 },
                 {
 					"type": "ext:zip",
 					"name": "ZIP Code",
+					"required": true,
 					"id": "DETAILS_ZIP"
                 },
                 {
@@ -28,6 +30,7 @@
                         "Female",
                         "Other"
 					],
+					"required": true,
 					"id": "DETAILS_GENDER"
 				},
                 {
@@ -40,6 +43,7 @@
 						"Master",
 						"Doctorate"
 					],
+					"required": true,
 					"id": "DETAILS_EDUCATION"
                 },
                 {
@@ -53,6 +57,7 @@
                         "2501 - 5000€",
                         "> 5000€"
 					],
+					"required": true,
 					"id": "DETAILS_INCOME"
 				},
                 {
@@ -66,6 +71,7 @@
 						"Once a month",
 						"Less than once a month"
 					],
+					"required": true,
 					"id": "DETAILS_FREQUENCY"
 				},
 				{
@@ -78,6 +84,7 @@
 						"It varies"
 					],
 					"icon": "square",
+					"required": true,
 					"id": "DETAILS_TIMEOFDAY"
 				},
 				{
@@ -89,6 +96,7 @@
 						"All week",
 						"It varies"
 					],
+					"required": true,
 					"id": "DETAILS_TIMEOFWEEK"
 				},
 				{
@@ -102,6 +110,7 @@
 						"Other"
 					],
 					"icon": "square",
+					"required": true,
 					"id": "DETAILS_TRANSPORTATION"
 				}
 			]

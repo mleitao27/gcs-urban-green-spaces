@@ -13,11 +13,13 @@
 					"type": "datepicker",
 					"name": "Data de Nascimento",
 					"mode": "manual",
+					"required": true,
 					"id": "DETAILS_BIRTH"
                 },
                 {
 					"type": "ext:zip",
 					"name": "Código Postal",
+					"required": true,
 					"id": "DETAILS_ZIP"
                 },
                 {
@@ -28,6 +30,7 @@
                         "Feminino",
                         "Outro"
 					],
+					"required": true,
 					"id": "DETAILS_GENDER"
 				},
                 {
@@ -40,6 +43,7 @@
 						"Mestrado",
 						"Doutoramento"
 					],
+					"required": true,
 					"id": "DETAILS_EDUCATION"
                 },
                 {
@@ -53,6 +57,7 @@
                         "2501 - 5000€",
                         "> 5000€"
 					],
+					"required": true,
 					"id": "DETAILS_INCOME"
 				},
                 {
@@ -66,6 +71,7 @@
 						"1 vez por mês",
 						"Menos de 1 vez por mês"
 					],
+					"required": true,
 					"id": "DETAILS_FREQUENCY"
 				},
 				{
@@ -78,6 +84,7 @@
 						"É variável"
 					],
 					"icon": "square",
+					"required": true,
 					"id": "DETAILS_TIMEOFDAY"
 				},
 				{
@@ -89,6 +96,7 @@
 						"Durante toda a semana",
 						"É variável"
 					],
+					"required": true,
 					"id": "DETAILS_TIMEOFWEEK"
 				},
 				{
@@ -102,6 +110,7 @@
 						"Outro"
 					],
 					"icon": "square",
+					"required": true,
 					"id": "DETAILS_TRANSPORTATION"
 				}
 			]
