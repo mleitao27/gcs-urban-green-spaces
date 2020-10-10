@@ -12,6 +12,7 @@ import {
 import Colors from '../constants/colors';
 
 import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons'; 
 
 import SurveyFormScreen from './surveys/SurveyFormScreen';
 import SurveyMapScreen from './surveys/SurveyMapScreen';
@@ -32,7 +33,7 @@ const SurveyScreenExtension = props => {
                     <Ionicons name="md-paper" size={24} color={'white'} />
                 </TouchableOpacity>
                 <TouchableOpacity style={{...styles.iconContainer, ...{backgroundColor: mode === 'map' ? 'black' : Colors.primary}}} onPress={() => setMode('map')}>
-                    <Ionicons name="md-map" size={24} color={'white'} />
+                    <FontAwesome5 name="map-marked-alt" size={24} color={'white'} />
                 </TouchableOpacity>
             </View>
             {content}
