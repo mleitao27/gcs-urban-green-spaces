@@ -1,49 +1,67 @@
 import React from 'react';
 import { View, Text, Dimensions, StyleSheet, Image, ScrollView } from 'react-native';
 
+import dictionary from '../dictionaryExtension.json';
+
 // Window width and height used for styling purposes
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+
 const presentation2 = props => {
+
+    const page = dictionary[props.language].PRESENTATION.PAGE[2];
+
+    const imageWidth = windowWidth * 0.8;
+
+    const getImageHeight = (i) => {
+        return windowWidth * 0.8 * (page.IMAGE[i].HEIGHT / page.IMAGE[i].WIDTH);
+    };
+
     return (
         <ScrollView style={styles.container}>
             <View style={styles.content}>
                 <Text style={{...styles.text, ...styles.title}}>
-                    Profile
+                    {page.TITLE}
                 </Text>
                 <Text style={styles.text}>
-                    In the profile is requested some personal information about you.
-                    This data is import because it will help researchers to better interpret your answers.
-                    The profile screen can be divided into 2 main parts.
-                    The first part regards your basic user information, used only to identify you.
-                    Here you have the section mark as 1 where will be displayed your ranking within the app, in the section 2 will be visible your profile information such as profile photo, name, user type (normal or researcher) and you e-mail, finally the button in section 3 will allow you to edit this information.
+                    {page.TEXT[1]}
                 </Text>
                 <Image
-                        style={styles.image1}
+                        style={{
+                            width: imageWidth,
+                            height:  getImageHeight(1)
+                        }}
                         source={require('../assets/profile1.png')}
                 />
                 <Text style={styles.text}>
-                    After entering the editing mode you will be presented with the following screen.
-                    Section 4 and 5 allow you to change your profile photo and name respectively, all these changes will only have effect when the button in section 6 is pressed.
+                {dictionary[props.language].PRESENTATION.PAGE[2].TEXT[2]}
                 </Text>
                 <Image
-                        style={styles.image2}
+                        style={{
+                            width: imageWidth,
+                            height:  getImageHeight(2)
+                        }}
                         source={require('../assets/profile2.png')}
                 />
                 <Text style={styles.text}>
-                    The second part of the profile screen contains in section 7 information that will be used by the researchers to understand who visits UGS and to provide custom solutions and draw accurate conclusions from each answer given by each user.
-                    By clicking the button in section 8 you will be able to help our researcher team by providing your detailed information through the proposed survey.
+                    {dictionary[props.language].PRESENTATION.PAGE[2].TEXT[3]}
                 </Text>
                 <Image
-                        style={styles.image3}
+                        style={{
+                            width: imageWidth,
+                            height:  getImageHeight(3)
+                        }}
                         source={require('../assets/profile3.png')}
                 />
                 <Text style={styles.text}>
-                    After filling the survey do not forget to press the submit button (section 9) in order to save your answer.
+                    {dictionary[props.language].PRESENTATION.PAGE[2].TEXT[4]}
                 </Text>
                 <Image
-                        style={styles.image4}
+                        style={{
+                            width: imageWidth,
+                            height:  getImageHeight(4)
+                        }}
                         source={require('../assets/profile4.png')}
                 />
             </View>
@@ -68,22 +86,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: windowHeight*0.05
     },
-    image1: {
-        width: windowWidth*0.8,
-        height: windowWidth*0.8*1.11,
-    },
-    image2: {
-        width: windowWidth*0.8,
-        height: windowWidth*0.8*1.23,
-    },
-    image3: {
-        width: windowWidth*0.8,
-        height: windowWidth*0.8*1.61,
-    },
-    image4: {
-        width: windowWidth*0.8,
-        height: windowWidth*0.8*0.28,
-    }
 });
 
 export default presentation2;

@@ -1,63 +1,86 @@
 import React from 'react';
 import { View, Text, Dimensions, StyleSheet, ScrollView, Image } from 'react-native';
 
+import dictionary from '../dictionaryExtension.json';
+
 // Window width and height used for styling purposes
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const presentation3 = props => {
+
+    const page = dictionary[props.language].PRESENTATION.PAGE[4];
+
+    const imageWidth = windowWidth * 0.8;
+
+    const getImageHeight = (i) => {
+        return windowWidth * 0.8 * (page.IMAGE[i].HEIGHT / page.IMAGE[i].WIDTH);
+    };
+
     return (
         <ScrollView style={styles.container}>
             <View style={styles.content}>
                 <Text style={{...styles.text, ...styles.title}}>
-                    Results
+                {page.TITLE}
                 </Text>
                 <Text style={styles.text}>
-                    The results screen is where the user can find both the given answers and the placed markers.
-                    It is structured similarly to the survey screen.
-                    By pressing the button in the section 1 the user is taken to the answers list.
+                {page.TEXT[1]}
                 </Text>
                 <Image
-                    style={styles.image1}
+                    style={{
+                            width: imageWidth,
+                            height:  getImageHeight(1)
+                        }}
                     source={require('../assets/results1.png')}
                 />
                 <Text style={styles.text}>
-                    Here (section 2) is presented a list of clickable cards containing some information about the different answer given so far.
+                {page.TEXT[2]}
                 </Text>
                 <Image
-                    style={styles.image2}
+                    style={{
+                            width: imageWidth,
+                            height:  getImageHeight(2)
+                        }}
                     source={require('../assets/results2.png')}
                 />
                 <Text style={styles.text}>
-                    After clicking in any of the available cards it is displayed some more detailed information about that card's respective answer as it is shown in the section 3.
-                    The button in the section 4 will allow you to go back to the answers list.
+                {page.TEXT[3]}
                 </Text>
                 <Image
-                    style={styles.image3}
+                    style={{
+                            width: imageWidth,
+                            height:  getImageHeight(3)
+                        }}
                     source={require('../assets/results3.png')}
                 />
                 <Text style={styles.text}>
-                    The button in the section 5 redirects to a list of UGS.
-                    This list contains all the UGS where the user placed any marker.
+                {page.TEXT[4]}
                 </Text>
                 <Image
-                    style={styles.image4}
+                    style={{
+                            width: imageWidth,
+                            height:  getImageHeight(4)
+                        }}
                     source={require('../assets/results4.png')}
                 />
                 <Text style={styles.text}>
-                    Each UGS will be represented by a clickable card as before and demonstrated in the section 6.
+                {page.TEXT[5]}
                 </Text>
                 <Image
-                    style={styles.image5}
+                    style={{
+                            width: imageWidth,
+                            height:  getImageHeight(5)
+                        }}
                     source={require('../assets/results5.png')}
                 />
                 <Text style={styles.text}>
-                    Clicking in one of the mentioned UGS cards will lead to a screen containing a list of all the markers placed in that UGS.
-                    In this screen it is also possible to see some details about each individual marker.
-                    Equivalently to the answers detail screen here there is also a back button to return to the UGS list.
+                {page.TEXT[6]}
                 </Text>
                 <Image
-                    style={styles.image6}
+                    style={{
+                            width: imageWidth,
+                            height:  getImageHeight(6)
+                        }}
                     source={require('../assets/results6.png')}
                 />
             </View>
@@ -81,30 +104,6 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: windowHeight*0.05
-    },
-    image1: {
-        width: windowWidth*0.8,
-        height: windowWidth*0.8*0.27,
-    },
-    image2: {
-        width: windowWidth*0.8,
-        height: windowWidth*0.8*1.81,
-    },
-    image3: {
-        width: windowWidth*0.8,
-        height: windowWidth*0.8*2.05,
-    },
-    image4: {
-        width: windowWidth*0.8,
-        height: windowWidth*0.8*0.26,
-    },
-    image5: {
-        width: windowWidth*0.8,
-        height: windowWidth*0.8*0.67,
-    },
-    image6: {
-        width: windowWidth*0.8,
-        height: windowWidth*0.8*2.09,
     },
 });
 
