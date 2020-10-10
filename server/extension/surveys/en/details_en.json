@@ -77,6 +77,7 @@
 						"At night",
 						"It varies"
 					],
+					"icon": "square",
 					"id": "DETAILS_TIMEOFDAY"
 				},
 				{
@@ -100,6 +101,7 @@
 						"Public transportation",
 						"Other"
 					],
+					"icon": "square",
 					"id": "DETAILS_TRANSPORTATION"
 				}
 			]
