@@ -37,19 +37,19 @@
         "PRESENTATION": {
             "PAGE": {
                 "1": {
-                    "TITLE": "Welcome to the Urban Green Spaces (UGS) mapping app.",
+                    "TITLE": "Welcome to the Urban Green Spaces (UGS) usage mapping app.",
                     "TEXT": {
-                        "1": "This app was developed in the context of a master's thesis from Instituto Superior Técnico in collaboration with professors from Faculdade de Ciências da Universidade de Lisboa. The objective of this app is collect data regarding the UGS usage and their users preferences. Every piece of collected information will be used with scientific purposes only, allowing researchers to study and find ways to improve UGS. Here you can find a brief tutorial explaining how to use the app."
+                        "1": "This app was developed in the context of a master's thesis from Instituto Superior Técnico in collaboration with the Faculdade de Ciências da Universidade de Lisboa. The objective of this app is to collect data regarding the UGS use and users’ preferences. Every piece of collected information will be used for scientific purposes only, allowing researchers to understand the motivations behind users behaviours  and support UGS planning and management. At the moment the database only has UGS in Lisbon. Here you can find a brief tutorial explaining how to use the app."
                     },
                     "IMAGE" : {}
                 },
                 "2": {
                     "TITLE": "Profile",
                     "TEXT": {
-                        "1": "In the profile is requested some personal information about you. This data is important because it will help researchers to better interpret and contextualize your answers. All the information in this screen will only be visible to you and the researchers team, no other user will have access to this data. The profile screen can be divided into 2 main parts. The first part regards your basic user information, used only to identify you. Here you have the section mark as 1 where will be displayed your ranking within the app, in the section 2 will be visible your profile information such as profile photo, name, user type (normal or researcher) and your email, finally the button in section 3 will allow you to edit this information.",
-                        "2": "After entering the editing mode (by clicking in the editing button) you will be presented with the following screen. Section 4 and 5 allow you to change your profile photo and name respectively, all these changes will only have effect when the button in section 6 is pressed.",
-                        "3": "The second part of the profile screen contains, in the section 7, information that will be used by the researchers to understand who visits UGS and to provide custom solutions and draw accurate conclusions from each answer given by each user. By clicking the button in section 8 you will be able to help our research team by providing your detailed information through the proposed survey.",
-                        "4": "After filling the survey do not forget to press the submit button (section 9) in order to save your answer."
+                        "1": "In the profile section is requested some information about you. This data is important because it will help researchers to better interpret and contextualize your answers. All the information shown in this screen will be visible only to you and the researchers team, no other user will have access to this data. The profile screen can be divided into two main parts. The first part regards your basic user information, used to identify you. Here you have the section marked as 1 where your ranking within the app will be displayed, in section 2 you will see your profile information such as profile photo, name, user type (normal or researcher) and your email. Finally, you will be able to edit this information at any time by using the button marked with 3.",
+                        "2": "After entering in the editing mode (by clicking in the editing button) you will be presented with the screen below. Section 4 and 5 allow you to change your profile photo and name respectively, all these changes will only have effect when you save the data, i.e., when button 6 is pressed.",
+                        "3": "The second part of the profile screen (section 7) contains  information that will be used to understand who visits UGS and people’s motivations. This section can be edited by clicking tin botton 8.",
+                        "4": "After filling the survey do not forget to press the submit button (section 9) in order to save your answers."
                     },
                     "IMAGE" : {
                         "1": {
@@ -73,10 +73,10 @@
                 "3": {
                     "TITLE": "Survey",
                     "TEXT": {
-                        "1": "The survey screen is the most relevant screen in the app. Because it is here where you, the user, will be able to shared with the researchers' team your opinion about the UGS. The answers given in these surveys are the reason for the existence of this app, so it is asked of you to answer as honestly and thoughtfully as possible. This screen is divided into 2 sub screens. The form screen can be accessed by pressing the button in the section 1.",
-                        "2": " The form screen consists of a map where the user can see its geographical position as well as the UGS marked in the map with a green circumference as shown in the section 2. In the screen there will also appear different questions in the section 3 to which you must answer in order to complete the survey. There is also a button that allows to change the map's type (section 4).",
-                        "3": "By clicking in the button in section 5 you will be redirected to the mapping sub screen. This screen is also dedicated to the collection of data about UGS. But this time the user is asked to mark relevant places inside each UGS. These markers can either be associated with the user's feelings, the weather or the UGS elements.",
-                        "4": "The screen contains a map similar to the one presented before but where will be presented the marked places like in section 6. Below (section 7) are the buttons that must be pressed in order to mark a specific place."
+                        "1": "The survey screen is the main screen in the app. Because it is here where you, the user, will be able to share with the researchers' team your opinion about the UGS. The answers given in these surveys are the reason for the existence of this app, so we asked you to answer as honestly and thoughtfully as possible. This screen is divided into two sub-screens. The form screen can be accessed by pressing the button in section 1.",
+                        "2": "The form screen consists of a map where the user can see its geographical position as well as the UGS marked in the map with a green circumference as shown in section 2. In the screen, there will also appear different questions (section 3) to which you must answer in order to complete the survey. There is also a button that allows you to change the map layout you wish to see (section 4).",
+                        "3": "By clicking in the button in section 5 you will be redirected to the mapping sub screen. This screen is also dedicated to the collection of data about UGS. But this time the user is asked to mark relevant places inside each UGS. These markers can either be associated with the user’s feeling, the weather or UGS elements.",
+                        "4": "The screen contains a map similar to the one presented before but, this time, with several marked places like shown in section 6. Below (section 7) are the buttons that must be pressed in order to mark a specific place."
                     },
                     "IMAGE" : {
                         "1": {
@@ -100,12 +100,12 @@
                 "4": {
                     "TITLE": "Results",
                     "TEXT": {
-                        "1": "The results screen is where the user can find both the given answers and the placed markers. It is structured similarly to the survey screen. By pressing the button in the section 1 the user is taken to the answers list.",
-                        "2": "Here (section 2) is presented a list of clickable cards containing some information about the different answer given so far.",
-                        "3": "After clicking in any of the available cards it is displayed some more detailed information about that card's respective answer as it is shown in the section 3. The button in the section 4 will allow you to go back to the answers list.",
-                        "4": "The button in the section 5 redirects to a list of UGS. This list contains all the UGS where the user placed any marker.",
-                        "5": "Each UGS will be represented by a clickable card as before and demonstrated in the section 6.",
-                        "6": "Clicking in one of the mentioned UGS cards will lead to a screen containing a list of all the markers placed in that UGS. In this screen it is also possible to see some details about each individual marker. Equivalently to the answers detail screen here there is also a back button to return to the UGS list."
+                        "1": "The results screen is where the user can find both the given answers and the placed markers. It is structured similarly to the survey screen. By pressing the button in section 1 the user is taken to the answers list.",
+                        "2": "Here (section 2) is presented a list of clickable cards containing the information about the different answers given so far.",
+                        "3": "After clicking on any of the available cards it is displayed  detailed information, as it is shown in the section 3. Button 4 allows you to go back to the answers list.",
+                        "4": "The button in section 5 redirects to a list of UGS. This list contains all the UGS where the user placed any marker.",
+                        "5": "Each UGS will be represented by a clickable card as before and demonstrated in section 6.",
+                        "6": "By clicking in one of the mentioned UGS cards, it will lead you to a screen containing a list of all the markers placed in that UGS. In this screen it is also possible to see the details about each individual marker. Equivalently to the answers detail screen here there is also a back button to return to the UGS list."
                     },
                     "IMAGE" : {
                         "1": {
@@ -175,19 +175,19 @@
         "PRESENTATION": {
             "PAGE": {
                 "1": {
-                    "TITLE": "Bem-vindo(a) à aplicação de mapeamento de Urban Green Spaces (UGS).",
+                    "TITLE": "Bem-vindo(a) à aplicação de mapeamento de usos de Espaços Verdes Urbanos (EVU).",
                     "TEXT": {
-                        "1": "Esta app foi desenvolvida no contexto de uma tese de mestrado do Instituto Superior Técnico em colaboração com professores da Faculdade de Ciências da Universidade de Lisboa. O objectivo desta app é recolher informações sobre a utilização de Espaços Verdes Urbano (em inglês Urban Green Spaces ou UGS) por parte dos utilizadores bem como as suas preferências. Todas as informações recolhidas serão apenas utilizadas para fins científicos, permitindo aos investigadores estudar e encontra formas de melhorar UGS. Aqui encontra-se um breve tutorial de como utilizar correctamente a app."
+                        "1": "Esta app foi desenvolvida no contexto de uma tese de mestrado do Instituto Superior Técnico em colaboração com a Faculdade de Ciências da Universidade de Lisboa. O objectivo desta app é recolher informações sobre a utilização de Espaços Verdes Urbano (em inglês, Urban Green Spaces ou UGS) por parte dos utilizadores bem como as suas preferências. Todas as informações recolhidas serão apenas utilizadas para fins científicos, permitindo aos investigadores perceber as motivações por trás do comportamento dos usuários e apoiar o planeamento e gestão dos EVU. Neste momento a base de dados apenas contém EVU situados na cidade Lisboa. Aqui encontra-se um breve tutorial de como utilizar correctamente a app."
                     },
                     "IMAGE" : {}
                 },
                 "2": {
                     "TITLE": "Perfil",
                     "TEXT": {
-                        "1": "No perfil são pedidas algumas informações pessoais. Esta informação é importante porque ajudará os investigadores a interpretar e contextualizar as suas respostas. Toda a informação presente neste ecrã apenas será visível por si e pela equipa de investigadores, nenhum outro utilizador terá acesso a esta informação. O ecrã de perfil pode ser divido em 2 partes. A primeira é referente à informação básica do utilizador, usada apenas para a sua identificação. Aqui, na secção marcada com o número 1 será apresentado o seu ranking dentro da app, na secção 2 será visível os seus dados pessoais tais como a sua foto de perfil, nome, tipo de utilizador (normal ou investigador) e o seu endereço de email, finalmente o botão na secção 3 permite-lhe editar esta informação.",
-                        "2": "Após entrar no modo de edição (clicando no botão de editar) ser-lhe-á apresentado o seguinte ecrã. As secções 4 e 5 permitem mudar a foto de perfil e o nome respectivamente,  todas estas alterações apenas se tornarão permanentes quando for clicado o botão na secção 6.",
-                        "3": "A segunda parte do ecrã do perfil contém, na secção7, informação que será então usada pelos investigadores para entender quem visita os UGS mas também para conseguirem desenhar soluções customizadas para futuros UGS e retirar conclusões mais precisas sobre cada resposta dada por cada utilizador. Clicando no botão na secção 8 será possível ajudar a equipa de investigação através do preenchimento do formulário que irá aparecer no ecrã.",
-                        "4": "Após o preenchimento do formulário não se esqueça de pressionar o botão (na secção 9) para submeter e guardar a sua resposta."
+                        "1": "No perfil são pedidas algumas informações pessoais. Esta informação é importante porque ajudará os investigadores a interpretar e contextualizar as suas respostas. Toda a informação presente neste ecrã apenas será visível por si e pela equipa de investigadores, nenhum outro utilizador terá acesso a esta informação. O ecrã de perfil pode ser dividido em duas partes. A primeira é referente à informação básica do utilizador, usada apenas para a sua identificação. Aqui, na secção marcada com o número 1 será apresentado o seu ranking dentro da app. Na secção 2 será visível os seus dados pessoais tais como a sua foto de perfil, nome, tipo de utilizador (normal ou investigador) e o seu endereço de email. Finalmente, o botão na secção 3 permite-lhe editar esta informação.",
+                        "2": "Após entrar no modo de edição (clicando no botão de editar) ser-lhe-á apresentado o seguinte ecrã. As secções 4 e 5 permitem mudar a foto de perfil e o nome respectivamente. Todas estas alterações, apenas se tornarão permanentes quando for clicado o botão 6.",
+                        "3": "A segunda parte do ecrã do perfil (secção 7), contém  informação que será então usada pelos investigadores para entender quem visita os EVU e quais as suas motivações. Ao clicar no botão 8 poderá editar esta secção.",
+                        "4": "Após o preenchimento do formulário não se esqueça de pressionar o botão (na secção 9) para submeter e guardar as suas respostas."
                     },
                     "IMAGE" : {
                         "1": {
@@ -211,10 +211,10 @@
                 "3": {
                     "TITLE": "Questionário",
                     "TEXT": {
-                        "1": "O ecrã do questionário é um dos mais relevantes em toda a aplicação. Pois é neste ecrã que o utilizador poderá partilhar com a equipa de investigadores a sua opinião sobre os UGS. As respostas dadas aos questionários que serão apresentados neste ecrã são a motivação por detrás desta aplicação, como tal é lhe pedido que as suas respostas sejam o mais honestas e o melhor pensadas possível. Este ecrã divide-se em dois sub ecrãs. O ecrã dos questionários pode ser acedido clicando no botão na secção 1.",
-                        "2": "O ecrã dos questionários consiste em um mapa onde o utilizador pode ver a sua posição geográfica actual bem como os UGS, que se encontram marcados no mapa com uma circunferência verde, tal como demonstrado na secção 2. No ecrã também irão aparecer diferentes questões, na secção 3, que deverão ser respondidas até o questionário. Existe ainda um botão que permite alterar o tipo de mapa (section 4).",
-                        "3": "Ao clicar no botão da secção 5 será redirecionado para o sub ecrã de mapeamento. Este ecrã também é dedicado à recolha de dados sobre UGS. Desta vez é pedido ao utilizador para marcar lugares relevantes dentro de cada espaço verde. Este marcadores podem reflectir sentimentos do utilizador, condições meteorológicas ou elementos dentro do UGS.",
-                        "4": "O ecrã contém um mapa semelhante ao apresentado anteriormente mas aqui serão apresentados os pontos de interesse assinalados  como se vê na secção 6. Em baixo (secção 7) estão os botões que quando clicados permitem assinalar os pontos de interesse."
+                        "1": "O ecrã do questionário é o principal da aplicação. É através deste ecrã que o utilizador poderá partilhar com a equipa de investigadores a sua opinião sobre os EVU. As respostas dadas aos questionários que serão apresentados neste ecrã são a motivação por detrás desta aplicação, como tal é lhe pedido que as suas respostas sejam o mais honestas e o melhor pensadas possível. Este ecrã divide-se em dois sub-ecrãs. O ecrã dos questionários pode ser acedido clicando no botão na secção 1.",
+                        "2": "O ecrã dos questionários consiste num mapa onde o utilizador pode ver a sua posição geográfica actual bem como os EVU, que se encontram marcados no mapa com uma circunferência verde, tal como demonstrado na secção 2. No ecrã também irão aparecer diferentes questões (secção 3), que deverão ser respondidas para completar o questionário. Existe ainda um botão que permite alterar o tipo de mapa que deseja visualizar (secção 4).",
+                        "3": "Ao clicar no botão da secção 5 será redirecionado para o sub ecrã de mapeamento. Este ecrã também é dedicado à recolha de dados sobre EVU. Desta vez é pedido ao utilizador para marcar lugares relevantes dentro de cada espaço verde. Este marcadores podem reflectir as motivações do utilizador, condições meteorológicas ou elementos dentro do EVU.",
+                        "4": "O ecrã contém um mapa semelhante ao apresentado anteriormente mas aqui serão apresentados os vários pontos de interesse assinalados, como se vê na secção 6. Em baixo (secção 7) estão os botões que quando clicados permitem assinalar os pontos de interesse."
                     },
                     "IMAGE" : {
                         "1": {
@@ -239,11 +239,11 @@
                     "TITLE": "Resultados",
                     "TEXT": {
                         "1": "O ecrã dos resultados é onde o utilizador pode encontrar tanto as respostas dadas aos questionário como os pontos de interesse assinalados. Encontra-se estruturado da mesma forma que o ecrã dos questionários. Ao clicar no botão da secção 1 o utilizador é levado para a lista das suas respostas.",
-                        "2": "Aqui (secção 2) é apresentada uma list de cartões clicáveis que contêm uma breve descrição sobre as diferentes respostas dadas até agora.",
-                        "3": "Após clicar em algum dos cartões disponíveis são apresentados mais alguns detalhes sobre a resposta à qual o cartão diz respeita como demonstrado na secção 3. O botão na secção 4 permite retroceder e voltar à lista de respostas.",
-                        "4": "O botão na secção 5 redireciona para uma list de espaços verdes. Esta lista contém todos os UGS onde o utilizador assinalou algum ponto de interesse.",
-                        "5": "Cada UGS será representado por um cartão clicável tal como ante e à semelhança do demonstrado na secção 6.    ",
-                        "6": "Ao clicar em um dos cartões mencionados levará o utilizador para um ecrã contendo uma lista com todos os pontos de interesses assinalados dentro do respectivo espaço verde. Neste ecrã também são visíveis alguns detalhes sobre cada marcador individualmente. À semelhança do ecrã onde eram apresentados os detalhes das respostas, também neste ecrã existe um botão que permite regressar à lista de UGS."
+                        "2": "Aqui (secção 2) é apresentada uma lista de cartões clicáveis que contêm a descrição sobre as diferentes respostas dadas até agora.",
+                        "3": "Após clicar em algum dos cartões disponíveis, são apresentados os detalhes sobre a resposta à qual o cartão diz respeito,  como demonstrado na secção 3. O botão 4 permite retroceder e voltar à lista de respostas.",
+                        "4": "O botão na secção 5 redireciona para uma lista de espaços verdes. Esta lista contém todos os espaços verdes onde o utilizador assinalou algum ponto de interesse.",
+                        "5": "Cada EVU será representado por um cartão clicável tal como antes e à semelhança do demonstrado na secção 6.",
+                        "6": "Ao clicar em um dos cartões mencionados levará o utilizador para um ecrã contendo uma lista com todos os pontos de interesse assinalados dentro do respectivo espaço verde. Neste ecrã também são visíveis os detalhes sobre cada marcador individual. À semelhança do ecrã onde eram apresentados os detalhes das respostas, também neste ecrã existe um botão que permite regressar à lista de EVU."
                     },
                     "IMAGE" : {
                         "1": {
