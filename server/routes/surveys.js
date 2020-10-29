@@ -13,6 +13,9 @@ var router = express.Router();
 // Import survey extension functions
 const surveyExtension = require('../extension/surveysExtension');
 
+// Import feedback funtions
+const feedback = require('../modules/feedback');
+
 // Used to allow multipart request used to send images between app/client and server
 var multer  = require('multer')
 var upload = multer({ limits: { fieldSize: 25 * 1024 * 1024 } })
@@ -39,7 +42,8 @@ router.post('/answerImage', upload.single(), async (req, res) => {
 
 // Get feedback of an answer
 router.post('/feedback', async (req, res) => {
-    surveyExtension.returnFeedback(req, res);
+    feedback.immediate(req, res);
+    feedback.differenciated(req, res);
 });
 
 // Get info to help answer survey

@@ -17,8 +17,6 @@ import MapView, { PROVIDER_GOOGLE, Marker, Circle } from 'react-native-maps';
 import { Form } from 'react-native-json-forms';
 import FormExtension from '../FormExtension';
 
-import FeedbackHandler from '../FeedbackHandler';
-
 import SensorsData from '../components/SensorsData';
 
 import config from '../config';
@@ -31,6 +29,10 @@ import activationJSON from '../activationJSON.json';
 
 const SurveyFormScreen = props => {
 
+    /************************************************
+     * STATES
+     ************************************************/
+    // Permissions
     const [cameraPermission, setCameraPermission] = useState(null);
     const [cameraRollPermission, setCameraRollPermission] = useState(null);
     const [locationPermission, setLocationPermission] = useState(null);
@@ -41,17 +43,26 @@ const SurveyFormScreen = props => {
     // State to store error message (not used)
     const [errorMessage, setErrorMessage] = useState('');
 
+    // Checks if any form loaded
     const [loaded, setLoaded] = useState(null);
+    // Form content
     const [form, setForm] = useState(null);
+    // Immediate feedback
+    const [feedback, setFeedback] = useState(null);
 
+    // Form status
     const [status, setStatus] = useState(-1);
     const [statusKey, setStatusKey] = useState(-1);
 
+    // Map height
     const [mapHeight, setMapHeight] = useState('100%');
+    // Map type
+    const [mapType, setMapType] = useState('standard');
+    // Checks if after details form filling to adjust map's initial location
     const [afterDetails, setAfterDetails] = useState(false);
 
-    const [mapType, setMapType] = useState('standard');
-
+    // Only run one time
+    // Gets permissions and user location
     useEffect(() => {
 
         let cancel = false;
@@ -88,6 +99,7 @@ const SurveyFormScreen = props => {
         };
     }, []);
 
+    // Set map height
     useEffect(() => {
         if (mapHeight ==='0%') {
             getHeight();
@@ -95,38 +107,45 @@ const SurveyFormScreen = props => {
         }
     }, [statusKey]);
 
+    // Gets a form every time status change (answer is given)
     useEffect(() => {
         (async () => {
             setLoaded(null);
-            const res = await fetch(`${config.serverURL}/api/surveys/`,{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email:  props.navigation.state.params.email,
-                    status: status,
-                    type: 'form',
-                    language: props.navigation.state.params.language
-                })
-            });
-    
-            if (res.status == 200) {
-                setForm(await res.json());
-                setStatusKey(status);
-                setLoaded(true);
+            if (status !== 15) {
+                const res = await fetch(`${config.serverURL}/api/surveys/`,{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email:  props.navigation.state.params.email,
+                        status: status,
+                        type: 'form',
+                        language: props.navigation.state.params.language
+                    })
+                });
+        
+                if (res.status == 200) {
+                    setForm(await res.json());
+                    setStatusKey(status);
+                    setLoaded(true);
+                }
+                else if (res.status === 403) {
+                    Alert.alert('ERROR', 'Login Timeout.');
+                    props.navigation.state.params.logout();
+                    props.navigation.navigate({routeName: 'Main'});
+                }
+                else
+                    Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
             }
-            else if (res.status === 403) {
-                Alert.alert('ERROR', 'Login Timeout.');
-                props.navigation.state.params.logout();
-                props.navigation.navigate({routeName: 'Main'});
-            }
-            else
-                Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
 
         })();
     }, [status]);
 
+    /************************************************
+     * FUNCTIONS
+     ************************************************/
+    // Updates ranking in server after every answer submitted
     const updateRanking = async (email, points) => {
         const res = await fetch(`${config.serverURL}/api/profile/editRanking`, {
             method: 'POST',
@@ -140,6 +159,7 @@ const SurveyFormScreen = props => {
         });
     };
 
+    // Handles photos submittion to server
     const submitPhoto = async (data) => {
         let index;
         let base64 = null;
@@ -177,6 +197,7 @@ const SurveyFormScreen = props => {
         return data;
     };
 
+    // Submits answer to server
     const onSubmit = async (data) => {
 
         data = await submitPhoto(data);
@@ -201,7 +222,35 @@ const SurveyFormScreen = props => {
             // Change this
             if (parseInt(newStatus.status) != 15 && parseInt(newStatus.status) != 1)
                 setLoaded(null);
-            if (parseInt(newStatus.status) === 15) updateRanking(props.navigation.state.params.email, 100);
+            if (parseInt(newStatus.status) === 15) {
+                updateRanking(props.navigation.state.params.email, 100);
+                await getFeedback();
+            }
+        }
+        else if (res.status === 403) {
+            Alert.alert('ERROR', 'Login Timeout.');
+            props.navigation.state.params.logout();
+            props.navigation.navigate({routeName: 'Main'});
+        }
+        else
+        Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
+    };
+    
+    // Gets feedback from server if last answer was submitted
+    const getFeedback = async () => {
+        const res = await fetch(`${config.serverURL}/api/surveys/feedback`,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email:  props.navigation.state.params.email,
+                language: props.navigation.state.params.language
+            })
+        });
+
+        if (res.status == 200) {
+            setFeedback(await res.json());
         }
         else if (res.status === 403) {
             Alert.alert('ERROR', 'Login Timeout.');
@@ -210,28 +259,9 @@ const SurveyFormScreen = props => {
         }
         else
             Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
-        //FeedbackHandler();
     };
 
-    let formContent = <View />;
-    if (loaded === null)
-        formContent = <View style={styles.fallbackTextContainer}><Text style={styles.text}>Loading survey...</Text></View>
-    else if (loaded === false)
-        formContent = <View style={styles.fallbackTextContainer}><Text style={styles.text}>Unable to load survey. Please go back.</Text></View>
-    else if (loaded === true) {
-        if (statusKey === 15) {
-            formContent = (
-                <SensorsData form={form} />
-            );
-        }
-        else 
-            formContent = (
-                <ScrollView style={styles.formContainer}>
-                    <Form key={statusKey} json={form.form} extension={FormExtension} onSubmit={onSubmit} showSubmitButton={false} submitText={dictionary[props.navigation.state.params.language].SUBMIT} />
-                </ScrollView>
-            );
-    }
-
+    // Gets map height based on survey type
     const getHeight = () => {
         if (form === null) setMapHeight('100%');
         else if (form.type === 'details') setMapHeight('0%');
@@ -239,6 +269,7 @@ const SurveyFormScreen = props => {
         else setMapHeight('60%');
     };
 
+    // Handles location change by user scrolling in the map
     const onRegionChangeComplete = (region) => {
         
         if (afterDetails === true) {
@@ -252,10 +283,35 @@ const SurveyFormScreen = props => {
         getHeight();
     };
 
+    // Changes map type when button is pressed
     const changeMapType = () => {
         if (mapType === 'satellite') setMapType('standard');
         else if (mapType === 'standard') setMapType('satellite');
     };
+
+    /************************************************
+     * PRE-RENDER
+     ************************************************/
+    let formContent = <View />;
+    if (loaded === null) {
+        if (status === 15 && feedback !== null) {
+            formContent = (
+                <SensorsData data={feedback} />
+            );
+        } else {
+            formContent = (<View style={styles.fallbackTextContainer}><Text style={styles.text}>Loading survey...</Text></View>);
+        }
+    }
+    else if (loaded === false)
+        formContent = <View style={styles.fallbackTextContainer}><Text style={styles.text}>Unable to load survey. Please go back.</Text></View>
+    else if (loaded === true) {
+        formContent = (
+            <ScrollView style={styles.formContainer}>
+                <Form key={statusKey} json={form.form} extension={FormExtension} onSubmit={onSubmit} showSubmitButton={false} submitText={dictionary[props.navigation.state.params.language].SUBMIT} />
+            </ScrollView>
+        );
+    }
+
 
     let mapTypeBtn = <View/>;
     if (form !== null && form.type === 'base')
@@ -281,6 +337,9 @@ const SurveyFormScreen = props => {
         })
     );
     
+    /************************************************
+     * RENDER
+     ************************************************/
     return (
         <View style={styles.container}>
             <View style={{width: '100%', height: mapHeight}}>

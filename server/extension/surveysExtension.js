@@ -7,7 +7,6 @@ var config = require('./config');
 var surveysArray = require('./surveys/surveysArray').surveysArray;
 const errorJSON = require('./data/error.json');
 
-var feedback = require('../modules/feedback');
 var dbStorage = require('./dbExtension');
 
 var strings = require('./strings').strings;
@@ -120,7 +119,6 @@ const getBaseSurvey = async (req, res, status) => {
     }
     else if (status.base === END) {
         db.updateDocument('answers', {_id: status.answer}, {done: true});
-        form = {weather: status.weather, googlefit: status.googlefit}
     }
     
     res.status(200).send({form, type: 'base'});
@@ -149,12 +147,8 @@ const processAnswer = async (req, res) => {
         // If user not in cache
         if (typeof result === 'undefined') res.status(403).send();
         else {
-            console.log(req.body);
+            //console.log(req.body);
             
-            // Immediate Feedback
-            feedback.immediate();
-            // Differenciated Feedback
-            feedback.differenciated();
             // Database storage
             const status = await db.getDocument('status', {user: req.body.email});
             dbStorage.storeAnswer(req.body.email, req.body.answer, req.body.type);
@@ -163,6 +157,7 @@ const processAnswer = async (req, res) => {
             if (req.body.type === 'base') {
                 newStatus = await getNewStatus(req.body.email, status[0].base, {data: req.body.answer, id: status[0].answer}, req.body.language);
                 db.updateDocument('status', {user: req.body.email}, {base: newStatus});
+                if (newStatus === END) db.updateDocument('answers', {_id: status[0].answer}, {done: true});
                 res.status(200).send({status: newStatus});
             }
             else if (req.body.type === 'details') {
@@ -321,10 +316,6 @@ const getNewStatus = async (email, oldStatus, answer, language) => {
     
 };
 
-const returnFeedback = (req, res) => {
-    
-};
-
 const submitSurvey = (req, res) => {
     
 };
@@ -344,5 +335,4 @@ exports.getSurvey = getSurvey;
 exports.submitSurvey = submitSurvey;
 exports.processAnswer = processAnswer;
 exports.processImage = processImage;
-exports.returnFeedback = returnFeedback;
 exports.getInfo = getInfo;

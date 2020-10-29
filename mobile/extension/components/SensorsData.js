@@ -14,12 +14,12 @@ const SensorsData = props => {
         else if (metric === 'activeMinutes') return 'Active Minutes: ';
     };
     
-    let googleContent = <View><Text style={styles.title}>Google Data</Text></View>;
-    if (props.form.form.googlefit !== null)
+    let googleContent = <View><Text style={styles.title}>No Google data</Text></View>;
+    if (props.data.googlefit !== null)
         googleContent = (
             <View style={styles.googleContainer}>
                 <Text style={styles.title}>Google Data</Text>
-                {props.form.form.googlefit.map(g => {
+                {props.data.googlefit.map(g => {
                     if (g.type === 'activity') {
                         for (let a of g.value) {
                             if (g.value.indexOf(a) === 0)
@@ -52,8 +52,8 @@ const SensorsData = props => {
             {googleContent}
 
             <View style={styles.weatherContainer}>
-                <CustomImage imageLink={weatherDictionary[props.form.form.weather.description]} style={styles.weatherIcon} />
-                <Text style={styles.title}>{Math.round(props.form.form.weather.temp-273)}ºC</Text>
+                <CustomImage imageLink={weatherDictionary[props.data.weather.description]} style={styles.weatherIcon} />
+                <Text style={styles.title}>{Math.round(props.data.weather.temp-273)}ºC</Text>
             </View>
 
         </View>
