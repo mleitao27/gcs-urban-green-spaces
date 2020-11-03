@@ -224,7 +224,10 @@ const getNewStatus = async (email, oldStatus, answer, language) => {
         return YN_GOOGLE;
     }
     else if (oldStatus === YN_GOOGLE) {
-        if (answer.data[0].value === false) return UGS_LIST;
+        if (answer.data[0].value === false) {
+            db.updateDocument('status', {user: email}, {googlefit: null});
+            return UGS_LIST;
+        }
         else return GOOGLE_FIT;
     }
     else if (oldStatus === GOOGLE_FIT) {
