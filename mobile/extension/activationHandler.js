@@ -108,8 +108,6 @@ const activationHandler = async (activationMode) => {
       // Creates geofence around every area in array
       // When fence jumped, onEnterArea called
       Location.startGeofencingAsync('onEnterArea', fences);
-
-      let res = (await TaskManager.getRegisteredTasksAsync());
       
     }
   }
