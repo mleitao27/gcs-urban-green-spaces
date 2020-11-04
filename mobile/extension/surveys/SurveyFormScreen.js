@@ -23,7 +23,8 @@ import config from '../config';
 
 import { Feather } from '@expo/vector-icons';
 
-import dictionary from '../dictionaryExtension.json';
+import dictionaryExtension from '../dictionaryExtension.json';
+import dictionary from '../../data/dictionary.json';
 
 import activationJSON from '../activationJSON.json';
 
@@ -110,7 +111,6 @@ const SurveyFormScreen = props => {
     // Gets a form every time status change (answer is given)
     useEffect(() => {
         (async () => {
-            setLoaded(null);
             if (status !== 15) {
                 const res = await fetch(`${config.serverURL}/api/surveys/`,{
                     method: 'POST',
@@ -131,12 +131,12 @@ const SurveyFormScreen = props => {
                     setLoaded(true);
                 }
                 else if (res.status === 403) {
-                    Alert.alert('ERROR', 'Login Timeout.');
+                    Alert.alert(dictionary[props.navigation.state.params.language].ERROR, dictionary[props.navigation.state.params.language].LOGIN_TIMEOUT);
                     props.navigation.state.params.logout();
                     props.navigation.navigate({routeName: 'Main'});
                 }
                 else
-                    Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
+                    Alert.alert(dictionary[props.navigation.state.params.language].ERROR, dictionary[props.navigation.state.params.language].UNEXPEDTED_ERROR);
             }
 
         })();
@@ -187,18 +187,20 @@ const SurveyFormScreen = props => {
                 data[index].value = await res.json();
             }
             else if (res.status === 403) {
-                Alert.alert('ERROR', 'Login Timeout.');
+                Alert.alert(dictionary[props.navigation.state.params.language].ERROR, dictionary[props.navigation.state.params.language].LOGIN_TIMEOUT);
                 props.navigation.state.params.logout();
                 props.navigation.navigate({routeName: 'Main'});
             }
             else
-                Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
+                Alert.alert(dictionary[props.navigation.state.params.language].ERROR, dictionary[props.navigation.state.params.language].UNEXPEDTED_ERROR);
         }
         return data;
     };
 
     // Submits answer to server
     const onSubmit = async (data) => {
+        
+        if (status !== 19) setLoaded(null);
 
         data = await submitPhoto(data);
 
@@ -220,7 +222,7 @@ const SurveyFormScreen = props => {
             const newStatus = await res.json();
             setStatus(newStatus.status);
             // Change this
-            if (parseInt(newStatus.status) != 15 && parseInt(newStatus.status) != 1)
+            if (parseInt(newStatus.status) !== 15 && parseInt(newStatus.status) !== 1)
                 setLoaded(null);
             if (parseInt(newStatus.status) === 15) {
                 updateRanking(props.navigation.state.params.email, 100);
@@ -228,12 +230,12 @@ const SurveyFormScreen = props => {
             }
         }
         else if (res.status === 403) {
-            Alert.alert('ERROR', 'Login Timeout.');
+            Alert.alert(dictionary[props.navigation.state.params.language].ERROR, dictionary[props.navigation.state.params.language].LOGIN_TIMEOUT);
             props.navigation.state.params.logout();
             props.navigation.navigate({routeName: 'Main'});
         }
         else
-        Alert.alert('ERROR', 'Unexpected error. Contact system admin.');
+            Alert.alert(dictionary[props.navigation.state.params.language].ERROR, dictionary[props.navigation.state.params.language].UNEXPEDTED_ERROR);
     };
     
     // Gets feedback from server if last answer was submitted
@@ -299,15 +301,15 @@ const SurveyFormScreen = props => {
                 <SensorsData data={feedback} />
             );
         } else {
-            formContent = (<View style={styles.fallbackTextContainer}><Text style={styles.text}>Loading survey...</Text></View>);
+        formContent = (<View style={styles.fallbackTextContainer}><Text style={styles.text}>{dictionaryExtension[props.navigation.state.params.language].LOADING_SURVEY}</Text></View>);
         }
     }
     else if (loaded === false)
-        formContent = <View style={styles.fallbackTextContainer}><Text style={styles.text}>Unable to load survey. Please go back.</Text></View>
+        formContent = <View style={styles.fallbackTextContainer}><Text style={styles.text}>{dictionaryExtension[props.navigation.state.params.language].FAIL_SURVEY}</Text></View>
     else if (loaded === true) {
         formContent = (
             <ScrollView style={styles.formContainer}>
-                <Form key={statusKey} json={form.form} extension={FormExtension} onSubmit={onSubmit} showSubmitButton={false} submitText={dictionary[props.navigation.state.params.language].SUBMIT} />
+                <Form key={statusKey} json={form.form} extension={FormExtension} onSubmit={onSubmit} showSubmitButton={false} submitText={dictionaryExtension[props.navigation.state.params.language].SUBMIT} />
             </ScrollView>
         );
     }

@@ -34,6 +34,8 @@
         "WARNING": "WARNING",
         "MARKERS_WARNING": "Your markers list is empty this may happen if you placed marker outside UGS or in newly added UGS.",
         "POINTS": "Points",
+        "LOADING_SURVEY": "Loading survey, please wait...",
+        "FAIL_SURVEY": "Unable to load survey. Please go back.",
         "PRESENTATION": {
             "PAGE": {
                 "1": {
@@ -172,6 +174,8 @@
         "WARNING": "AVISO",
         "MARKERS_WARNING": "A sua lista de pontos de interesse está vazia isto pode acontecer se identificou pontos fora de espaços verdes ou em espaços verdes recentemente adicionados.",
         "POINTS": "Pontos",
+        "LOADING_SURVEY": "A carregar questionário por favor aguarde...",
+        "FAIL_SURVEY": "Não foi possível carregar o survey. Por favor volte ao menu.",
         "PRESENTATION": {
             "PAGE": {
                 "1": {
