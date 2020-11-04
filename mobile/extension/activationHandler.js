@@ -66,15 +66,16 @@ const activationHandler = async (activationMode) => {
     // Define the onEnterArea task with the task manager
     TaskManager.defineTask('onEnterArea', onEnterArea);
 
-    let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest });
     const max = 100;
-
+    
     // Get location and notification permissions
     let locationPermission = await Permissions.askAsync(Permissions.LOCATION);
     let notificationsPermission = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-
+    
     // If permissions granted
     if (locationPermission.status === 'granted' && notificationsPermission.status === 'granted') {
+      
+      let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest });
 
       let fences = [];
       
