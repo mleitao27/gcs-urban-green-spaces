@@ -6,6 +6,8 @@
 				{
 					"type": "imagepicker",
 					"name": "What was your motivation to come here?",
+					"numberPerLine": 6,
+					"imageSize": "small",
 					"choices": [
 						{
 							"value": "meditation",

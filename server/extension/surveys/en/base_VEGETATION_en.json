@@ -6,6 +6,8 @@
 				{
 					"type": "imagepicker",
 					"name": "What vegetation elements can be found in this UGS?",
+					"numberPerLine": 5,
+					"imageSize": "small",
 					"choices": [
 						{
 							"value": "tree",
