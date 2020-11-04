@@ -98,7 +98,7 @@ const OAuthButtons = props => {
       if (result.type === "success") {
         const params = {
           'platform': 'google',
-          'id': config.credentials.google.androidClientId,
+          'id': (Platform.OS === 'ios' ?  config.credentials.google.iosClientId : config.credentials.google.androidClientId) ,
           'token': result.idToken,
           'user': result.user.id,
           'name': result.user.name,
