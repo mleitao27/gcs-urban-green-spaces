@@ -36,12 +36,13 @@
         "POINTS": "Points",
         "LOADING_SURVEY": "Loading survey, please wait...",
         "FAIL_SURVEY": "Unable to load survey. Please go back.",
+        "USABILITY_FORM": "Usability Form",
         "PRESENTATION": {
             "PAGE": {
                 "1": {
                     "TITLE": "Welcome to the Urban Green Spaces (UGS) usage mapping app.",
                     "TEXT": {
-                        "1": "This app was developed in the context of a master's thesis from Instituto Superior Técnico in collaboration with the Faculdade de Ciências da Universidade de Lisboa. The objective of this app is to collect data regarding the UGS use and users’ preferences. Every piece of collected information will be used for scientific purposes only, allowing researchers to understand the motivations behind users behaviours  and support UGS planning and management. At the moment the database only has UGS in Lisbon. Here you can find a brief tutorial explaining how to use the app."
+                        "1": "This app was developed in the context of a master's thesis from Instituto Superior Técnico in collaboration with the Faculdade de Ciências da Universidade de Lisboa. The objective of this app is to collect data regarding the UGS use and users’ preferences. Every piece of collected information will be used for scientific purposes only, allowing researchers to understand the motivations behind users behaviours  and support UGS planning and management. At the moment the database only has UGS in Lisbon. Here you can find a brief tutorial explaining how to use the app. After using the app help improve it by giving your feedback about its usability. Fill the form by clicking the button bellow."
                     },
                     "IMAGE" : {}
                 },
@@ -176,12 +177,13 @@
         "POINTS": "Pontos",
         "LOADING_SURVEY": "A carregar questionário por favor aguarde...",
         "FAIL_SURVEY": "Não foi possível carregar o survey. Por favor volte ao menu.",
+        "USABILITY_FORM": "Questionário de Usabilidade",
         "PRESENTATION": {
             "PAGE": {
                 "1": {
                     "TITLE": "Bem-vindo(a) à aplicação de mapeamento de usos de Espaços Verdes Urbanos (EVU).",
                     "TEXT": {
-                        "1": "Esta app foi desenvolvida no contexto de uma tese de mestrado do Instituto Superior Técnico em colaboração com a Faculdade de Ciências da Universidade de Lisboa. O objectivo desta app é recolher informações sobre a utilização de Espaços Verdes Urbano (em inglês, Urban Green Spaces ou UGS) por parte dos utilizadores bem como as suas preferências. Todas as informações recolhidas serão apenas utilizadas para fins científicos, permitindo aos investigadores perceber as motivações por trás do comportamento dos usuários e apoiar o planeamento e gestão dos EVU. Neste momento a base de dados apenas contém EVU situados na cidade Lisboa. Aqui encontra-se um breve tutorial de como utilizar correctamente a app."
+                        "1": "Esta app foi desenvolvida no contexto de uma tese de mestrado do Instituto Superior Técnico em colaboração com a Faculdade de Ciências da Universidade de Lisboa. O objectivo desta app é recolher informações sobre a utilização de Espaços Verdes Urbano (em inglês, Urban Green Spaces ou UGS) por parte dos utilizadores bem como as suas preferências. Todas as informações recolhidas serão apenas utilizadas para fins científicos, permitindo aos investigadores perceber as motivações por trás do comportamento dos usuários e apoiar o planeamento e gestão dos EVU. Neste momento a base de dados apenas contém EVU situados na cidade Lisboa. Aqui encontra-se um breve tutorial de como utilizar correctamente a app. Após utitlizar a app ajude a melhorá-la deixanto a sua opinião à cerca da sua usabilidade. Preencha o questionário clicando no botão em baixo."
                     },
                     "IMAGE" : {}
                 },
