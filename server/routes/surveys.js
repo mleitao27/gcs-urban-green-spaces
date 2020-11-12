@@ -22,7 +22,8 @@ var upload = multer({ limits: { fieldSize: 25 * 1024 * 1024 } })
 
 // Get a survey
 router.post('/', async (req, res) => {
-    surveyExtension.getSurvey(req, res);
+    surveyExtension.dynamicSurvey(req, res);
+    surveyExtension.staticSurvey(req, res);
 });
 
 // Submit a new survey to the server

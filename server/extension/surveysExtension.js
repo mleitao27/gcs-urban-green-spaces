@@ -36,7 +36,11 @@ const YN_GOOGLE = 17;
 const SKIP_SURVEY = 18;
 const SENSORS = 19;
 
-const getSurvey = (req, res) => {
+const staticSurvey = (req, res) => {
+
+};
+
+const dynamicSurvey = (req, res) => {
     cache.get(req.body.email)
     .then(async result => {
         // If user not in cache
@@ -334,7 +338,8 @@ const resetAnswer = (email) => {
     return db.insertDocument('answers', newAnswer);
 };
 
-exports.getSurvey = getSurvey;
+exports.dynamicSurvey = dynamicSurvey;
+exports.staticSurvey = staticSurvey;
 exports.submitSurvey = submitSurvey;
 exports.processAnswer = processAnswer;
 exports.processImage = processImage;
