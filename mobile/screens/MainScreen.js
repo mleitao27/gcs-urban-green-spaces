@@ -95,8 +95,10 @@ const MainScreen = props => {
             // If user not registered on the system
             if (res.status == 404)
                 Alert.alert(dictionary[language].ERROR, dictionary[language].NOT_USER);
-            else
+            else if(res.status == 200)
                 changeLoggedState(true, email, password);
+            else
+                Alert.alert(dictionary[language].ERROR, dictionary[language].UNEXPEDTED_ERROR);
         } else {
             Alert.alert(dictionary[language].ERROR, dictionary[language].FIELDS_NOT_FILLED);
         }

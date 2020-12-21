@@ -81,7 +81,7 @@ const dynamicSurvey = (req, res) => {
                 } else {
                     res.status(200).send({form: errorJSON});
                 }
-            }
+            }else res.status(200).send({form: errorJSON});
         } return 0;
     });
 };
