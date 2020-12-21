@@ -3,7 +3,6 @@
     "name": "UGS",
     "slug": "ugs",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
       "android"
@@ -38,13 +37,13 @@
         "CAMERA",
         "ACCESS_FINE_LOCATION",
         "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE"        
+        "WRITE_EXTERNAL_STORAGE"
       ],
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyANE10F9HC3a6AP46bgUEwd1MCGEPObePE"
         }
-      },  
+      },
       "versionCode": 1
     }
   }
